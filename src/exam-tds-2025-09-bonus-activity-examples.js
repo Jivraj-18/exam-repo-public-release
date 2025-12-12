@@ -31,6 +31,11 @@ export async function questions(user, elementMap) {
       ...(await import("./q-fastapi-coder.js").then((m) => m.default({ user, weight: 2 }))),
     },
 
+    // GA3: FastAPI - Server-Side Validation
+    {
+      ...(await import("./q-fastapi-validation.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+
     // GA5: Web Scraping - Data Extraction
     {
       ...(await import("./q-scrape-imdb-movies.js").then((m) => m.default({ user, weight: 1 }))),
