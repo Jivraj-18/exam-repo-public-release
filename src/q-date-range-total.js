@@ -18,16 +18,21 @@ export default async function ({ user, weight = 1 }) {
   const year = 2024;
   const startMonth = Math.floor(random() * 6) + 1; // 1–6
   const endMonth = startMonth + Math.floor(random() * 6); // ensure endMonth >= startMonth
-  const startDate = new Date(year, startMonth - 1, 1);
-  const endDate = new Date(year, endMonth - 1, 28);
+  const startDate = new Date(Date.UTC(year, startMonth - 1, 1));
+  const endDate = new Date(Date.UTC(year, endMonth - 1, 28));
+
 
   const dateToISO = (d) => d.toISOString().split("T")[0];
+
+  const startISO = dateToISO(startDate);
+  const endISO = dateToISO(endDate);
+
 
   // generate 60 transactions across the year
   const transactions = Array.from({ length: 60 }, () => {
     const month = Math.floor(random() * 12); // 0–11
     const day = Math.floor(random() * 28) + 1; // 1–28 to avoid month length issues
-    const date = new Date(year, month, day);
+    const date = new Date(Date.UTC(year, month, day));
     const amount = Number((10 + random() * 990).toFixed(2));
     return { date: dateToISO(date), amount };
   });
@@ -35,11 +40,11 @@ export default async function ({ user, weight = 1 }) {
   // compute expected sum of amounts within the date range (inclusive)
   let total = 0;
   for (const tx of transactions) {
-    const txDate = new Date(tx.date);
-    if (txDate >= startDate && txDate <= endDate) {
+    if (tx.date >= startISO && tx.date <= endISO) {
       total += tx.amount;
     }
   }
+
   const expectedTotal = Number(total.toFixed(2));
 
   const answer = (input) => {
