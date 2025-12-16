@@ -11,6 +11,7 @@ import geospatial from "./tds/geospatial-analysis-with-excel.md";
 import imageCompression from "./tds/image-compression.md";
 import largeLanguageModels from "./tds/large-language-models.md";
 import visualization from "./tds/data-visualization-with-seaborn.md";
+import q24f2004489 from "./q-24f2004489.js";
 
 export async function questions(user, elementMap) {
   const results = [
@@ -65,6 +66,11 @@ export async function questions(user, elementMap) {
       ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
       help: md(visualization),
     },
+    // GA9: Bonus Activity - FastAPI Logic (5 Marks)
+    {
+      ...(await q24f2004489(rng)), // Imports the 5-step validation logic
+      weight: 5,
+    },
 
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
@@ -76,3 +82,4 @@ export async function questions(user, elementMap) {
   displayQuestions(results, elementMap);
   return Object.fromEntries(results.map(({ id, ...rest }) => [id, rest]));
 }
+
