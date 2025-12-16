@@ -13,48 +13,44 @@ export default {
     || email == "narayanan@study.iitm.ac.in" // Narayanan R
     || email == "sivaadithya@study.iitm.ac.in" // Sivaadithya M
     || email == "anand@study.iitm.ac.in", // Anand S
+  
   instructions: /* html */ `
     <h1 class="display-3 my-5">
-      TDS 2025 Sep Bonus Activity - Example Questions
+      Data Science Assessment - Set A
     </h1>
 
     <h2 class="display-6 my-5">Overview</h2>
-    <p>This is a curated collection of 8 example questions covering key tools and techniques from the Tools in Data Science course. These examples showcase the diversity of skills taught across all modules:</p>
+    <p>This assessment covers 5 key computational problems testing your ability to handle real-world data scenarios. The questions are designed to test the following skills:</p>
     <ul>
-      <li><strong>Data Wrangling</strong>: JSON filtering, Excel manipulation</li>
-      <li><strong>Web Scraping</strong>: Data extraction from web sources</li>
-      <li><strong>Data Preparation</strong>: Transforming and cleaning data</li>
-      <li><strong>Analysis</strong>: Statistical analysis and cohort analysis</li>
-      <li><strong>AI-Assisted Development</strong>: Using LLMs to write code</li>
-      <li><strong>Visualization</strong>: Creating meaningful charts and plots</li>
+      <li><strong>Log Analysis</strong>: Security anomaly detection from server logs</li>
+      <li><strong>Data Cleaning</strong>: Reconciliation of messy financial CSVs</li>
+      <li><strong>Data Wrangling</strong>: Auditing complex nested JSON inventories</li>
+      <li><strong>SQL Logic</strong>: Calculating overtime from timesheet data</li>
+      <li><strong>Text Processing</strong>: Extracting patterns from unstructured text</li>
     </ul>
 
-    <h2 class="display-6 my-5">Bonus Activity Instructions</h2>
+    <h2 class="display-6 my-5">Assessment Instructions</h2>
     <ol>
-      <li><strong>Understand the examples</strong>. Study these 8 questions and their solutions to understand the patterns.</li>
-      <li><strong>Create new questions</strong>. Following the same structure and difficulty level, create additional questions on Tools in Data Science topics not covered here.</li>
-      <li><strong>Submit your questions</strong>. Add your new questions to this assignment by creating pull requests or contacting the instructors.</li>
-      <li><strong>Validation</strong>. Your questions will be reviewed for clarity, correctness, and pedagogical value before being added to the main course material.</li>
+      <li><strong>Unique Datasets</strong>. Each question generates data specific to your ID. Copying answers will result in failure.</li>
+      <li><strong>Tool Flexibility</strong>. You are free to use Python, Excel, SQL, or command-line tools to solve these problems.</li>
+      <li><strong>Stability</strong>. Ensure a stable internet connection. Do not refresh the page once the exam has started.</li>
+      <li><strong>Submission</strong>. Submit your numerical or text answers in the provided input fields before the timer expires.</li>
     </ol>
 
-    <h2 class="display-6 my-5">How to Use This Assignment</h2>
+    <h2 class="display-6 my-5">How to Use This Interface</h2>
     <ol>
-      <li><strong>Learn what you need</strong>. Reading material is provided, but feel free to skip it if you can answer the question.</li>
-      <li><strong>Check your answers</strong> by pressing <kbd>Check</kbd>. It shows which answers are right or wrong. You can check multiple times.</li>
-      <li><strong>Use anything</strong>. You can use any resources you want. The Internet, ChatGPT, friends, whatever.</li>
+      <li><strong>Download</strong>. Click the button to download the generated dataset for the question.</li>
+      <li><strong>Analyze</strong>. Process the file locally using your preferred tools.</li>
+      <li><strong>Verify</strong>. Enter your answer and press <kbd>Check</kbd>.</li>
     </ol>
 
     <h2 class="display-6 my-5">Questions Included</h2>
     <ol>
-      <li>Sort and Filter a JSON Product Catalog (Data Wrangling)</li>
-      <li>Use Excel Spreadsheet Features (Spreadsheets)</li>
-      <li>FastAPI Code Generation with LLM (AI-Assisted Development)</li>
-      <li>Scrape IMDb Movie Data (Web Scraping)</li>
-      <li>Search Hacker News with RSS Feed (Web Scraping - Proxy)</li>
-      <li>JSON Sensor Data Rollup (Data Preparation)</li>
-      <li>Python Cohort Retention Analysis (Statistical Analysis)</li>
-      <li>Image Compression with Dynamic Quality (Image Processing)</li>
-      <li>Region Containing Point Geospatial Query (Geospatial Analysis - Server-Side Validation)</li>
+      <li>Security Audit: Brute Force Detection</li>
+      <li>Finance: Net Revenue Reconciliation</li>
+      <li>Operations: Damaged Inventory Audit</li>
+      <li>HR: Overtime Calculation</li>
+      <li>Data Entry: Invoice ID Scraping</li>
     </ol>
   `,
 };
