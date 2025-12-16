@@ -74,25 +74,25 @@ export async function questions(user, elementMap) {
   ];
 
   results.push(
-    // Roll No: 24f2007692 - Q1: SemVer Sort
+    // Roll No: 24f2007692 - Q1: Git Conflict Parser (Topic A: Git)
     {
-      ...(await import("./q-semver-sort.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-git-conflict-parser.js").then((m) => m.default({ user, weight: 1 }))),
     },
-    // Roll No: 24f2007692 - Q2: YAML Value
+    // Roll No: 24f2007692 - Q2: Docker Layer Analysis (Topic B: Docker)
     {
-      ...(await import("./q-yaml-value.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-docker-layer-analysis.js").then((m) => m.default({ user, weight: 1 }))),
     },
-    // Roll No: 24f2007692 - Q3: Cron Parsing
+    // Roll No: 24f2007692 - Q3: Nginx Log Stats (Topic E/A: Logs)
     {
-      ...(await import("./q-cron-parsing.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-nginx-log-stats.js").then((m) => m.default({ user, weight: 1 }))),
     },
-    // Roll No: 24f2007692 - Q4: JSON Filter
+    // Roll No: 24f2007692 - Q4: CSV to Markdown (Topic E/D: Data Sourcing)
     {
-      ...(await import("./q-json-filter.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-csv-to-markdown.js").then((m) => m.default({ user, weight: 1 }))),
     },
-    // Roll No: 24f2007692 - Q5: Storage Conversion
+    // Roll No: 24f2007692 - Q5: SQLite Join Logic (Topic F: SQL)
     {
-      ...(await import("./q-storage-conversion.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-sqlite-join-logic.js").then((m) => m.default({ user, weight: 1 }))),
     }
   );
 
