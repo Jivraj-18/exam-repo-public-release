@@ -66,6 +66,36 @@ export async function questions(user, elementMap) {
       help: md(visualization),
     },
 
+    // GA-BONUS: FastAPI – Order Processing
+    {
+      ...(await import("../questions/q-fastapi-orders.js")
+        .then((m) => m.default({ user, elementMap }))),
+    },
+
+    // GA-BONUS: Excel – Regional Revenue
+    {
+      ...(await import("../questions/q-excel-regional.js")
+        .then((m) => m.default({ user, elementMap }))),
+    },
+
+    // GA-BONUS: Data Analytics – Correlation
+    {
+      ...(await import("../questions/q-analytics-correlation.js")
+        .then((m) => m.default({ user, elementMap }))),
+    },
+
+    // GA-BONUS: Web Scraping – Jobs
+    {
+      ...(await import("../questions/q-webscraping-jobs.js")
+        .then((m) => m.default({ user, elementMap }))),
+    },
+
+    // GA-BONUS: Dynamic SQL – Filters
+    {
+      ...(await import("../questions/q-dynamic-sql.js")
+        .then((m) => m.default({ user, elementMap }))),
+    },
+
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
