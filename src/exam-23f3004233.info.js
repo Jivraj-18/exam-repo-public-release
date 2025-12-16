@@ -1,18 +1,23 @@
 export default {
-  // Basic exam settings
-  title: "Tools in Data Science - Practice Questions (23f3004233)",
-  start: "2024-12-01T00:00:00+05:30", // Exam available from this date
-  hours: 2.0, // Time limit: 2 hours
-
-  // Access control
-  admin: (email) => email === "23f3004233@ds.study.iitm.ac.in", // Admin access
-  allowed: (email) => true, // Allow anyone to take the exam for testing
-
-  // Pre-exam instructions
+  title: "TDS 2025 Sep Bonus Activity - 23f3004233",
+  start: "2024-12-01T00:00:00+05:30",
+  end: () => "2026-12-31T23:59:59+05:30",
+  allowed: () => true, // Allow all logged-in users to submit
+  read: () => true, // Allow all to read (non-logged-in users in reader mode)
+  admin: (email) =>
+    email == "22f3001919@ds.study.iitm.ac.in" // Carlton D'Silva
+    || email == "prasanna@study.iitm.ac.in" // PRASANNA S
+    || email == "22f3002542@ds.study.iitm.ac.in" // JIVRAJ SINGH SHEKHAWAT
+    || email == "22f3002460@ds.study.iitm.ac.in" // Hritik Roshan Maurya
+    || email == "jkm@study.iitm.ac.in" // Jayakrishnan Warriem
+    || email == "narayanan@study.iitm.ac.in" // Narayanan R
+    || email == "sivaadithya@study.iitm.ac.in" // Sivaadithya M
+    || email == "anand@study.iitm.ac.in", // Anand S
   instructions: /* html */ `
-    <h1>Tools in Data Science - Practice Questions</h1>
-    <p><strong>Roll Number:</strong> 23f3004233</p>
-    
+    <h1 class="display-3 my-5">
+      TDS 2025 Sep Bonus Activity - 23f3004233
+    </h1>
+
     <h2>Instructions</h2>
     <ol>
       <li><strong>Total Questions:</strong> 5 questions covering different TDS modules</li>
