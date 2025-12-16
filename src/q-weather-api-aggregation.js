@@ -134,7 +134,7 @@ export default async function ({ user, weight = 2 }) {
           <ul>
             <li>Keep only cities with comfort index <strong>&ge; ${minComfortIndex}</strong></li>
             <li>Keep only cities with AQI <strong>&le; ${maxAQI}</strong></li>
-            <li>Sort by travel_score (comfort_index + quality_score) descending</li>
+            <li>Sort by travel_score (average of comfort_index and (100 - normalized AQI)) descending</li>
           </ul>
         </li>
       </ol>
