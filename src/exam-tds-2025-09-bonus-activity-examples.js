@@ -66,6 +66,27 @@ export async function questions(user, elementMap) {
       help: md(visualization),
     },
 
+    // Bonus Question 1: CSV Sum
+    {
+      ...(await import("./q-csv-sum.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    // Bonus Question 2: Log Parsing
+    {
+      ...(await import("./q-log-parsing.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    // Bonus Question 3: Unit Conversion
+    {
+      ...(await import("./q-unit-conversion.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    // Bonus Question 4: Text Frequency
+    {
+      ...(await import("./q-text-frequency.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    // Bonus Question 5: JSON Schema Validator
+    {
+      ...(await import("./q-json-schema-validator.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
