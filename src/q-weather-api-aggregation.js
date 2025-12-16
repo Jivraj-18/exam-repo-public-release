@@ -76,7 +76,7 @@ export default async function ({ user, weight = 2 }) {
             apparent_temperature: apparentTemp,
             comfort_index: comfortIndex,
             aqi: aqi,
-            travel_score: Math.round((comfortIndex + (100 - aqi / 150 * 100)) / 2),
+            travel_score: Math.round((comfortIndex + (100 - (aqi / 150) * 100)) / 2),
           });
         }
       }
