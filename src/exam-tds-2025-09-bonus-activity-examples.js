@@ -12,6 +12,7 @@ import imageCompression from "./tds/image-compression.md";
 import largeLanguageModels from "./tds/large-language-models.md";
 import visualization from "./tds/data-visualization-with-seaborn.md";
 
+
 export async function questions(user, elementMap) {
   const results = [
     // GA1: Core Tools - JSON Wrangling
@@ -71,6 +72,42 @@ export async function questions(user, elementMap) {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+
+        // BONUS: JSON Log Filtering
+    {
+      ...(await import("./q-json-log-filter.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // BONUS: CSV Revenue Aggregation
+    {
+      ...(await import("./q-csv-revenue-aggregation.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // BONUS: REST API Country Info
+    {
+      ...(await import("./q-rest-api-country-info.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // BONUS: SQLite Sales Aggregation
+    {
+      ...(await import("./q-sqlite-sales-aggregation.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // BONUS: Markdown Structure Analysis
+    {
+      ...(await import("./q-markdown-structure-analysis.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
   ];
 
   displayQuestions(results, elementMap);
