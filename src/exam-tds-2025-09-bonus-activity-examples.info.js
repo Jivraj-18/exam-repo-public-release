@@ -55,6 +55,11 @@ export default {
       <li>Python Cohort Retention Analysis (Statistical Analysis)</li>
       <li>Image Compression with Dynamic Quality (Image Processing)</li>
       <li>Region Containing Point Geospatial Query (Geospatial Analysis - Server-Side Validation)</li>
+      <li>Web Scraping & APIs</strong> - Multi-source data integration and API aggregation</li>
+      <li>Data Preparation</strong> - CSV analysis and transformation</li>
+      <li>Data Analysis</strong> - SQL analytics with DuckDB</li>
+      <li>Media Processing</strong> - Image transformation with Python</li>
+      <li>Web Automation</strong> - Playwright browser automation</li>
     </ol>
   `,
 };

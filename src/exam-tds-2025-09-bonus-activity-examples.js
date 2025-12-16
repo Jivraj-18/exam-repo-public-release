@@ -65,6 +65,20 @@ export async function questions(user, elementMap) {
       ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
       help: md(visualization),
     },
+    // GA5: Weather API
+    { ...(await import("./q-weather-api-aggregation.js").then((m) => m.default({ user, weight: 1 }))) },
+
+    // GA6: CSV Analysis
+    { ...(await import("./q-pdf-tabula-extraction.js").then((m) => m.default({ user, weight: 1.25 }))) },
+
+    // GA7: DuckDB Analysis
+    { ...(await import("./q-duckdb-sales-analysis.js").then((m) => m.default({ user, weight: 1.5 }))) },
+
+    // GA6: Image Transformation
+    { ...(await import("./q-image-transformation.js").then((m) => m.default({ user, weight: 1 }))) },
+
+    // GA5: Playwright Automation
+    { ...(await import("./q-playwright-automation.js").then((m) => m.default({ user, weight: 1.5 }))) },
 
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
