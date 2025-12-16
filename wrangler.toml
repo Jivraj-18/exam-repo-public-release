@@ -1,6 +1,6 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "exam"
-main = "src/worker.js"
+main = "public/exam.js"
 compatibility_date = "2024-10-11"
 
 [assets]
