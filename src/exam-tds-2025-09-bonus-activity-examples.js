@@ -11,6 +11,8 @@ import geospatial from "./tds/geospatial-analysis-with-excel.md";
 import imageCompression from "./tds/image-compression.md";
 import largeLanguageModels from "./tds/large-language-models.md";
 import visualization from "./tds/data-visualization-with-seaborn.md";
+import llmScraping from "./tds/llm-website-scraping.md";
+import forecastExcel from "./tds/visualizing-forecasts-with-excel.md";
 
 export async function questions(user, elementMap) {
   const results = [
@@ -26,15 +28,33 @@ export async function questions(user, elementMap) {
       help: md(excel),
     },
 
+    // GA1: Core Tools - Aggregation (CSV)
+    {
+      ...(await import("./q-aggregate-sales-excel.js").then((m) => m.default({ user, weight: 1 }))),
+      help: md(excel),
+    },
+
     // GA3: AI Coding - LLM Assisted Development
     {
       ...(await import("./q-fastapi-coder.js").then((m) => m.default({ user, weight: 2 }))),
+    },
+
+    // GA3: AI Coding - Premortem tests
+    {
+      ...(await import("./q-llm-test-first.js").then((m) => m.default({ user, weight: 0.5 })) ),
+      help: md(largeLanguageModels),
     },
 
     // GA5: Web Scraping - Data Extraction
     {
       ...(await import("./q-scrape-imdb-movies.js").then((m) => m.default({ user, weight: 1 }))),
       help: md(webScraping),
+    },
+
+    // GA5: Web Scraping - Job listings (HTML)
+    {
+      ...(await import("./q-job-listings-scrape.js").then((m) => m.default({ user, weight: 1 })) ),
+      help: md(llmScraping),
     },
 
     // GA5: Web Scraping - API Parsing with Proxy
@@ -66,11 +86,23 @@ export async function questions(user, elementMap) {
       help: md(visualization),
     },
 
+    // GA8: Forecasting - Short term forecast CSV
+    {
+      ...(await import("./q-forecast-csv.js").then((m) => m.default({ user, weight: 1 })) ),
+      help: md(forecastExcel),
+    },
+
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+
+    // GA4: Geospatial - Point-in-rectangle GeoJSON
+    {
+      ...(await import("./q-geojson-point-in-region.js").then((m) => m.default({ user, weight: 1 })) ),
+      help: md(geospatial),
+    },
   ];
 
   displayQuestions(results, elementMap);

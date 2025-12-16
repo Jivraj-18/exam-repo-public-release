@@ -19,7 +19,7 @@ export default {
     </h1>
 
     <h2 class="display-6 my-5">Overview</h2>
-    <p>This is a curated collection of 8 example questions covering key tools and techniques from the Tools in Data Science course. These examples showcase the diversity of skills taught across all modules:</p>
+    <p>This is a curated collection of 14 example questions covering key tools and techniques from the Tools in Data Science course. These examples showcase the diversity of skills taught across all modules:</p>
     <ul>
       <li><strong>Data Wrangling</strong>: JSON filtering, Excel manipulation</li>
       <li><strong>Web Scraping</strong>: Data extraction from web sources</li>
@@ -31,7 +31,7 @@ export default {
 
     <h2 class="display-6 my-5">Bonus Activity Instructions</h2>
     <ol>
-      <li><strong>Understand the examples</strong>. Study these 8 questions and their solutions to understand the patterns.</li>
+      <li><strong>Understand the examples</strong>. Study these example questions and their solutions to understand the patterns.</li>
       <li><strong>Create new questions</strong>. Following the same structure and difficulty level, create additional questions on Tools in Data Science topics not covered here.</li>
       <li><strong>Submit your questions</strong>. Add your new questions to this assignment by creating pull requests or contacting the instructors.</li>
       <li><strong>Validation</strong>. Your questions will be reviewed for clarity, correctness, and pedagogical value before being added to the main course material.</li>
@@ -48,13 +48,18 @@ export default {
     <ol>
       <li>Sort and Filter a JSON Product Catalog (Data Wrangling)</li>
       <li>Use Excel Spreadsheet Features (Spreadsheets)</li>
+      <li>Aggregate sales by region (CSV aggregation)</li>
       <li>FastAPI Code Generation with LLM (AI-Assisted Development)</li>
+      <li>Premortem test: catch the ZeroDivision bug (Test-first workflows)</li>
       <li>Scrape IMDb Movie Data (Web Scraping)</li>
+      <li>Scrape Job Listings from HTML (Web Scraping - HTML)</li>
       <li>Search Hacker News with RSS Feed (Web Scraping - Proxy)</li>
       <li>JSON Sensor Data Rollup (Data Preparation)</li>
       <li>Python Cohort Retention Analysis (Statistical Analysis)</li>
+      <li>Forecast next week (Short-term forecasting / Visualization)</li>
       <li>Image Compression with Dynamic Quality (Image Processing)</li>
       <li>Region Containing Point Geospatial Query (Geospatial Analysis - Server-Side Validation)</li>
+      <li>GeoJSON: select points inside a region (Geospatial Analysis)</li>
     </ol>
   `,
 };
