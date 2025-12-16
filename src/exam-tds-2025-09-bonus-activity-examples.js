@@ -66,6 +66,23 @@ export async function questions(user, elementMap) {
       help: md(visualization),
     },
 
+    // Bonus Activity: Student-contributed questions
+    {
+      ...(await import("./q-avg-salary-department.js").then((m) => m.default({ user, weight: 0.5 }))),
+    },
+    {
+      ...(await import("./q-category-count.js").then((m) => m.default({ user, weight: 0.5 }))),
+    },
+    {
+      ...(await import("./q-date-range-total.js").then((m) => m.default({ user, weight: 0.5 }))),
+    },
+    {
+      ...(await import("./q-profit-margin-sort.js").then((m) => m.default({ user, weight: 0.5 }))),
+    },
+    {
+      ...(await import("./q-vowel-frequency.js").then((m) => m.default({ user, weight: 0.5 }))),
+    },
+
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
