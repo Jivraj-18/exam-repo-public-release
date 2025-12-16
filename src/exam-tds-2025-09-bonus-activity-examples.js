@@ -66,11 +66,51 @@ export async function questions(user, elementMap) {
       help: md(visualization),
     },
 
+    // All new 5 questions Added by Student Name : Akshat Agarwal , Student Registration Number : 24F1001736
+
+    // Question – 1 : Deterministic Hashing for Data Deduplication
+    {
+      ...(await import("./q-dedup-hashing.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // Question – 2 : Time-Series Aggregation Window Selection
+    {
+      ...(await import("./q-time-series-window.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // Question – 3 : Detecting Feature Leakage in ML Models
+    {
+      ...(await import("./q-feature-leakage.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // Question – 4 : Handling Schema Evolution in Data Pipelines
+    {
+      ...(await import("./q-schema-evolution.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // Question – 5 : Offline vs Online Model Evaluation Metrics
+    {
+      ...(await import("./q-offline-online-metrics.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+
+
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+
   ];
 
   displayQuestions(results, elementMap);
