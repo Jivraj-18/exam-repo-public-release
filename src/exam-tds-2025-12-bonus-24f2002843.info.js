@@ -1,0 +1,49 @@
+export default {
+  title: "TDS 2025 Dec Bonus Activity - 24f2002843",
+  start: "2025-12-01T00:00:00+05:30",
+  end: () => "2025-12-18T23:59:59+05:30",
+  allowed: () => true,
+  read: () => true,
+  admin: (email) =>
+    email == "22f3001919@ds.study.iitm.ac.in" ||
+    email == "prasanna@study.iitm.ac.in" ||
+    email == "22f3002542@ds.study.iitm.ac.in" ||
+    email == "22f3002460@ds.study.iitm.ac.in" ||
+    email == "jkm@study.iitm.ac.in" ||
+    email == "narayanan@study.iitm.ac.in" ||
+    email == "sivaadithya@study.iitm.ac.in" ||
+    email == "anand@study.iitm.ac.in",
+  instructions: /* html */ `
+    <h1 class="display-3 my-5">
+      TDS Bonus Activity Questions - Roll No: 24f2002843
+    </h1>
+
+    <h2 class="display-6 my-5">Question Topics</h2>
+    <p>This bonus activity includes 5 questions covering diverse Tools in Data Science topics:</p>
+    <ul>
+      <li><strong>Multi-Source Weather & Air Quality Analytics</strong>: Aggregate real-time weather and air quality data from multiple APIs, calculate comfort indices</li>
+      <li><strong>CSV Data Analysis</strong>: Extract and analyze tabular financial data with filtering and sorting</li>
+      <li><strong>DuckDB Analytics</strong>: Fast SQL analysis on CSV sales data with grouping and aggregation</li>
+      <li><strong>Image Transformation</strong>: Batch image processing with dual transformations, metadata handling, and manifest generation</li>
+      <li><strong>Playwright Automation</strong>: Web automation and testing with browser control</li>
+    </ul>
+
+    <h2 class="display-6 my-5">Instructions</h2>
+    <ol>
+      <li>Answer all 5 questions based on TDS course content</li>
+      <li>Each question uses personalized data based on your email</li>
+      <li>Follow the task requirements carefully</li>
+      <li>Questions cover: API usage, data analysis, SQL, image processing, and web automation</li>
+      <li>Submit by December 18, 2025</li>
+    </ol>
+
+    <h2 class="display-6 my-5">Topics Covered</h2>
+    <ul>
+      <li><strong>Module 5: Web Scraping & APIs</strong> - Multi-source data integration and API aggregation</li>
+      <li><strong>Module 6: Data Preparation</strong> - CSV analysis and transformation</li>
+      <li><strong>Module 7: Data Analysis</strong> - SQL analytics with DuckDB</li>
+      <li><strong>Module 6: Media Processing</strong> - Advanced image transformation with metadata</li>
+      <li><strong>Module 5: Web Automation</strong> - Playwright browser automation</li>
+    </ul>
+  `,
+};
