@@ -2,76 +2,69 @@ export const questions = [
   {
     id: 1,
     question: `
-A FastAPI endpoint expects a JSON body with fields:
-{ "email": string, "age": number }
+You are processing a large JSONL log file using jq.
 
-A client sends:
-{ "email": 123, "age": "20" }
+Some records do not contain the field "status", causing jq filters to fail.
 
-The server responds with HTTP 422.
-Explain why FastAPI rejects this request and name the component responsible for this validation.
+Explain why this happens and how jq can be used safely to handle missing fields without crashing the pipeline.
 `,
     expected_answer: `
-FastAPI uses Pydantic models to validate request bodies.
-The request is rejected because email is not a string and age is not a number.
-Pydantic performs automatic type checking and raises a validation error, resulting in HTTP 422.
+jq filters fail when they assume a field always exists.
+If a field is missing, jq produces null values.
+Using safe patterns like select(has("status")) or the // operator for fallback values prevents failures and allows the pipeline to continue safely.
 `
   },
 
   {
     id: 2,
     question: `
-An LLM-based system uses a system prompt to enforce rules and a user prompt for instructions.
-A user tries to override system rules by explicitly asking the model to ignore them.
+A DuckDB query aggregates data using GROUP BY, but the result contains duplicated rows.
 
-Which prompt takes priority and why?
+Explain one common mistake that causes this behavior and how it should be fixed.
 `,
     expected_answer: `
-The system prompt takes priority.
-System prompts define high-level behavior and constraints that user prompts cannot override.
-This helps prevent prompt injection and enforces safety and consistency.
+This usually happens when non-aggregated columns are selected without being included in the GROUP BY clause.
+DuckDB requires all selected non-aggregated columns to be grouped.
+Fixing the GROUP BY clause or removing extra columns resolves the duplication issue.
 `
   },
 
   {
     id: 3,
     question: `
-An LLM has access to two tools:
-1. search_docs(query)
-2. summarize(text)
+A shell command uses grep to filter log files, but it matches more lines than expected.
 
-The user asks: "Summarize the documentation for FastAPI request validation."
-
-Which tool should be called first and why?
+Explain why this happens and how grep options can be adjusted to make the match more precise.
 `,
     expected_answer: `
-search_docs should be called first to retrieve the relevant documentation.
-summarize should be called after, using the retrieved text as input.
-The tools must be used in a logical sequence to complete the task correctly.
+This happens due to partial or unanchored pattern matching.
+Using options like -w for whole-word matching, ^ and $ for anchors, or more specific regular expressions helps ensure precise matches.
 `
   },
 
   {
     id: 4,
     question: `
-An API call occasionally fails with a timeout error.
-Mention one safe strategy to handle this failure in production systems.
+In Excel, a pivot table shows incorrect totals after new rows are added to the source data.
+
+Explain why this occurs and how to ensure the pivot table always includes new data.
 `,
     expected_answer: `
-A retry mechanism with a limited number of retries and backoff can be used.
-This helps recover from transient failures without overwhelming the server.
+Pivot tables do not automatically refresh or expand their source range.
+Converting the data range into an Excel Table or refreshing the pivot table ensures that new rows are included correctly.
 `
   },
 
   {
     id: 5,
     question: `
-A developer wants an LLM to give the same output for the same prompt across runs.
-Name one parameter that should be adjusted and explain its effect.
+While measuring area in QGIS, the calculated values appear incorrect or unrealistic.
+
+Explain one common reason for this issue and how it should be corrected.
 `,
     expected_answer: `
-The temperature parameter should be set to a low value (or zero).
-Lower temperature reduces randomness and increases determinism in the model's output.
+This usually occurs when measurements are performed using a geographic coordinate reference system.
+Switching to an appropriate projected CRS, such as UTM, allows QGIS to calculate accurate area measurements.
 `
   }
 ];
