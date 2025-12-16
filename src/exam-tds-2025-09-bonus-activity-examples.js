@@ -4,73 +4,43 @@ import { md } from "./utils/markdown.js";
 // Core Tools in Data Science (from all GA modules)
 import excel from "./tds/spreadsheets.md";
 import json from "./tds/json.md";
-import pythonAnalysis from "./tds/data-analysis-with-python.md";
-import dataTransformation from "./tds/data-transformation-in-excel.md";
-import webScraping from "./tds/scraping-imdb-with-javascript.md";
-import geospatial from "./tds/geospatial-analysis-with-excel.md";
-import imageCompression from "./tds/image-compression.md";
-import largeLanguageModels from "./tds/large-language-models.md";
-import visualization from "./tds/data-visualization-with-seaborn.md";
+import fastapiOrders from "../questions/q-fastapi-orders.js";
+import excelRegional from "../questions/q-excel-regional.js";
+import analyticsCorrelation from "../questions/q-analytics-correlation.js";
+import webscrapingJobs from "../questions/q-webscraping-jobs.js";
+import dynamicSQL from "../questions/q-dynamic-sql.js";
 
 export async function questions(user, elementMap) {
   const results = [
-    // GA1: Core Tools - JSON Wrangling
-    {
-      ...(await import("./q-sort-filter-json.js").then((m) => m.default({ user, weight: 1.0 }))),
-      help: md(json),
-    },
+    // GA7: FastAPI – Order Processing
+  {
+    ...(await import("../questions/q-fastapi-orders.js")
+      .then((m) => m.default({ user, elementMap }))),
+  },
 
-    // GA1: Core Tools - Spreadsheets
-    {
-      ...(await import("./q-use-excel.js").then((m) => m.default({ user, weight: 0.5 }))),
-      help: md(excel),
-    },
+  // GA8: Excel – Regional Revenue
+  {
+    ...(await import("../questions/q-excel-regional.js")
+      .then((m) => m.default({ user, elementMap }))),
+  },
 
-    // GA3: AI Coding - LLM Assisted Development
-    {
-      ...(await import("./q-fastapi-coder.js").then((m) => m.default({ user, weight: 2 }))),
-    },
+  // GA9: Data Analytics – Correlation
+  {
+    ...(await import("../questions/q-analytics-correlation.js")
+      .then((m) => m.default({ user, elementMap }))),
+  },
 
-    // GA5: Web Scraping - Data Extraction
-    {
-      ...(await import("./q-scrape-imdb-movies.js").then((m) => m.default({ user, weight: 1 }))),
-      help: md(webScraping),
-    },
+  // GA10: Web Scraping – Job Listings
+  {
+    ...(await import("../questions/q-webscraping-jobs.js")
+      .then((m) => m.default({ user, elementMap }))),
+  },
 
-    // GA5: Web Scraping - API Parsing with Proxy
-    {
-      ...(await import("./q-hacker-news-search.js").then((m) => m.default({ user, weight: 1 }))),
-    },
-
-    // GA6: Data Preparation - Advanced Transformation
-    {
-      ...(await import("./q-json-sensor-rollup.js").then((m) => m.default({ user, weight: 1 }))),
-      help: md(dataTransformation),
-    },
-
-    // GA7: Data Analysis - Statistical Analysis
-    {
-      ...(await import("./q-python-cohort-retention.js").then((m) => m.default({ user, weight: 1.25 }))),
-      help: md(pythonAnalysis),
-    },
-
-    // GA2: Deployment - Image Compression
-    {
-      ...(await import("./q-image-compression-dynamic.js").then((m) => m.default({ user, weight: 0.75 }))),
-      help: md(imageCompression),
-    },
-
-    // GA8: Visualization - Seaborn Data Visualization
-    {
-      ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
-      help: md(visualization),
-    },
-
-    // GA4: Geospatial Analysis - Server-Side Validation
-    // {
-    //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
-    //   help: md(geospatial),
-    // },
+  // GA11: Dynamic SQL – Optional Filters
+  {
+    ...(await import("../questions/q-dynamic-sql.js")
+      .then((m) => m.default({ user, elementMap }))),
+  },
   ];
 
   displayQuestions(results, elementMap);
