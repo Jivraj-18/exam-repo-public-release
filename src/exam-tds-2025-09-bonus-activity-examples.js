@@ -71,6 +71,33 @@ export async function questions(user, elementMap) {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+
+    // NEW QUESTIONS - exam-23f2001262
+
+    // DuckDB: Data Analysis with SQL
+    {
+      ...(await import("./q-duckdb-flight-analysis.js").then((m) => m.default({ user, weight: 1.5 }))),
+    },
+
+    // Shell Commands: Data Preparation
+    {
+      ...(await import("./q-shell-log-analysis.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+
+    // NetworkX: Network Analysis in Python
+    {
+      ...(await import("./q-network-actor-analysis.js").then((m) => m.default({ user, weight: 1.5 }))),
+    },
+
+    // GitHub Actions: CI/CD Automation
+    {
+      ...(await import("./q-github-actions-automation.js").then((m) => m.default({ user, weight: 1.25 }))),
+    },
+
+    // FastAPI: FAST API Development
+    {
+      ...(await import("./q-fastapi-endpoint.js").then((m) => m.default({ user, weight: 1.5 }))),
+    },
   ];
 
   displayQuestions(results, elementMap);
