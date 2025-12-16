@@ -73,6 +73,30 @@ export async function questions(user, elementMap) {
     // },
   ];
 
+  results.push(
+    // Roll No: 24f2007692 - Q1: SemVer Sort
+    {
+      ...(await import("./q-semver-sort.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    // Roll No: 24f2007692 - Q2: YAML Value
+    {
+      ...(await import("./q-yaml-value.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    // Roll No: 24f2007692 - Q3: Cron Parsing
+    {
+      ...(await import("./q-cron-parsing.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    // Roll No: 24f2007692 - Q4: JSON Filter
+    {
+      ...(await import("./q-json-filter.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    // Roll No: 24f2007692 - Q5: Storage Conversion
+    {
+      ...(await import("./q-storage-conversion.js").then((m) => m.default({ user, weight: 1 }))),
+    }
+  );
+
+
   displayQuestions(results, elementMap);
   return Object.fromEntries(results.map(({ id, ...rest }) => [id, rest]));
 }
