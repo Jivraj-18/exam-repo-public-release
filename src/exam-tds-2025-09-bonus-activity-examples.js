@@ -11,6 +11,9 @@ import geospatial from "./tds/geospatial-analysis-with-excel.md";
 import imageCompression from "./tds/image-compression.md";
 import largeLanguageModels from "./tds/large-language-models.md";
 import visualization from "./tds/data-visualization-with-seaborn.md";
+import parsingJson from "./tds/parsing-json.md";
+import githubActions from "./tds/github-actions.md";
+import terminalBash from "./tds/bash.md";
 
 export async function questions(user, elementMap) {
   const results = [
@@ -71,6 +74,34 @@ export async function questions(user, elementMap) {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+
+    // GA5 Sourcing - Sourcing data using javascript from the console.
+    {
+      ...(await import("./q-data-sourcing-dom.js").then((m) => m.default({ user, weight: 1.0 }))),
+      help: md(webScraping),
+    },
+    // GA4: LLMs – Tool Calling (Smart Campus Agent)
+    {
+      ...(await import("./q-llm-smartcampus-tool.js").then((m) => m.default({ user, weight: 2.0 }))),
+      help: md(largeLanguageModels),
+    },
+    // GA6: Data Preparation – Nuclear Telemetry Roll-up
+    {
+      ...(await import("./q-nuclear-telemetry-rollup.js").then((m) => m.default({ user, weight: 2.0 }))),
+      help: md(parsingJson),
+    },
+    // GA2: Deployment - GitHub Actions CI Debugging
+    {
+      ...(await import("./q-github-actions-ci-debug.js").then((m) => m.default({ user, weight: 1.0 }))),
+      help: md(githubActions)
+    },
+    // GA1: Development - Bash scripting
+    {
+      ...(await import("./q-bash-log-audit.js").then((m) => m.default({ user, weight: 1.0 }))),
+      help: md(terminalBash)
+    },
+
+
   ];
 
   displayQuestions(results, elementMap);
