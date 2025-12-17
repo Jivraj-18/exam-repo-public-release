@@ -1,19 +1,18 @@
 import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
 
 export default async function ({ user, weight = 1 }) {
-  const id = "q-cli-basic-1";
-  const title = "List files sorted by size";
+  const id = "q-scrape-excel-web";
+  const title = "Excel Web Import";
 
-  const answer = "ls -lS";
+  const answer = "Data > Get Data > From Web";
 
   const question = html`
     <div class="mb-3">
       <p>
-        Which Linux command lists files in the current directory in
-        <strong>long format</strong>, sorted by <strong>file size</strong>
-        (largest first)?
+        In Excel, which menu path starts the <strong>web scraping query</strong>
+        to import tables from websites like weather forecasts?
       </p>
-      <label for="${id}" class="form-label">Command:</label>
+      <label for="${id}" class="form-label">Path:</label>
       <input class="form-control" id="${id}" name="${id}" />
     </div>
   `;
