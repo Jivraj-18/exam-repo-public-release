@@ -16,7 +16,7 @@ export default async function ({ user, weight = 0.75 }) {
       const hour = 8 + Math.floor(rng() * 9); // 08..16
       const min = ["00", "15", "30", "45"][Math.floor(rng() * 4)];
       const course = courses[Math.floor(rng() * courses.length)];
-      slots.push({ day: d, time: `${hour}:${min}`, name: course });
+      slots.push({ day: d, time: `${String(hour).padStart(2, "0")}:${min}`, name: course });
     }
   }
   // earliest lexicographic by time then day order

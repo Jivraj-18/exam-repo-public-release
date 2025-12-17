@@ -31,16 +31,13 @@ export default async function ({ user, weight = 1 }) {
   });
 
   const radius = 500; // meters
-  // Simple greedy clustering: assign to first cluster within radius; else create new
+  // Greedy clustering with fixed centers: first point in a cluster remains the center
   /** @type {Array<{lat:number,lon:number,items:number}>} */
   const clusters = [];
   for (const p of pois) {
     let found = false;
     for (const c of clusters) {
       if (haversine(p.lat, p.lon, c.lat, c.lon) <= radius) {
-        // update centroid (mean)
-        c.lat = (c.lat * c.items + p.lat) / (c.items + 1);
-        c.lon = (c.lon * c.items + p.lon) / (c.items + 1);
         c.items++;
         found = true;
         break;

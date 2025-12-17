@@ -9,8 +9,7 @@ export default async function ({ user, weight = 0.75 }) {
   const currencies = ["USD", "EUR", "INR", "JPY", "GBP", "AUD", "CAD"];
   const pick = (arr) => arr[Math.floor(rng() * arr.length)];
   const from = pick(currencies);
-  let to = pick(currencies.filter((c) => c !== from));
-  if (to === from) to = "EUR";
+  const to = pick(currencies.filter((c) => c !== from));
   const amount = Number((10 + rng() * 990).toFixed(2));
 
   // Synthetic daily rates table normalized to USD base

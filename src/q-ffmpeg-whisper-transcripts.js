@@ -16,10 +16,15 @@ export default async function ({ user, weight = 1 }) {
 
   const total = segments.reduce((sum, s) => sum + (s.end - s.start), 0);
 
+  const toHMS = (seconds) => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+    return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+  };
+
   const srt = segments
-    .map(
-      (s) => `${s.i}\n00:00:${String(s.start).padStart(2, "0")},000 --> 00:00:${String(s.end).padStart(2, "0")},000\n${s.text}\n`,
-    )
+    .map((s) => `${s.i}\n00:${toHMS(s.start)},000 --> 00:${toHMS(s.end)},000\n${s.text}\n`)
     .join("\n");
 
   const answer = (input) => {

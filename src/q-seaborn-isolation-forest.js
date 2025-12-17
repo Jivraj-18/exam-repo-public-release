@@ -11,8 +11,18 @@ export default async function ({ user, weight = 0.75 }) {
   values.push(250 + rng() * 50, -40 - rng() * 20);
 
   const sorted = values.slice().sort((a, b) => a - b);
-  const q1 = sorted[Math.floor(0.25 * (sorted.length - 1))];
-  const q3 = sorted[Math.floor(0.75 * (sorted.length - 1))];
+
+  const quantile = (arr, q) => {
+    const pos = (arr.length - 1) * q;
+    const lo = Math.floor(pos);
+    const hi = Math.ceil(pos);
+    if (lo === hi) return arr[lo];
+    const frac = pos - lo;
+    return arr[lo] * (1 - frac) + arr[hi] * frac;
+  };
+
+  const q1 = quantile(sorted, 0.25);
+  const q3 = quantile(sorted, 0.75);
   const iqr = q3 - q1;
   const lower = q1 - 1.5 * iqr;
   const upper = q3 + 1.5 * iqr;

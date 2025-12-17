@@ -17,7 +17,7 @@ export default async function ({ user, weight = 1 }) {
     segment: segments[Math.floor(rng() * segments.length)],
   }));
 
-  const base = Date.UTC(2025, 2, 1); // March 2025
+  const base = Date.UTC(2025, 2, 1); // March 1, 2025 UTC
   const orders = Array.from({ length: 40 }, (_, i) => ({
     id: `O${i + 1}`,
     customer_id: customers[Math.floor(rng() * customers.length)].id,
@@ -25,7 +25,8 @@ export default async function ({ user, weight = 1 }) {
     ts: new Date(base + Math.floor(rng() * 90) * 24 * 3600 * 1000).toISOString(),
   }));
 
-  const targetMonth = monthStr(new Date(base + 30 * 24 * 3600 * 1000)); // April 2025 approx
+  // Target the following month explicitly (April 2025)
+  const targetMonth = monthStr(new Date(Date.UTC(2025, 3, 1)));
   const targetSegment = segments[Math.floor(rng() * segments.length)];
 
   // Compute revenue for segment+month

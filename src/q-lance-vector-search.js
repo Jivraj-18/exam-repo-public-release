@@ -1,8 +1,9 @@
 import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
 import seedrandom from "seedrandom";
 
-function embed(text, rng) {
-  // Tiny deterministic pseudo-embedding
+function embed(text, seed) {
+  const rng = seedrandom(seed);
+  // Tiny deterministic pseudo-embedding per text seed
   const vec = Array.from({ length: 8 }, () => rng());
   for (const ch of text) vec[(ch.charCodeAt(0) + text.length) % vec.length] += (ch.charCodeAt(0) % 7) / 100;
   return vec;
@@ -16,7 +17,7 @@ export default async function ({ user, weight = 1 }) {
   const id = "q-lance-vector-search";
   const title = "Semantic Search: Top Doc ID";
 
-  const rng = seedrandom(`${user.email}#${id}`);
+  const baseSeed = `${user.email}#${id}`;
   const docs = [
     { id: "d1", text: "Rust systems programming guide" },
     { id: "d2", text: "Go microservices and concurrency" },
@@ -24,10 +25,11 @@ export default async function ({ user, weight = 1 }) {
     { id: "d4", text: "Vector databases with LanceDB" },
     { id: "d5", text: "Cloudflare Workers and KV" },
   ];
+  const rng = seedrandom(baseSeed);
   const query = ["rust", "vector search", "cloud", "analysis"][Math.floor(rng() * 4)];
 
-  const qvec = embed(query, rng);
-  const scored = docs.map((d) => ({ id: d.id, score: dot(embed(d.text, rng), qvec) }));
+  const qvec = embed(query, `${baseSeed}|query|${query}`);
+  const scored = docs.map((d) => ({ id: d.id, score: dot(embed(d.text, `${baseSeed}|doc|${d.id}`), qvec) }));
   const best = scored.sort((a, b) => b.score - a.score)[0].id;
 
   const answer = (input) => {

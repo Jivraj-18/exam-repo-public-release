@@ -23,21 +23,27 @@ export default async function ({ user, weight = 1 }) {
 
   // Build sessions: new session if inactivity > 30 minutes per IP
   const SESSION_GAP_MS = 30 * 60 * 1000;
-  /** @type {Record<string, {last:number, paths:string[]}>} */
+  /** @type {Record<string, {last:number, current:{paths:string[]}}>} */
   const state = {};
+  /** @type {Array<{paths:string[]}>} */
+  const allSessions = [];
   for (const { ip, ts, path } of logs) {
     const t = Date.parse(ts);
     const s = state[ip];
-    if (!s || t - s.last > SESSION_GAP_MS) state[ip] = { last: t, paths: [path] };
-    else {
+    const startNew = !s || t - s.last > SESSION_GAP_MS;
+    if (startNew) {
+      const session = { paths: [path] };
+      state[ip] = { last: t, current: session };
+      allSessions.push(session);
+    } else {
       s.last = t;
-      s.paths.push(path);
+      s.current.paths.push(path);
     }
   }
 
-  // Aggregate visits per path across sessions
+  // Aggregate visits per path across all sessions (not just the latest per IP)
   const counts = new Map();
-  for (const s of Object.values(state)) for (const p of s.paths) counts.set(p, (counts.get(p) || 0) + 1);
+  for (const s of allSessions) for (const p of s.paths) counts.set(p, (counts.get(p) || 0) + 1);
   const top = [...counts.entries()].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "/";
 
   const answer = (input) => {
