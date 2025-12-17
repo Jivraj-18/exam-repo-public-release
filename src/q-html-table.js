@@ -1,18 +1,18 @@
 import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
 
 export default async function ({ user, weight = 1 }) {
-  const id = "q-html-table";
-  const title = "HTML Table Element";
+  const id = "q-html-data-table";
+  const title = "Displaying Tabular Data in HTML";
 
   const answer = "table";
 
   const question = html`
     <div class="mb-3">
       <p>
-        Which HTML tag is used to define a <strong>table</strong> for displaying
-        data in rows and columns?
+        When designing a webpage that displays structured data in rows and
+        columns, which HTML element should be used as the container?
       </p>
-      <label for="${id}" class="form-label">HTML Tag:</label>
+      <label for="${id}" class="form-label">HTML Element:</label>
       <input class="form-control" id="${id}" name="${id}" />
     </div>
   `;
