@@ -38,6 +38,19 @@ export async function questions(user, elementMap) {
     {
       ...(await import("./q-pandas-csv-aggregation.js").then((m) => m.default({ user, weight: 1 }))),
     },
+    // GA2: APIs - FastAPI JSON Validation
+    {
+      ...(await import("./q-fastapi-json-validation.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    // GA4: LLM - Text Information Extraction
+    {
+      ...(await import("./q-llm-text-extraction.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+
+    // GA8: Visualization Logic - Histogram Bin Counting
+    {
+      ...(await import("./q-histogram-bin-count.js").then((m) =>m.default({ user, weight: 1 }))),
+    },
 
     // GA5: Web Scraping - Data Extraction
     {
