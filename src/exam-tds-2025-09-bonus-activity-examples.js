@@ -72,31 +72,31 @@ export async function questions(user, elementMap) {
     //   help: md(geospatial),
     // },
 
-    // ========== Nitya'S QUESTIONS (23f3003687) ==========
-    
-    // Markdown to HTML Converter
+    // ========== HITESH'S TDS QUESTIONS (23f3003687) ==========
+
+    // Pandas GroupBy Operations - Data Analysis with Python
     {
-      ...(await import("./q-markdown-converter.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-pandas-groupby.js").then((m) => m.default({ user, weight: 1 }))),
     },
 
-    // CSV Statistics Calculator
+    // SQL Aggregation Queries - Database Queries
     {
-      ...(await import("./q-csv-stats.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-sql-aggregation.js").then((m) => m.default({ user, weight: 1 }))),
     },
 
-    // String Transformation API
+    // Regular Expression Data Extraction - Text Processing
     {
-      ...(await import("./q-string-transform.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-regex-extraction.js").then((m) => m.default({ user, weight: 1 }))),
     },
 
-    // Date Calculator API
+    // HTTP API Data Fetching - Working with APIs
     {
-      ...(await import("./q-date-calculator.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-httpx-api.js").then((m) => m.default({ user, weight: 1 }))),
     },
 
-    // Number Base Converter API
+    // BeautifulSoup HTML Parsing - Web Scraping
     {
-      ...(await import("./q-number-base.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-beautifulsoup-parse.js").then((m) => m.default({ user, weight: 1 }))),
     },
   ];
 
