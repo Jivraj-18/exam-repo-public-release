@@ -66,6 +66,38 @@ export async function questions(user, elementMap) {
       help: md(visualization),
     },
 
+    // Bonus Activity Questions - Student Contributions
+    
+    // Q1: Pandas DataFrame Merge and Analysis
+    {
+      ...(await import("./q-pandas-merge-analysis.js").then((m) => m.default({ user, weight: 1 }))),
+      help: md(pythonAnalysis),
+    },
+
+    // Q2: Data Cleaning with Regex and Text Processing
+    {
+      ...(await import("./q-data-cleaning-regex.js").then((m) => m.default({ user, weight: 1 }))),
+      help: md(pythonAnalysis),
+    },
+
+    // Q3: Statistical Correlation Analysis
+    {
+      ...(await import("./q-correlation-analysis.js").then((m) => m.default({ user, weight: 1.25 }))),
+      help: md(pythonAnalysis),
+    },
+
+    // Q4: Time Series Moving Average
+    {
+      ...(await import("./q-time-series-moving-average.js").then((m) => m.default({ user, weight: 1 }))),
+      help: md(pythonAnalysis),
+    },
+
+    // Q5: CSV GroupBy and Aggregation
+    {
+      ...(await import("./q-csv-groupby-aggregation.js").then((m) => m.default({ user, weight: 1 }))),
+      help: md(pythonAnalysis),
+    },
+
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
