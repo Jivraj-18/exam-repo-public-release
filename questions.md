@@ -67,3 +67,21 @@ comm -23 <(ls q-*.js | sort) <(grep -oh 'q-[^ ]*\.js' exam-*.js | sort | uniq)
 - [q-google-auth-nonce.js](src/q-google-auth-nonce.js)
 - [q-image-compression-manifest.js](src/q-image-compression-manifest.js)
 - [q-ollama-route.js](src/q-ollama-route.js)
+---
+
+## Bonus Activity Submission – 21f2000034
+
+### Question 1
+Explain the role of Git branches in collaborative data science projects. How do pull requests help avoid conflicts?
+
+### Question 2
+A machine learning model is deployed as a REST API. Explain how FastAPI helps in this process and mention two advantages over Flask.
+
+### Question 3
+Why is server-side data validation important in data science pipelines? Explain its impact on model reliability.
+
+### Question 4
+What is reproducibility in data science experiments? Explain how version control supports reproducibility.
+
+### Question 5
+Differentiate between unit testing and integration testing in data science workflows with one example.
