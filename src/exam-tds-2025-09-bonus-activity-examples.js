@@ -65,6 +65,15 @@ export async function questions(user, elementMap) {
       ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
       help: md(visualization),
     },
+        
+    // GA! :Linux internals: CPU scheduler concept
+    {
+      ...(await import("./q-linux-scheduler.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
+      // no extra help reading for this one
+    },
+
 
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
