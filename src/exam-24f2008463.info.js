@@ -1,5 +1,5 @@
 export default {
-  title: "Innovations Exam: 10 New Questions",
+  title: "Exam 24f2008463: 10 New Questions",
   start: "2025-01-01T00:00:00Z",
   end: "2030-01-01T00:00:00Z",
   instructions: /* html */ `
