@@ -1,5 +1,5 @@
 import { displayQuestions } from "./utils/display.js";
-
+import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
 export async function questions(user, elementMap) {
   const results = [
     // Question 1: CSV Column Validation
