@@ -11,6 +11,11 @@ import geospatial from "./tds/geospatial-analysis-with-excel.md";
 import imageCompression from "./tds/image-compression.md";
 import largeLanguageModels from "./tds/large-language-models.md";
 import visualization from "./tds/data-visualization-with-seaborn.md";
+import qLogAnalysis from "./q-log-analysis.js";
+import qBatchProcessing from "./q-batch-processing.js";
+import qMessyCleaning from "./q-messy-cleaning.js";
+import qGitOperations from "./q-git-operations.js";
+import qDevtoolsMemory from "./q-devtools-memory.js";
 
 export async function questions(user, elementMap) {
   const results = [
@@ -76,3 +81,4 @@ export async function questions(user, elementMap) {
   displayQuestions(results, elementMap);
   return Object.fromEntries(results.map(({ id, ...rest }) => [id, rest]));
 }
+
