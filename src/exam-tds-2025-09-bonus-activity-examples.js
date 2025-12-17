@@ -16,61 +16,112 @@ export async function questions(user, elementMap) {
   const results = [
     // GA1: Core Tools - JSON Wrangling
     {
-      ...(await import("./q-sort-filter-json.js").then((m) => m.default({ user, weight: 1.0 }))),
+      ...(await import("./q-sort-filter-json.js").then((m) =>
+        m.default({ user, weight: 1.0 })
+      )),
       help: md(json),
     },
 
     // GA1: Core Tools - Spreadsheets
     {
-      ...(await import("./q-use-excel.js").then((m) => m.default({ user, weight: 0.5 }))),
+      ...(await import("./q-use-excel.js").then((m) =>
+        m.default({ user, weight: 0.5 })
+      )),
       help: md(excel),
     },
 
     // GA3: AI Coding - LLM Assisted Development
     {
-      ...(await import("./q-fastapi-coder.js").then((m) => m.default({ user, weight: 2 }))),
+      ...(await import("./q-fastapi-coder.js").then((m) =>
+        m.default({ user, weight: 2 })
+      )),
     },
 
     // GA5: Web Scraping - Data Extraction
     {
-      ...(await import("./q-scrape-imdb-movies.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-scrape-imdb-movies.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
       help: md(webScraping),
     },
 
     // GA5: Web Scraping - API Parsing with Proxy
     {
-      ...(await import("./q-hacker-news-search.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-hacker-news-search.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
     },
 
     // GA6: Data Preparation - Advanced Transformation
     {
-      ...(await import("./q-json-sensor-rollup.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-json-sensor-rollup.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
       help: md(dataTransformation),
     },
 
     // GA7: Data Analysis - Statistical Analysis
     {
-      ...(await import("./q-python-cohort-retention.js").then((m) => m.default({ user, weight: 1.25 }))),
+      ...(await import("./q-python-cohort-retention.js").then((m) =>
+        m.default({ user, weight: 1.25 })
+      )),
       help: md(pythonAnalysis),
     },
 
     // GA2: Deployment - Image Compression
     {
-      ...(await import("./q-image-compression-dynamic.js").then((m) => m.default({ user, weight: 0.75 }))),
+      ...(await import("./q-image-compression-dynamic.js").then((m) =>
+        m.default({ user, weight: 0.75 })
+      )),
       help: md(imageCompression),
     },
 
     // GA8: Visualization - Seaborn Data Visualization
     {
-      ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
+      ...(await import("./q-seaborn-data-visualization.js").then((m) =>
+        m.default({ user, weight: 1.5 })
+      )),
       help: md(visualization),
     },
 
-    // GA4: Geospatial Analysis - Server-Side Validation
-    // {
-    //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
-    //   help: md(geospatial),
-    // },
+    // ===============================
+    // STUDENT CONTRIBUTED QUESTIONS
+    // ===============================
+
+    // Pandas: Outlier removal using IQR
+    {
+      ...(await import("./q-pandas-outlier-removal.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // NumPy: Min–Max normalization
+    {
+      ...(await import("./q-numpy-normalization.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // SQL: Window function ranking
+    {
+      ...(await import("./q-sql-window-function.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // Sklearn: Train-test split size
+    {
+      ...(await import("./q-sklearn-train-test-shape.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // FastAPI: Query parameter handling
+    {
+      ...(await import("./q-fastapi-query-params.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
   ];
 
   displayQuestions(results, elementMap);
