@@ -1,8 +1,7 @@
-export default function ({ user, weight = 1 }) {
-  return {
-    id: "structured-output",
-    weight,
-    question: `
+export default {
+  id: "structured-output",
+  weight: 1,
+  question: `
 A logistics company needs fake Indian address data for testing.
 
 Write the JSON body for a request to:
@@ -15,7 +14,6 @@ Requirements:
 - Output must contain an array called addresses
 - Each address must have state, city, and pincode
 - additionalProperties must be false
-    `,
-    answer: "",
-  };
-}
+  `,
+  answer: ""
+};
