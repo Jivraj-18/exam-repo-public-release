@@ -66,6 +66,34 @@ export async function questions(user, elementMap) {
       help: md(visualization),
     },
 
+    // GA8: Visualization - Fix SVG Bar Chart
+    {
+      ...(await import("./q-svg-bar-chart-fix.js").then((m) => m.default({ user, weight: 1 }))),
+      help: md(visualization),
+    },
+
+    // GA6: Data Cleaning - CSV Cleaning
+    {
+      ...(await import("./q-csv-cleaning-lossless.js").then((m) => m.default({ user, weight: 1 }))),
+      help: md(dataTransformation),
+    },
+
+    // GA1: Version Control - Git History Repair
+    {
+      ...(await import("./q-git-history-repair.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+
+    // GA6: Data Transformation - JSON Flatten
+    {
+      ...(await import("./q-json-flatten-advanced.js").then((m) => m.default({ user, weight: 1 }))),
+      help: md(json),
+    },
+
+    // GA5: Debugging - HTTP Header Debug
+    {
+      ...(await import("./q-http-header-debug.js").then((m) => m.default({ user, weight: 0.75 }))),
+    },
+
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
