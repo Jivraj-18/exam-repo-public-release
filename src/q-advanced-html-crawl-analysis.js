@@ -16,23 +16,35 @@ export default function ({ user, weight = 2 }) {
     { file: "terms.html", hasProduct: false, hasSemanticHTML: false, isValid: true },
     { file: "broken.html", hasProduct: false, hasSemanticHTML: false, isValid: false },
   ];
-  
-  const matchingFiles = crawlData.filter(
-    f => f.hasProduct && f.hasSemanticHTML && f.isValid
-  ).length;
-  
+
+  // Expected files after crawl filtering
+  const expectedFiles = crawlData
+    .filter(f => f.hasProduct && f.hasSemanticHTML && f.isValid)
+    .map(f => f.file);
+
   return {
     id: "advanced_html_crawl_analysis",
-    type: "input",
+    type: "textarea",
     weight,
-    placeholder: "8",
-    label: "HTML Crawl Analysis: Count Matching Files",
+    placeholder: "index.html, product-001.html, product-003.html, ...",
+    label: "HTML Crawl Analysis: Select Valid Product Pages",
     description: /* html */ `
       <h3>Crawl and Analyze HTML Files</h3>
-      
-      <h4>Scenario:</h4>
-      <p>You've crawled an e-commerce website. Here's what you found:</p>
-      
+
+      <h4>Scenario</h4>
+      <p>
+        You have crawled an e-commerce website and collected metadata about each
+        HTML file. A production crawler should only keep files that:
+      </p>
+
+      <ul>
+        <li>Contain product information</li>
+        <li>Use semantic HTML</li>
+        <li>Have a valid structure</li>
+      </ul>
+
+      <p>The crawl summary is shown below:</p>
+
       <table class="table table-sm table-bordered">
         <thead>
           <tr>
@@ -60,42 +72,50 @@ export default function ({ user, weight = 2 }) {
           <tr><td>broken.html</td><td>✗</td><td>✗</td><td>✗</td></tr>
         </tbody>
       </table>
-      
-      <h4>Task:</h4>
-      <p>Count files that match ALL criteria:</p>
-      <ul>
-        <li>✓ Has product information</li>
-        <li>✓ Uses semantic HTML tags</li>
-        <li>✓ Valid structure</li>
-      </ul>
-      
-      <p><strong>Your answer:</strong> A single integer = count of files matching all criteria</p>
+
+      <h4>Task</h4>
+      <p>
+        List the filenames that your crawler should <strong>keep</strong>.
+        Enter filenames separated by commas or new lines.
+      </p>
     `,
     help: [/* html */ `
-      <p><strong>Analysis approach:</strong></p>
-      <ol>
-        <li>Go through each file row</li>
-        <li>Check if it has ✓ for ALL three criteria</li>
-        <li>Count matching files</li>
-      </ol>
-      <p><strong>Example:</strong> index.html has ✓✓✓ → counts as 1</p>
-      <p><strong>Example:</strong> product-002.html has ✓✗✓ → does NOT count</p>
+      <p><strong>Tip:</strong></p>
+      <ul>
+        <li>All three conditions must be satisfied</li>
+        <li>Order does not matter</li>
+        <li>No extra files should be included</li>
+      </ul>
     `],
     check: ({ answer }) => {
-      const count = parseInt(answer.trim());
-      
-      if (isNaN(count) || count < 0) {
+      const submitted = answer
+        .split(/[, \n]+/)
+        .map(s => s.trim())
+        .filter(Boolean);
+
+      const expected = expectedFiles;
+
+      const missing = expected.filter(f => !submitted.includes(f));
+      const extra = submitted.filter(f => !expected.includes(f));
+
+      if (missing.length === 0 && extra.length === 0) {
         return {
-          pass: false,
-          message: "✗ Please enter a valid positive integer",
+          pass: true,
+          message: `✓ Correct! Your crawler correctly selected ${expected.length} files.`,
         };
       }
-      
+
       return {
-        pass: count === matchingFiles,
-        message: count === matchingFiles
-          ? `✓ Correct! Found ${count} matching files.`
-          : `✗ Expected ${matchingFiles}, but got ${count}. Recount files with all ✓ marks.`,
+        pass: false,
+        message: `
+✗ Incorrect crawl selection.
+
+Missing files:
+${missing.length ? missing.join(", ") : "None"}
+
+Extra files included:
+${extra.length ? extra.join(", ") : "None"}
+        `.trim(),
       };
     },
   };
