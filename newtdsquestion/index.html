@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TDS Exam Preview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 20px;
+    }
+
+    .question {
+      background: #fff;
+      padding: 16px;
+      margin-bottom: 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .question h3 {
+      margin-top: 0;
+    }
+
+    .option {
+      margin: 6px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧪 Tools in Data Science – Exam Preview</h1>
+  <p>Email simulated as: <b>23f2003481@ds.study.iitm.ac.in</b></p>
+
+  <div id="exam"></div>
+
+  <script type="module">
+    import { questions } from "./exam-Shubham.js";
+
+    // Minimal displayQuestions replacement
+    function displayQuestions(results, elementMap) {
+      const root = document.getElementById("exam");
+
+      results.forEach((q, index) => {
+        const div = document.createElement("div");
+        div.className = "question";
+
+        div.innerHTML = `
+          <h3>Question ${index + 1}</h3>
+          <pre>${q.question}</pre>
+        `;
+
+        root.appendChild(div);
+      });
+    }
+
+    // Monkey-patch displayQuestions used by exam.js
+    window.displayQuestions = displayQuestions;
+
+    // Fake user object (what exam system normally provides)
+    const user = {
+      email: "23f2003481@ds.study.iitm.ac.in",
+    };
+
+    // Dummy elementMap
+    const elementMap = {};
+
+    // Run exam
+    await questions(user, elementMap);
+  </script>
+
+</body>
+</html>
