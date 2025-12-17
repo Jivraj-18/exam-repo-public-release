@@ -72,7 +72,7 @@ export async function questions(user, elementMap) {
     //   help: md(geospatial),
     // },
 
-    // ========== HITESH'S TDS QUESTIONS (23f3003687) ==========
+    // ========== NITYA'S TDS QUESTIONS (23f3003687) ==========
 
     // Pandas GroupBy Operations - Data Analysis with Python
     {
