@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Git Question Test</title>
+
+    <script type="module">
+      import { render } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
+      import questionModule from "./src/q-git-commit-analysis.js";
+
+      const user = { email: "test@example.com" };
+
+      const q = await questionModule({ user, weight: 1 });
+
+      render(q.question, document.body);
+
+      // For debugging: expose expected answer in console
+      console.log("Expected output:", q.answer.toString());
+    </script>
+  </head>
+  <body></body>
+</html>
