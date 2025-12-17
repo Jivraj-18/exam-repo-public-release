@@ -15,6 +15,9 @@ let questions;
 let endTime;
 
 export async function setup(quiz) {
+  // Normalize quiz ID: remove "exam-" prefix if present (to handle both /exam-ID and /ID URLs)
+  if (quiz.startsWith("exam-")) quiz = quiz.slice(5);
+
   // Check if the quiz is valid
   let response;
   try {
