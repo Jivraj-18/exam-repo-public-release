@@ -71,6 +71,33 @@ export async function questions(user, elementMap) {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+
+    // ========== Nitya'S QUESTIONS (23f3003687) ==========
+    
+    // Markdown to HTML Converter
+    {
+      ...(await import("./q-markdown-converter.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+
+    // CSV Statistics Calculator
+    {
+      ...(await import("./q-csv-stats.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+
+    // String Transformation API
+    {
+      ...(await import("./q-string-transform.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+
+    // Date Calculator API
+    {
+      ...(await import("./q-date-calculator.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+
+    // Number Base Converter API
+    {
+      ...(await import("./q-number-base.js").then((m) => m.default({ user, weight: 1 }))),
+    },
   ];
 
   displayQuestions(results, elementMap);
