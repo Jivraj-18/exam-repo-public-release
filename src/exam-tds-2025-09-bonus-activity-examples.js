@@ -30,6 +30,10 @@ export async function questions(user, elementMap) {
     {
       ...(await import("./q-fastapi-coder.js").then((m) => m.default({ user, weight: 2 }))),
     },
+    // GA2: APIs - FastAPI JSON Aggregation
+    {
+      ...(await import("./q-fastapi-json-aggregation.js").then((m) => m.default({ user, weight: 1 }))),
+    },
 
     // GA5: Web Scraping - Data Extraction
     {
