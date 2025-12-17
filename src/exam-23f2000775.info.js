@@ -5,8 +5,8 @@ export default {
   // Start time in the past ensures the exam is "open" immediately
   start: "2024-12-15T10:00:00+05:30", 
   hours: 1.0, 
-  admin: (email) => email === "admin@example.com", 
-  allowed: (email) => email.endsWith(".edu"), 
+  admin: (email) => true,
+  allowed: (email) => true 
   instructions: /* html */ `
     <h1>Bonus Submission</h1>
     <p>5 Scenario-based questions covering Git, LLMs, Scraping, Pandas, and Seaborn.</p>
