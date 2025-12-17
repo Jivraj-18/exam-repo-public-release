@@ -66,6 +66,32 @@ export async function questions(user, elementMap) {
       help: md(visualization),
     },
 
+    // Bonus: Development Tools - Release Management
+    {
+      ...(await import("./q-semver-release-planner.js").then((m) => m.default({ user, weight: 0.75 })) ),
+    },
+
+    // Bonus: Deployment Tools - Capacity Planning
+    {
+      ...(await import("./q-deploy-container-capacity.js").then((m) => m.default({ user, weight: 0.75 })) ),
+    },
+
+    // Bonus: AI Coding / LLMs - Structured Output Guardrails
+    {
+      ...(await import("./q-llm-structured-output-audit.js").then((m) => m.default({ user, weight: 0.75 })) ),
+    },
+
+    // Bonus: Data Sourcing & Preparation - Invoice Normalization
+    {
+      ...(await import("./q-data-sourcing-normalize.js").then((m) => m.default({ user, weight: 0.75 })) ),
+    },
+
+    // Bonus: Data Analysis & Visualization - Moving Average
+    {
+      ...(await import("./q-visualization-moving-average.js").then((m) => m.default({ user, weight: 0.75 })) ),
+      help: md(visualization),
+    },
+
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
