@@ -59,7 +59,6 @@ export async function questions(user, elementMap) {
       ...(await import("./q-image-compression-dynamic.js").then((m) => m.default({ user, weight: 0.75 }))),
       help: md(imageCompression),
     },
-
     // GA8: Visualization - Seaborn Data Visualization
     {
       ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
