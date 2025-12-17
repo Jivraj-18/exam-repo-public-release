@@ -15,10 +15,12 @@ let questions;
 let endTime;
 
 export async function setup(quiz) {
+  // Accept both "exam-<id>" and "<id>" forms
+  const quizId = String(quiz).replace(/^exam-/, "");
   // Check if the quiz is valid
   let response;
   try {
-    response = await import(`./exam-${quiz}.info.js`);
+    response = await import(`./exam-${quizId}.info.js`);
   } catch {
     $examForm.innerHTML = /* html */ `
       <div class="alert alert-danger" role="alert">
@@ -45,7 +47,7 @@ export async function setup(quiz) {
   countdown({ startTime, endTime, callback });
 
   // Show the questions directly (no time restrictions or permissions)
-  await showQuestions(quiz, user);
+  await showQuestions(quizId, user);
 
   // Callback handles exam state changes and updates UI accordingly
   function callback({ status, time }) {
@@ -61,7 +63,7 @@ export async function setup(quiz) {
         : `Due ${formatDateTime(endTime)}`;
     }
     // Reload if the exam just started
-    if (!questions) showQuestions(quiz, user);
+    if (!questions) showQuestions(quizId, user);
   }
 }
 
