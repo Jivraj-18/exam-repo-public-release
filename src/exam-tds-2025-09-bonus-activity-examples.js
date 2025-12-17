@@ -71,8 +71,26 @@ export async function questions(user, elementMap) {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+    // Bonus Activity Questions - 24f2002696
+    {
+      ...(await import("./q-fastapi-ratelimit-24f2002696.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    {
+      ...(await import("./q-duckdb-timeseries-24f2002696.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    {
+      ...(await import("./q-playwright-visual-24f2002696.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    {
+      ...(await import("./q-marimo-dashboard-24f2002696.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    {
+      ...(await import("./q-github-actions-matrix-24f2002696.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    
   ];
 
   displayQuestions(results, elementMap);
   return Object.fromEntries(results.map(({ id, ...rest }) => [id, rest]));
 }
+
