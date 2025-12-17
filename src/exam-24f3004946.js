@@ -14,4 +14,4 @@ export async function questions(user, elementMap) {
   return Object.fromEntries(
     results.map(({ id, ...rest }) => [id, rest])
   );
-}
+} 

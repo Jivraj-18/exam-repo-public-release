@@ -18,3 +18,4 @@ export default async function ({ user, weight = 1 }) {
 
   return { id, title, weight, question, answer };
 }
+
