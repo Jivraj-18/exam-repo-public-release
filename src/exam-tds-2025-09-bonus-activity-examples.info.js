@@ -54,6 +54,11 @@ export default {
       <li>JSON Sensor Data Rollup (Data Preparation)</li>
       <li>Python Cohort Retention Analysis (Statistical Analysis)</li>
       <li>Image Compression with Dynamic Quality (Image Processing)</li>
+      <li>Fix a Broken SVG Chart (Data Visualization)</li>
+      <li>Clean a Malformed CSV (Data Cleaning)</li>
+      <li>Fix Git Commit History (Version Control)</li>
+      <li>Flatten Nested JSON (Data Transformation)</li>
+      <li>Fix HTTP Request Headers (Debugging)</li>
       <li>Region Containing Point Geospatial Query (Geospatial Analysis - Server-Side Validation)</li>
     </ol>
   `,
