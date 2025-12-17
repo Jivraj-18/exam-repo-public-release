@@ -3,11 +3,6 @@ import { displayQuestions } from "./utils/display.js";
 export async function questions(user, elementMap) {
   const results = [
     {
-      ...(await import("./q-uv-httpbin-headers.js").then((m) =>
-        m.default({ user, weight: 1 }),
-      )),
-    },
-    {
       ...(await import("./q-llm-streaming-sse.js").then((m) =>
         m.default({ user, weight: 1 }),
       )),
@@ -17,13 +12,18 @@ export async function questions(user, elementMap) {
         m.default({ user, weight: 1 }),
       )),
     },
-      {
+    {
       ...(await import("./q-sql-rolling-conversion-lift.js").then((m) =>
         m.default({ user, weight: 1 }),
       )),
     },
     {
       ...(await import("./q-duckdb-json-error-rate.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
+    },
+    {
+      ...(await import("./q-google-sheets-importxml-count.js").then((m) =>
         m.default({ user, weight: 1 }),
       )),
     }

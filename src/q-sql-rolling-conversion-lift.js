@@ -4,47 +4,45 @@ export default async function ({ user, weight = 1 }) {
     weight,
 
     question: `
-### SQL Analysis — Rolling Conversion Lift Detection
+### SQL Analytics — Rolling Conversion Lift
 
-You are part of the growth analytics team at a SaaS company monitoring
-daily product activations. Sudden improvements in conversion rate
-often indicate successful experiments or campaigns.
+You are part of the growth analytics team at a SaaS company analyzing
+daily conversion performance across regions.
 
-You are given a table \`daily_metrics\` with the following columns:
+You are given a table \`daily_metrics\` with the following schema:
 
 - \`metric_date\` (DATE)
 - \`region\` (TEXT)
 - \`sessions\` (INTEGER)
 - \`conversions\` (INTEGER)
 
-Your task is to identify **unusual positive conversion spikes**.
-
 #### Task
 
 Using SQL window functions:
 
-1. Compute the **daily conversion rate**:
-   \`conversion_rate = conversions / sessions\`
+1. Compute the **daily conversion rate** as:
+\`\`\`
+conversion_rate = conversions / sessions
+\`\`\`
 
 2. For each region, compute the **7-day trailing average conversion rate**
-   (exclude the current day).
+   using the previous 7 days **excluding the current day**.
 
-3. Compute the **lift** for each day as:
-
+3. Compute the **conversion lift** for each day as:
 \`\`\`
 (conversion_rate - trailing_avg) / trailing_avg
 \`\`\`
 
-4. Filter to:
+4. Filter the results to:
    - \`region = 'APAC'\`
-   - positive lift values only
+   - only rows with **positive lift**
 
-5. Identify the **maximum conversion lift** observed.
+5. Find the **maximum conversion lift** observed.
 
 📌 **Question**  
 What is the **maximum positive conversion lift** for the APAC region?
 
-(Enter the value as a decimal or percentage, rounded to two decimals.)
+(Round your answer to **two decimal places**.)
     `,
 
     type: "number",

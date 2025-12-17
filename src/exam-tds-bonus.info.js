@@ -30,11 +30,11 @@ export default {
 
     <h2 class="display-6 my-5">Topics Covered</h2>
     <ul>
-      <li><strong>Python Tooling (uv)</strong>: Executing scripts and inspecting HTTP behavior</li>
       <li><strong>LLMs & Streaming</strong>: Understanding Server-Sent Events (SSE)</li>
       <li><strong>Reactive Notebooks</strong>: Dependency tracking in Marimo</li>
       <li><strong>SQL Analytics</strong>: Rolling averages and conversion lift analysis</li>
       <li><strong>DuckDB & JSON</strong>: Log analysis using JSON functions</li>
+      <li><strong>Data Sourcing</strong>: Extracting structured web data using Google Sheets</li>
     </ul>
 
     <h2 class="display-6 my-5">Instructions</h2>
@@ -63,11 +63,11 @@ export default {
 
     <h2 class="display-6 my-5">Questions Included</h2>
     <ol>
-      <li>Inspect HTTP Request Headers using <code>uv</code> and <code>httpbin</code></li>
       <li>Understanding LLM Streaming with Server-Sent Events (SSE)</li>
       <li>Reactive Dependency Execution in Marimo Notebooks</li>
       <li>Rolling Conversion Lift Detection using SQL Window Functions</li>
       <li>API Error Rate Computation from JSON Logs using DuckDB</li>
+      <li>Counting Structured Web Data using Google Sheets and IMPORTXML</li>
     </ol>
 
     <p class="mt-5">
