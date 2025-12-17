@@ -55,6 +55,11 @@ export default {
       <li>Python Cohort Retention Analysis (Statistical Analysis)</li>
       <li>Image Compression with Dynamic Quality (Image Processing)</li>
       <li>Region Containing Point Geospatial Query (Geospatial Analysis - Server-Side Validation)</li>
+      <li>Semantic Version Planner (Development Tools)</li>
+      <li>Kubernetes Capacity Planning (Deployment Tools)</li>
+      <li>LLM Structured Output Audit (AI Coding / LLM Guardrails)</li>
+      <li>Invoice Feed Normalization (Data Sourcing & Preparation)</li>
+      <li>Moving Average & Chart Choice (Data Analysis & Visualization)</li>
     </ol>
   `,
 };
