@@ -76,9 +76,25 @@ export async function questions(user, elementMap) {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+    {
+      ...(await qLogAnalysis({ user, weight: 1 })),
+    },
+    {
+      ...(await qBatchProcessing({ user, weight: 1 })),
+    },
+    {
+      ...(await qMessyCleaning({ user, weight: 1 })),
+    },
+    {
+      ...(await qGitOperations({ user, weight: 1 })),
+    },
+    {
+      ...(await qDevtoolsMemory({ user, weight: 1 })),
+    },
   ];
 
   displayQuestions(results, elementMap);
   return Object.fromEntries(results.map(({ id, ...rest }) => [id, rest]));
 }
+
 
