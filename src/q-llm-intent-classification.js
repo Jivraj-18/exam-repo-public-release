@@ -1,147 +1,125 @@
-/**
- * LLM: Controlled Intent Classification with Strict JSON Output
- * Difficulty: High
- * Marks: 2
- *
- * This question evaluates:
- * - Prompt engineering discipline
- * - Correct LLM API usage
- * - Strict structured (JSON-only) outputs
- * - Realistic production constraints
- */
-
-export default function ({ user, weight = 2 }) {
-  const id = "llm_intent_classification_json";
-
+export default function ({ user, weight = 1.5 }) {
+  const validExamples = [
+    { intent: "question", confidence: 0.95, entities: ["weather", "tomorrow"] },
+    { intent: "request", confidence: 0.88, entities: ["help", "code"] },
+    { intent: "complaint", confidence: 0.92, entities: ["slow", "performance"] },
+    { intent: "greeting", confidence: 0.99, entities: ["hello"] },
+    { intent: "feedback", confidence: 0.85, entities: ["good", "update"] },
+  ];
+  
   return {
-    id,
-    title: "LLM: Strict Intent Classification with JSON Output",
+    id: "llm_intent_classification_json",
+    type: "textarea",
     weight,
-
-    description: `
-SupportOps is building an AI-powered ticket routing system.  
-Incoming messages must be classified into **exactly one intent** so downstream systems can process them safely.
-
-The system is fragile — **any non-JSON output will cause failures**.
-
----
-
-### Input text
-
-\`\`\`
-The customer says the payment went through, but the dashboard still shows pending status.
-\`\`\`
-
-### Valid intent labels
-
-- BILLING
-- TECHNICAL
-- ACCOUNT
-- GENERAL
-
----
-
-### Your task
-
-Write a **Python program using httpx** that sends a request to the OpenAI-compatible Chat Completion API (via AI Pipe) to classify the intent.
-
-#### Requirements
-
-1. Use **gpt-4o-mini** as the model  
-2. Include an **Authorization header** with a dummy API key  
-3. The **first message must be a system message** that:
-   - Forces **JSON-only output**
-   - Restricts intent strictly to the labels above  
-4. The **second message must be exactly the input text**
-5. The model must return **only**:
-
-\`\`\`json
-{ "intent": "TECHNICAL" }
-\`\`\`
-
-6. Do **not** print anything else  
-7. Do **not** post-process the output  
-
----
-
-### Allowed libraries
-
-\`\`\`python
-import httpx
-\`\`\`
-
----
-
-### Submission
-
-Paste **only the Python code**.
+    placeholder: `{"intent": "question", "confidence": 0.95, "entities": ["weather"]}`,
+    label: "LLM Intent Classification: JSON Response",
+    description: /* html */ `
+      <h3>Classify User Intent Using LLM API</h3>
+      
+      <h4>Task:</h4>
+      <ol>
+        <li>Write a prompt that classifies user intents</li>
+        <li>Call any LLM API (OpenAI, Anthropic, Cohere, free local LLM, etc.)</li>
+        <li>Force JSON-only output (no markdown, no explanation)</li>
+        <li>Test with sample input and capture raw API response</li>
+        <li>Paste the JSON response here</li>
+      </ol>
+      
+      <h4>Expected JSON Structure:</h4>
+      <pre><code>{
+  "intent": "one of: greeting, question, request, feedback, complaint",
+  "confidence": 0.0 to 1.0,
+  "entities": ["array", "of", "extracted", "keywords"]
+}</code></pre>
+      
+      <h4>Sample Input to Test:</h4>
+      <p><code>"What's the weather like tomorrow?"</code></p>
+      
+      <h4>Expected Output for Sample:</h4>
+      <pre><code>{
+  "intent": "question",
+  "confidence": 0.95,
+  "entities": ["weather", "tomorrow"]
+}</code></pre>
+      
+      <h4>Valid Intent Values:</h4>
+      <ul>
+        <li><strong>greeting</strong>: "Hello", "Hi", "Hey"</li>
+        <li><strong>question</strong>: "What is?", "How does?", "Why?"</li>
+        <li><strong>request</strong>: "Can you?", "Please help", "Need assistance"</li>
+        <li><strong>feedback</strong>: "Good job", "Thank you", "Nice update"</li>
+        <li><strong>complaint</strong>: "This is broken", "Bad service", "Terrible UX"</li>
+      </ul>
     `,
+    help: [/* html */ `
+      <p><strong>Example prompt to use with any LLM:</strong></p>
+      <pre><code>System: "You are an intent classifier. Respond ONLY with valid JSON, no markdown, no explanation."
 
-    type: "code",
-    language: "python",
+User: "What's the weather like tomorrow?"
 
-    /**
-     * Reference answer (not shown to students)
-     * Used for automated validation heuristics
-     */
-    answer: `
-import httpx
-
-url = "https://aipipe.org/openai/v1/chat/completions"
-
-headers = {
-    "Authorization": "Bearer DUMMY_API_KEY",
-    "Content-Type": "application/json"
-}
-
-payload = {
-    "model": "gpt-4o-mini",
+Expected:
+{"intent": "question", "confidence": 0.95, "entities": ["weather", "tomorrow"]}</code></pre>
+      
+      <p><strong>Using OpenAI API:</strong></p>
+      <pre><code>curl https://api.openai.com/v1/chat/completions \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "model": "gpt-3.5-turbo",
     "messages": [
-        {
-            "role": "system",
-            "content": "Classify the user message into exactly one intent: BILLING, TECHNICAL, ACCOUNT, or GENERAL. Respond with ONLY valid JSON of the form { \\"intent\\": \\"LABEL\\" }."
-        },
-        {
-            "role": "user",
-            "content": "The customer says the payment went through, but the dashboard still shows pending status."
-        }
+      {"role": "system", "content": "Respond ONLY with JSON."},
+      {"role": "user", "content": "What is the weather?"}
     ]
-}
-
-response = httpx.post(url, json=payload, headers=headers)
-response.raise_for_status()
-print(response.json()["choices"][0]["message"]["content"])
-    `.trim(),
-
-    /**
-     * Automated checker
-     * No human grading
-     */
+  }'</code></pre>
+      
+      <p><strong>Using Free Local LLM (Ollama):</strong></p>
+      <pre><code>curl http://localhost:11434/api/generate \\
+  -d '{
+    "model": "mistral",
+    "prompt": "Classify: What is the weather? Respond JSON only.",
+    "stream": false
+  }'</code></pre>
+      
+      <p><strong>Valid response examples:</strong></p>
+      <pre><code>${JSON.stringify(validExamples, null, 2)}</code></pre>
+    `],
     check: ({ answer }) => {
-      if (!answer) return false;
-
-      // Must mention correct model
-      if (!answer.includes("gpt-4o-mini")) return false;
-
-      // Must use httpx.post
-      if (!answer.includes("httpx.post")) return false;
-
-      // Must include Authorization header
-      if (!/Authorization.*Bearer/i.test(answer)) return false;
-
-      // Must include system + user roles
-      if (!answer.includes('"role": "system"')) return false;
-      if (!answer.includes('"role": "user"')) return false;
-
-      // Must enforce JSON-only intent schema
-      if (!answer.includes('"intent"')) return false;
-
-      // Must include allowed labels
-      const labels = ["BILLING", "TECHNICAL", "ACCOUNT", "GENERAL"];
-      if (!labels.some((l) => answer.includes(l))) return false;
-
-      return true;
-    }
+      try {
+        const response = JSON.parse(answer.trim());
+        
+        const hasIntent = typeof response.intent === 'string' && response.intent.length > 0;
+        const hasConfidence = typeof response.confidence === 'number' && 
+                             response.confidence >= 0 && response.confidence <= 1;
+        const hasEntities = Array.isArray(response.entities) && response.entities.length > 0;
+        
+        const validIntents = ['greeting', 'question', 'request', 'feedback', 'complaint'];
+        const intentValid = validIntents.includes(response.intent.toLowerCase());
+        
+        const allValid = hasIntent && hasConfidence && hasEntities && intentValid;
+        
+        if (!allValid) {
+          const issues = [];
+          if (!hasIntent) issues.push("Missing/invalid 'intent' field");
+          if (!hasConfidence) issues.push("'confidence' must be 0-1");
+          if (!hasEntities) issues.push("'entities' must be non-empty array");
+          if (!intentValid) issues.push(`'intent' must be one of: ${validIntents.join(", ")}`);
+          
+          return {
+            pass: false,
+            message: `✗ Issues: ${issues.join("; ")}`,
+          };
+        }
+        
+        return {
+          pass: true,
+          message: `✓ Valid JSON! Intent: "${response.intent}" (${(response.confidence * 100).toFixed(0)}% confidence)`,
+        };
+      } catch (e) {
+        return {
+          pass: false,
+          message: `✗ Invalid JSON: ${e.message}. Paste raw API response only (no markdown).`,
+        };
+      }
+    },
   };
 }
-
