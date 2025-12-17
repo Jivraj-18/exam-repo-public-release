@@ -26,6 +26,13 @@ export async function questions(user, elementMap) {
       help: md(excel),
     },
 
+    // Bonus: Git Branch Naming Hook
+    {
+      ...(await import("./q1-git-hook.js").then((m) => m.default({ user, weight: 1 }))),
+      // No extra help docs; question text explains the task.
+    },
+
+
     // GA3: AI Coding - LLM Assisted Development
     {
       ...(await import("./q-fastapi-coder.js").then((m) => m.default({ user, weight: 2 }))),
