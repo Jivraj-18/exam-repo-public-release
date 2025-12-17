@@ -34,6 +34,10 @@ export async function questions(user, elementMap) {
     {
       ...(await import("./q-fastapi-json-aggregation.js").then((m) => m.default({ user, weight: 1 }))),
     },
+    // GA7: Data Analysis - Pandas CSV Aggregation
+    {
+      ...(await import("./q-pandas-csv-aggregation.js").then((m) => m.default({ user, weight: 1 }))),
+    },
 
     // GA5: Web Scraping - Data Extraction
     {
