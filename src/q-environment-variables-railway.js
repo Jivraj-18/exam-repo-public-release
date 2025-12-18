@@ -95,8 +95,8 @@ export default async function ({ user, weight = 1.0 }) {
       }
       
       // Verify api_key_prefix exists (first 4 chars of RAILWAY_API_KEY)
-      if (typeof data.api_key_prefix !== 'string' || data.api_key_prefix.length < 4) {
-        throw new Error("API key prefix is invalid or too short");
+      if (typeof data.api_key_prefix !== 'string' || data.api_key_prefix.length !== 4) {
+        throw new Error("API key prefix is invalid or must be exactly 4 characters long");
       }
       
       return true;
