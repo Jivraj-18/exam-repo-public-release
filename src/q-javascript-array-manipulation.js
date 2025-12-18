@@ -1,5 +1,5 @@
 /**
- * Question 3: JavaScript Array Manipulation with Node.js
+ * JavaScript Array Manipulation with Node.js
  * Topic: JavaScript/Node.js Data Processing
  * Marks: 0.6
  * GA: GA1 (Development Tools)
