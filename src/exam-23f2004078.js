@@ -3,7 +3,7 @@ import { displayQuestions } from "./utils/display.js";
 export async function questions(user, elementMap) {
   const results = [
     {
-      ...(await import("./q-workers-kv.js").then((m) =>
+      ...(await import("./q-workers-kv.js").then(m =>
         m.default({ user, weight: 1 })
       )),
       help: {
@@ -18,61 +18,61 @@ export async function questions(user, elementMap) {
     },
 
     {
-      ...(await import("./q-d3-binding.js").then((m) =>
+      ...(await import("./q-d3-binding.js").then(m =>
         m.default({ user, weight: 1 })
       )),
       help: {
         theme: "red",
         icon: "📊",
         title: "D3 Data Binding",
-        objective: "Bind data to SVG elements using D3’s data join.",
+        objective: "Bind data to SVG elements using D3’s data join pattern.",
         task:
-          "Select SVG #chart, bind data, enter circles, set cx/cy from x/y and r = sales / 50.",
-        tip: "D3’s enter-update-exit pattern enables dynamic visualizations.",
+          "Select SVG #chart, bind data, create circles, set cx/cy using x/y and radius as sales/50.",
+        tip: "D3’s enter-update-exit model enables dynamic visualizations.",
       },
     },
 
     {
-      ...(await import("./q-duckdb-query.js").then((m) =>
+      ...(await import("./q-duckdb-query.js").then(m =>
         m.default({ user, weight: 1 })
       )),
       help: {
         theme: "green",
         icon: "🔢",
         title: "DuckDB Window Function",
-        objective: "Analyze time-series data using window functions.",
+        objective: "Analyze time-series data using SQL window functions.",
         task:
           "Compute a 7-day rolling average using AVG() OVER ordered by date.",
-        tip: "Window functions avoid costly self-joins.",
+        tip: "Window functions avoid expensive self-joins.",
       },
     },
 
     {
-      ...(await import("./q-langchain-rag.js").then((m) =>
+      ...(await import("./q-langchain-rag.js").then(m =>
         m.default({ user, weight: 1 })
       )),
       help: {
         theme: "purple",
         icon: "🧠",
         title: "LangChain RAG Pipeline",
-        objective: "Build a Retrieval-Augmented Generation system.",
+        objective: "Build a Retrieval-Augmented Generation pipeline.",
         task:
-          "Load docs, split (chunk_size=500), embed, store in FAISS, build RetrievalQA chain.",
-        tip: "RAG improves accuracy by grounding LLMs in real data.",
+          "Load docs, split into chunks, embed, store in FAISS, and query using RetrievalQA.",
+        tip: "RAG grounds LLM answers in real documents.",
       },
     },
 
     {
-      ...(await import("./q-polars-lazy.js").then((m) =>
+      ...(await import("./q-polars-lazy.js").then(m =>
         m.default({ user, weight: 1 })
       )),
       help: {
         theme: "orange",
-        icon: "⚙️",
+        icon: "",
         title: "Polars LazyFrame Pipeline",
-        objective: "Process large datasets efficiently.",
+        objective: "Process large datasets efficiently using lazy evaluation.",
         task:
-          "Use scan_csv(), filter dates, groupby category, aggregate, collect(streaming=True).",
+          "Use scan_csv(), filter, groupby, aggregate, and collect with streaming enabled.",
         tip: "Lazy execution enables query optimization.",
       },
     },

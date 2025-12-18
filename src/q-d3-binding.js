@@ -3,6 +3,6 @@ export default async function question({ user, weight = 1 }) {
     id: "q-d3-binding",
     title: "D3 Data Binding",
     weight,
-    answer: null,
+    answer: "",
   };
 }
