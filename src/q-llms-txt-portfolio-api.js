@@ -55,7 +55,7 @@ export default async function ({ user, weight = 1.0 }) {
         id="${id}" 
         name="${id}" 
         rows="15"
-        placeholder="# Student Portfolio API - ${studentId}&#10;&#10;## Overview&#10;..."
+        placeholder=${`# Student Portfolio API - ${studentId}\n\n## Overview\n...`}
         required
       ></textarea>
     </div>
