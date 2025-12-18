@@ -20,10 +20,28 @@ export async function questions(user, elementMap) {
       help: md(json),
     },
 
+    // NEW: JSON API Transformation - Nested Data Processing
+    {
+      ...(await import("./q-json-api-transformation.js").then((m) => m.default({ user, weight: 1.5 }))),
+      help: md(json),
+    },
+
     // GA1: Core Tools - Spreadsheets
     {
       ...(await import("./q-use-excel.js").then((m) => m.default({ user, weight: 0.5 }))),
       help: md(excel),
+    },
+
+    // NEW: Excel Data Analysis - Farm Moisture Monitoring
+    {
+      ...(await import("./q-farm-moisture-analysis.js").then((m) => m.default({ user, weight: 1.5 }))),
+      help: md(excel),
+    },
+
+    // NEW: Geospatial Satellite Analysis - NPK Assessment
+    {
+      ...(await import("./q-satellite-farm-npk-analysis.js").then((m) => m.default({ user, weight: 2.0 }))),
+      help: md(geospatial),
     },
 
     // GA3: AI Coding - LLM Assisted Development
@@ -40,6 +58,12 @@ export async function questions(user, elementMap) {
     // GA5: Web Scraping - API Parsing with Proxy
     {
       ...(await import("./q-hacker-news-search.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+
+    // NEW: Web Scraping - Wikipedia Company Intelligence
+    {
+      ...(await import("./q-wikipedia-company-scraper.js").then((m) => m.default({ user, weight: 1.5 }))),
+      help: md(webScraping),
     },
 
     // GA6: Data Preparation - Advanced Transformation
@@ -64,6 +88,11 @@ export async function questions(user, elementMap) {
     {
       ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
       help: md(visualization),
+    },
+
+    // NEW: FastAPI AQI Tracker - Real-time Air Quality Monitoring
+    {
+      ...(await import("./q-fastapi-aqi-tracker.js").then((m) => m.default({ user, weight: 2.0 }))),
     },
 
     // GA4: Geospatial Analysis - Server-Side Validation
