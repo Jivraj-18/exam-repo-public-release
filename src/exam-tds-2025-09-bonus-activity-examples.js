@@ -11,7 +11,11 @@ import geospatial from "./tds/geospatial-analysis-with-excel.md";
 import imageCompression from "./tds/image-compression.md";
 import largeLanguageModels from "./tds/large-language-models.md";
 import visualization from "./tds/data-visualization-with-seaborn.md";
-
+import pythonAnalysisMd from "./tds/data-analysis-with-python.md";
+import duckdbMd from "./tds/data-analysis-with-duckdb.md";
+import dataPrepMd from "./tds/data-preparation.md";
+import vizMd from "./tds/data-visualization-with-seaborn.md";
+import correlationMd from "./tds/correlation-with-excel.md";
 export async function questions(user, elementMap) {
   const results = [
     // GA1: Core Tools - JSON Wrangling
@@ -54,6 +58,7 @@ export async function questions(user, elementMap) {
       help: md(pythonAnalysis),
     },
 
+
     // GA2: Deployment - Image Compression
     {
       ...(await import("./q-image-compression-dynamic.js").then((m) => m.default({ user, weight: 0.75 }))),
@@ -65,7 +70,31 @@ export async function questions(user, elementMap) {
       ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
       help: md(visualization),
     },
-
+    // GA7: Data Analysis - Pareto / 80-20 Rule
+    {
+      ...(await import("./q-pareto-analysis.js").then((m) => m.default({ user, weight: 1.2 }))),
+      help: md(pythonAnalysisMd),
+    },
+    // GA8: Data Visualization - Residual Outlier Detection
+    {
+      ...(await import("./q-viz-outlier-residual.js").then((m) => m.default({ user, weight: 1.25 }))),
+      help: md(vizMd),
+    },
+    // GA7: Data Analysis - Max Ranking per Group
+    {
+      ...(await import("./q-sql-ranking-leaders.js").then((m) => m.default({ user, weight: 1.25 }))),
+      help: md(duckdbMd),
+    },
+    // GA6: Data Preparation - JSON Log Flattening & Deduplication
+    {
+      ...(await import("./q-json-log-flattening.js").then((m) => m.default({ user, weight: 1.5 }))),
+      help: md(dataPrepMd),
+    }, 
+    // GA7: Data Analysis - Inverse Correlation Audit 
+    {
+      ...(await import("./q-correlation-inverse.js").then((m) => m.default({ user, weight: 1.0 }))),
+      help: md(correlationMd),
+    },
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
