@@ -1,5 +1,5 @@
 /**
- * Question 4: Deploy a Static HTML Dashboard with Netlify
+ * Deploy a Static HTML Dashboard with Netlify
  * Topic: Static Site Deployment
  * Marks: 0.8
  * GA: GA2 (Deployment Tools)
