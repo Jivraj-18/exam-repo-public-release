@@ -65,6 +65,40 @@ export async function questions(user, elementMap) {
       ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
       help: md(visualization),
     },
+    // NEW: Nested JSON event analysis
+    {
+      ...(await import("./q-python-nested-json-events.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // NEW: Z-score based outlier detection
+    {
+      ...(await import("./q-python-zscore-outlier.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // NEW: Weighted risk score computation
+    {
+      ...(await import("./q-python-weighted-risk-score.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // NEW: Irregular time-series rolling metrics
+    {
+      ...(await import("./q-python-irregular-event-rolling.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
+
+    // NEW: Data validation rules
+    {
+      ...(await import("./q-python-validation-rules.js").then((m) =>
+        m.default({ user, weight: 1 })
+      )),
+    },
 
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
