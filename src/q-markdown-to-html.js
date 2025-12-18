@@ -1,7 +1,7 @@
 import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
 import seedrandom from "seedrandom";
 
-export default async function({ user, weight = 1 }) {
+export default async function ({ user, weight = 1 }) {
   const id = "q-markdown-to-html";
   const title = "Convert Markdown to HTML";
 
@@ -59,7 +59,7 @@ See the [${linkText}](https://example.com) for more details.`;
     const normalize = (str) => str.replace(/\s+/g, ' ').replace(/>\s+</g, '><').trim().toLowerCase();
     const inputNorm = normalize(input);
     const expectedNorm = normalize(expectedHtml);
-    
+
     if (inputNorm !== expectedNorm) {
       throw new Error("HTML output does not match expected. Check heading levels, bold/italic tags, list structure, and link format.");
     }
@@ -112,7 +112,7 @@ md_text = """## Heading
 This **bold** text shows key insights.
 
 - First item
-- Second item  
+- Second item
 - Third item
 
 See the [link](https://example.com) for more details."""

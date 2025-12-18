@@ -23,7 +23,7 @@ export async function questions(user, elementMap) {
             ...(await import("./q-httpx-api-request.js").then((m) => m.default({ user, weight: 1.0 }))),
         },
 
-        // Q4: Pandas DataFrame Aggregation  
+        // Q4: Pandas DataFrame Aggregation
         // Tests groupby and aggregation operations in Pandas
         {
             ...(await import("./q-pandas-aggregation.js").then((m) => m.default({ user, weight: 1.25 }))),
