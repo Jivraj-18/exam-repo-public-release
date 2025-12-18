@@ -19,11 +19,11 @@ export default {
       
       <h3>📋 Question Topics</h3>
       <ol>
-        <li><strong>Git Command Construction</strong> - Version control command knowledge (personalized)</li>
-        <li><strong>JSON API Extraction</strong> - Identifying the common payload confusion mistake</li>
-        <li><strong>Data Visualization Best Practices</strong> - Choosing appropriate chart types (personalized)</li>
-        <li><strong>PDF Calculations</strong> - Data extraction and financial calculations</li>
-        <li><strong>LLM Prompt Patterns</strong> - Best practices in automated code generation</li>
+        <li><strong>Git Log Formatting</strong> - Custom format strings for version control analytics (personalized)</li>
+        <li><strong>OpenAI Embeddings API</strong> - Constructing JSON requests for text embeddings (personalized)</li>
+        <li><strong>GitHub API Integration</strong> - Repository tree analysis with recursive parameter (personalized)</li>
+        <li><strong>Pandas CSV Aggregation</strong> - Data processing and grouping operations (personalized)</li>
+        <li><strong>LLM Prompt Engineering</strong> - Critical rules for automated system design (personalized)</li>
       </ol>
       
       <h3>⚠️ Important Rules</h3>
