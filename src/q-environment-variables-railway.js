@@ -1,5 +1,5 @@
 /**
- * Question 6: Environment Variables in Railway Deployment
+ * Question 3: Environment Variables in Railway Deployment
  * Topic: Platform Deployment with Environment Configuration
  * Marks: 1.0
  * GA: GA2 (Deployment Tools)
