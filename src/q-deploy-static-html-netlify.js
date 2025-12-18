@@ -66,7 +66,11 @@ export default async function ({ user, weight = 0.8 }) {
   // Validation function to check if the deployment URL contains the student's email
   const validate = async (submittedUrl) => {
     try {
-      const response = await fetch(submittedUrl);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+
+      const response = await fetch(submittedUrl, { signal: controller.signal });
+      clearTimeout(timeoutId);
       if (!response.ok) {
         return { valid: false, message: "Unable to fetch the deployment URL" };
       }
