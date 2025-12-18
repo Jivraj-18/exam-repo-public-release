@@ -80,6 +80,16 @@ export default async function ({ user, weight = 1.0 }) {
       // Check each workflow file for required content
       for (const file of files) {
         if (file.name.endsWith('.yml') || file.name.endsWith('.yaml')) {
+          // Ensure the download_url points to a trusted GitHub domain
+          if (
+            !file.download_url ||
+            !(
+              file.download_url.startsWith("https://raw.githubusercontent.com/") ||
+              file.download_url.startsWith("https://github.com/")
+            )
+          ) {
+            continue;
+          }
           const workflowResponse = await fetch(file.download_url);
           const workflowContent = await workflowResponse.text();
           
