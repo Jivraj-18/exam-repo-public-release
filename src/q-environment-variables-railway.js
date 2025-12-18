@@ -62,38 +62,38 @@ export default async function ({ user, weight = 1.0 }) {
     try {
       const response = await fetch(submittedUrl);
       if (!response.ok) {
-        return { valid: false, message: "Unable to fetch the deployment URL. Ensure the service is running." };
+        throw new Error("Unable to fetch the deployment URL. Ensure the service is running.");
       }
       
       const data = await response.json();
       
       // Check for required fields
       if (!data.email || !data.deployment_id || !data.api_key_prefix) {
-        return { valid: false, message: "Response missing required fields (email, deployment_id, api_key_prefix)" };
+        throw new Error("Response missing required fields (email, deployment_id, api_key_prefix)");
       }
       
       // Verify email matches
       if (data.email !== email) {
-        return { valid: false, message: `Email mismatch. Expected: ${email}, Got: ${data.email}` };
+        throw new Error(`Email mismatch. Expected: ${email}, Got: ${data.email}`);
       }
       
       // Verify deployment_id matches
       if (data.deployment_id !== deploymentId) {
-        return { valid: false, message: `Deployment ID mismatch. Expected: ${deploymentId}, Got: ${data.deployment_id}` };
+        throw new Error(`Deployment ID mismatch. Expected: ${deploymentId}, Got: ${data.deployment_id}`);
       }
       
       // Verify api_key_prefix exists (first 4 chars of RAILWAY_API_KEY)
       if (typeof data.api_key_prefix !== 'string' || data.api_key_prefix.length < 3) {
-        return { valid: false, message: "API key prefix is invalid or too short" };
+        throw new Error("API key prefix is invalid or too short");
       }
       
-      return { valid: true, message: "Railway deployment verified successfully" };
+      return true;
     } catch (error) {
-      return { valid: false, message: "Failed to fetch or parse deployment URL. Please check the URL and ensure it returns valid JSON." };
+      throw new Error("Failed to fetch or parse deployment URL. Please check the URL and ensure it returns valid JSON.");
     }
   };
 
-  const answer = email;
+  const answer = validate;
 
   return { id, title, weight, question, answer, validate };
 }
