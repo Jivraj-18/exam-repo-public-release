@@ -49,7 +49,7 @@ export default async function ({ user, weight = 0.6 }) {
         name="${id}" 
         type="text"
         placeholder="a1b2c3d4e5f6... (64 character hash)"
-        pattern="[a-f0-9]{64}"
+        pattern="[A-Fa-f0-9]{64}"
         required
       />
     </div>
