@@ -1,5 +1,5 @@
 import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
-
+//question 2
 export default async function ({ user, weight = 1 }) {
   const id = "q-token-cost";
   const title = "LLM Token Cost";
