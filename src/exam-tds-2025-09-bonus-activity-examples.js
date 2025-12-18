@@ -20,6 +20,12 @@ export async function questions(user, elementMap) {
       help: md(json),
     },
 
+    // NEW: JSON API Transformation - Nested Data Processing
+    {
+      ...(await import("./q-json-api-transformation.js").then((m) => m.default({ user, weight: 1.5 }))),
+      help: md(json),
+    },
+
     // GA1: Core Tools - Spreadsheets
     {
       ...(await import("./q-use-excel.js").then((m) => m.default({ user, weight: 0.5 }))),

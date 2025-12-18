@@ -19,9 +19,9 @@ export default {
     </h1>
 
     <h2 class="display-6 my-5">Overview</h2>
-    <p>This is a curated collection of 12 example questions covering key tools and techniques from the Tools in Data Science course. These examples showcase the diversity of skills taught across all modules:</p>
+    <p>This is a curated collection of 13 example questions covering key tools and techniques from the Tools in Data Science course. These examples showcase the diversity of skills taught across all modules:</p>
     <ul>
-      <li><strong>Data Wrangling</strong>: JSON filtering, Excel manipulation, Farm moisture analysis</li>
+      <li><strong>Data Wrangling</strong>: JSON filtering, sorting, nested data transformation, Excel manipulation, Farm moisture analysis</li>
       <li><strong>Geospatial Analysis</strong>: Satellite imagery interpretation, NPK assessment, Multispectral analysis</li>
       <li><strong>Web Scraping</strong>: Data extraction from web sources, Real-time API integration</li>
       <li><strong>Data Preparation</strong>: Transforming and cleaning data</li>
@@ -30,11 +30,12 @@ export default {
       <li><strong>Visualization</strong>: Creating meaningful charts and plots</li>
       <li><strong>IoT & Agriculture</strong>: Smart irrigation and AQI monitoring systems</li>
       <li><strong>Remote Sensing</strong>: Satellite-based precision farming</li>
+      <li><strong>API Integration</strong>: Working with complex nested JSON structures</li>
     </ul>
 
     <h2 class="display-6 my-5">Bonus Activity Instructions</h2>
     <ol>
-      <li><strong>Understand the examples</strong>. Study these 12 questions and their solutions to understand the patterns.</li>
+      <li><strong>Understand the examples</strong>. Study these 13 questions and their solutions to understand the patterns.</li>
       <li><strong>Create new questions</strong>. Following the same structure and difficulty level, create additional questions on Tools in Data Science topics not covered here.</li>
       <li><strong>Submit your questions</strong>. Add your new questions to this assignment by creating pull requests or contacting the instructors.</li>
       <li><strong>Validation</strong>. Your questions will be reviewed for clarity, correctness, and pedagogical value before being added to the main course material.</li>
@@ -49,8 +50,7 @@ export default {
 
     <h2 class="display-6 my-5">Questions Included</h2>
     <ol>
-      <li>Sort and Filter a JSON Product Catalog (Data Wrangling)</li>
-      <li>Use Excel Spreadsheet Features (Spreadsheets)</li>      <li>Smart Irrigation System - Farm Moisture Analysis (Excel Data Analysis)</li>      <li>Satellite-Based NPK Assessment for Precision Farming (Geospatial Analysis)</li>      <li>FastAPI Code Generation with LLM (AI-Assisted Development)</li>
+      <li>Sort and Filter a JSON Product Catalog (Data Wrangling)</li>      <li> JSON API Transformation - E-Commerce Order Analysis (Nested JSON Processing)</li>      <li>Use Excel Spreadsheet Features (Spreadsheets)</li>      <li>Smart Irrigation System - Farm Moisture Analysis (Excel Data Analysis)</li>      <li>Satellite-Based NPK Assessment for Precision Farming (Geospatial Analysis)</li>      <li>FastAPI Code Generation with LLM (AI-Assisted Development)</li>
       <li>Scrape IMDb Movie Data (Web Scraping)</li>
       <li>Search Hacker News with RSS Feed (Web Scraping - Proxy)</li>
       <li>JSON Sensor Data Rollup (Data Preparation)</li>
