@@ -87,7 +87,19 @@ export default async function ({ user, weight = 1.0 }) {
     }
 
     // Check endpoints section
-    const missingEndpoints = required.endpoints.filter(ep => !submittedText.includes(ep));
+    const endpointsHeader = required.endpoints[0];
+    const endpointPaths = required.endpoints.slice(1);
+
+    const missingEndpoints = [];
+
+    // Header check: case-insensitive
+    if (!submittedText.toLowerCase().includes(endpointsHeader.toLowerCase())) {
+      missingEndpoints.push(endpointsHeader);
+    }
+
+    // Endpoint path checks: case-sensitive
+    const missingPaths = endpointPaths.filter(ep => !submittedText.includes(ep));
+    missingEndpoints.push(...missingPaths);
     if (missingEndpoints.length > 0) {
       errors.push(`Missing endpoints documentation: ${missingEndpoints.join(', ')}`);
     }
