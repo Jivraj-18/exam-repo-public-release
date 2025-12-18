@@ -4,8 +4,8 @@ export default async function ({ user, weight = 1 }) {
   const id = "q-streamlit";
   const title = "Interactive Streamlit Dashboard";
 
-  const validate = async (answer) => {
-    const url = answer.trim();
+  const answer = async (value) => {
+    const url = value.trim();
     if (!url.includes("raw.githubusercontent.com")) {
       throw new Error("Please provide the Raw GitHub URL (starts with raw.githubusercontent.com)");
     }
@@ -24,6 +24,7 @@ export default async function ({ user, weight = 1 }) {
 
   const question = html`
     <div class="mb-3">
+      <h2>Interactive Streamlit Dashboard</h2>
       <p>
         Create a <strong>Streamlit</strong> app (<code>app.py</code>) and push it to GitHub.
         <br>1. Set the title to <code>"Data Tools Demo"</code>.
@@ -35,5 +36,5 @@ export default async function ({ user, weight = 1 }) {
     </div>
   `;
 
-  return { id, title, weight, question, validate };
+  return { id, title, weight, question, answer };
 }

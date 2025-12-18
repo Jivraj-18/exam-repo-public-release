@@ -4,8 +4,8 @@ export default async function ({ user, weight = 1 }) {
   const id = "q-fastapi-auth";
   const title = "Secure API with FastAPI Headers";
 
-  const validate = async (answer) => {
-    const url = answer.trim().replace(/\/$/, ""); // Remove trailing slash
+  const answer = async (value) => {
+    const url = value.trim().replace(/\/$/, ""); 
     if (!url.startsWith("http")) throw new Error("URL must start with http or https");
 
     // 1. Check without header (Expect 401/403)
@@ -37,6 +37,7 @@ export default async function ({ user, weight = 1 }) {
 
   const question = html`
     <div class="mb-3">
+      <h2>Secure API with FastAPI Headers</h2>
       <p>
         Create a <strong>FastAPI</strong> app with a dependency that enforces security.
         <br>1. Define a dependency that checks for a header <code>X-Course-Token</code>.
@@ -49,5 +50,5 @@ export default async function ({ user, weight = 1 }) {
     </div>
   `;
 
-  return { id, title, weight, question, validate };
+  return { id, title, weight, question, answer };
 }

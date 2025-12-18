@@ -4,14 +4,10 @@ export default async function ({ user, weight = 0.75 }) {
   const id = "q-duckdb-generate";
   const title = "DuckDB Data Generation";
 
-  const validate = async (answer) => {
-    const cmd = answer.trim().toUpperCase();
+  const answer = async (value) => {
+    const cmd = value.trim().toUpperCase();
     
-    // Check for required components:
-    // 1. COPY command
-    // 2. range(100) -> Generates 0-99
-    // 3. TO 'test.csv'
-    
+    // Check for required components: COPY, range(100), TO 'test.csv'
     const hasCopy = /COPY/.test(cmd);
     const hasRange = /RANGE\s*\(\s*100\s*\)/.test(cmd);
     const hasFile = /TO\s+['"]TEST\.CSV['"]/.test(cmd);
@@ -25,6 +21,7 @@ export default async function ({ user, weight = 0.75 }) {
 
   const question = html`
     <div class="mb-3">
+      <h2>DuckDB Data Generation</h2>
       <p>
         You need to create a dummy dataset for testing. 
         Write a <strong>DuckDB SQL command</strong> (CLI) that:
@@ -36,5 +33,5 @@ export default async function ({ user, weight = 0.75 }) {
     </div>
   `;
 
-  return { id, title, weight, question, validate };
+  return { id, title, weight, question, answer };
 }

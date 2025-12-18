@@ -4,8 +4,8 @@ export default async function ({ user, weight = 1 }) {
   const id = "q-gh-actions-lint";
   const title = "GitHub Actions Linting";
 
-  const validate = async (answer) => {
-    const url = answer.trim();
+  const answer = async (value) => {
+    const url = value.trim();
     if (!url.includes("raw.githubusercontent.com")) throw new Error("Must be a Raw GitHub URL");
 
     const res = await fetch(url);
@@ -25,6 +25,7 @@ export default async function ({ user, weight = 1 }) {
 
   const question = html`
     <div class="mb-3">
+      <h2>GitHub Actions Linting</h2>
       <p>
         Create a GitHub Action workflow (<code>.github/workflows/quality.yml</code>).
         <br>1. Trigger on <strong>push</strong>.
@@ -36,5 +37,5 @@ export default async function ({ user, weight = 1 }) {
     </div>
   `;
 
-  return { id, title, weight, question, validate };
+  return { id, title, weight, question, answer };
 }

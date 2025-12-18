@@ -4,10 +4,9 @@ export default async function ({ user, weight = 0.5 }) {
   const id = "q-script-metadata";
   const title = "Inline Script Metadata";
 
-  const validate = async (answer) => {
-    const code = answer.trim();
+  const answer = async (value) => {
+    const code = value.trim();
     
-    // Check for PEP 723 block
     const hasBlock = /#\s*\/\/\/\s*script/.test(code);
     const hasDependency = /dependencies\s*=\s*\[.*"httpx".*\]/s.test(code);
     const hasImport = /import\s+httpx/.test(code);
@@ -21,6 +20,7 @@ export default async function ({ user, weight = 0.5 }) {
 
   const question = html`
     <div class="mb-3">
+      <h2>Inline Script Metadata</h2>
       <p>
         Write a Python script that uses <code>httpx</code> to fetch google.com. 
         <strong>Crucially</strong>, add the Inline Script Metadata block at the top so it runs with <code>uv run script.py</code> without manual installation.
@@ -30,5 +30,5 @@ export default async function ({ user, weight = 0.5 }) {
     </div>
   `;
 
-  return { id, title, weight, question, validate };
+  return { id, title, weight, question, answer };
 }
