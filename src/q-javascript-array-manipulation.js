@@ -40,7 +40,8 @@ export default async function ({ user, weight = 0.6 }) {
  {"name": "Deluxe Tool", "category": "Electronics", "price": 142.00, "stock": 70},
  {"name": "Smart Gadget", "category": "Tools", "price": 105.50, "stock": 55},
  {"name": "Basic Set", "category": "Home", "price": 32.00, "stock": 200},
- {"name": "Advanced Kit", "category": "Electronics", "price": 160.00, "stock": 80}]</code></pre>
+ {"name": "Advanced Kit", "category": "Electronics", "price": 160.00, "stock": 80},
+ {"name": "Clearance Bundle", "category": "Z-Misc", "price": 49.99, "stock": 75}]</code></pre>
       <label for="${id}" class="form-label">SHA256 hash of comma-separated names:</label>
       <input 
         class="form-control" 
