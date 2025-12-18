@@ -60,6 +60,18 @@ export default async function ({ user, weight = 1.0 }) {
   // Validation function to check if the Railway deployment URL returns the expected config
   const validate = async (submittedUrl) => {
     try {
+      // Ensure the submitted URL points to a valid Railway deployment domain
+      const parsedUrl = new URL(submittedUrl);
+      const hostname = parsedUrl.hostname.toLowerCase();
+      const isRailwayDomain =
+        hostname === "railway.app" ||
+        hostname.endsWith(".railway.app") ||
+        hostname === "up.railway.app" ||
+        hostname.endsWith(".up.railway.app");
+
+      if (!isRailwayDomain) {
+        throw new Error("The provided URL must be a Railway deployment URL (ending with .railway.app or .up.railway.app).");
+      }
       const response = await fetch(submittedUrl);
       if (!response.ok) {
         throw new Error("Unable to fetch the deployment URL. Ensure the service is running.");
