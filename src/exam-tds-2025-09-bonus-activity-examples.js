@@ -60,6 +60,12 @@ export async function questions(user, elementMap) {
       ...(await import("./q-hacker-news-search.js").then((m) => m.default({ user, weight: 1 }))),
     },
 
+    // NEW: Web Scraping - Wikipedia Company Intelligence
+    {
+      ...(await import("./q-wikipedia-company-scraper.js").then((m) => m.default({ user, weight: 1.5 }))),
+      help: md(webScraping),
+    },
+
     // GA6: Data Preparation - Advanced Transformation
     {
       ...(await import("./q-json-sensor-rollup.js").then((m) => m.default({ user, weight: 1 }))),
