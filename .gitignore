@@ -20,3 +20,4 @@ tools-in-data-science-public
 
 # No Apple filesystemfiles
 .DS_Store
+venv/
