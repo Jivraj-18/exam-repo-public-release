@@ -1,5 +1,4 @@
 import { en, Faker } from "https://cdn.jsdelivr.net/npm/@faker-js/faker@9/+esm";
-import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
 import { default as seedrandom } from "seedrandom";
 
 export default async function({ user, weight = 1 }) {

@@ -1,4 +1,3 @@
-import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
 import seedrandom from "seedrandom";
 
 export default async function({ user, weight = 1 }) {

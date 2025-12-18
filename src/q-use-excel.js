@@ -1,4 +1,3 @@
-import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
 import { default as _ } from "https://cdn.jsdelivr.net/npm/lodash@4/+esm";
 import { default as seedrandom } from "seedrandom";
 
