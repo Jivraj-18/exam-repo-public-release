@@ -110,7 +110,9 @@ export default async function ({ user, weight = 1.0 }) {
     }
 
     // Check response formats
-    const missingResponseElements = required.responseFormats.filter(elem => !submittedText.includes(elem));
+    const codeBlockMatches = submittedText.match(/```[\s\S]*?```/g);
+    const responseText = codeBlockMatches ? codeBlockMatches.join('\n') : submittedText;
+    const missingResponseElements = required.responseFormats.filter(elem => !responseText.includes(elem));
     if (missingResponseElements.length > 0) {
       errors.push(`Missing response format elements: ${missingResponseElements.join(', ')}`);
     }
