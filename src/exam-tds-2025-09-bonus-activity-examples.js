@@ -71,6 +71,13 @@ export async function questions(user, elementMap) {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+
+    // Your new questions
+    await (await import("./q-uv-metadata.js")).default({ user, weight: 1 }),
+    await (await import("./q-fastapi-status.js")).default({ user, weight: 1 }),
+    await (await import("./q-duckdb-transformation.js")).default({ user, weight: 1 }),
+    await (await import("./q-pydantic-extraction.js")).default({ user, weight: 1 }),
+    await (await import("./q-gh-pages-check.js")).default({ user, weight: 1 }),
   ];
 
   displayQuestions(results, elementMap);
