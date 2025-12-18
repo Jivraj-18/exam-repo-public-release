@@ -57,4 +57,9 @@ export default {
       <li>Region Containing Point Geospatial Query (Geospatial Analysis - Server-Side Validation)</li>
     </ol>
   `,
+  fastapiValidateEmailDomain: qFastapiValidateEmailDomain,
+  requestsCacheApiResponse: qRequestsCacheApiResponse,
+  pandasFilterOrders: qPandasFilterOrders,
+  pytestSanitizeUsername: qPytestSanitizeUsername,
+  gitBranchPrMcq: qGitBranchPrMcq
 };
