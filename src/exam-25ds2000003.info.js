@@ -19,10 +19,10 @@ export default {
       
       <h3>📋 Question Topics</h3>
       <ol>
-        <li><strong>CSV Data Aggregation</strong> - Data processing with personalization</li>
+        <li><strong>Git Command Construction</strong> - Version control command knowledge (personalized)</li>
         <li><strong>JSON API Extraction</strong> - Identifying the common payload confusion mistake</li>
-        <li><strong>GitHub File Counting</strong> - API integration with repository analysis</li>
-        <li><strong>PDF Calculations</strong> - Simulated invoice processing</li>
+        <li><strong>Data Visualization Best Practices</strong> - Choosing appropriate chart types (personalized)</li>
+        <li><strong>PDF Calculations</strong> - Data extraction and financial calculations</li>
         <li><strong>LLM Prompt Patterns</strong> - Best practices in automated code generation</li>
       </ol>
       

@@ -3,7 +3,7 @@ import { displayQuestions } from "./utils/display.js";
 export async function questions(user, elementMap) {
   const results = [
     {
-      ...(await import("./q-csv-aggregate.js").then((m) =>
+      ...(await import("./q-git-command-construct.js").then((m) =>
         m.default({ user, weight: 1 })
       )),
     },
@@ -13,7 +13,7 @@ export async function questions(user, elementMap) {
       )),
     },
     {
-      ...(await import("./q-github-file-count.js").then((m) =>
+      ...(await import("./q-data-viz-best-practice.js").then((m) =>
         m.default({ user, weight: 1 })
       )),
     },
