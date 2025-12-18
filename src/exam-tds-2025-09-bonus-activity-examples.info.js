@@ -54,7 +54,8 @@ export default {
       <li>JSON Sensor Data Rollup (Data Preparation)</li>
       <li>Python Cohort Retention Analysis (Statistical Analysis)</li>
       <li>Image Compression with Dynamic Quality (Image Processing)</li>
-      <li>Region Containing Point Geospatial Query (Geospatial Analysis - Server-Side Validation)</li>
+      <li>Seaborn Data Visualization (Data Visualization)</li>
+      <li>FastAPI Live AQI Tracker (Real-time API Integration & Web Scraping)</li>
     </ol>
   `,
 };

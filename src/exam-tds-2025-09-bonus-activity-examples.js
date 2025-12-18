@@ -66,6 +66,11 @@ export async function questions(user, elementMap) {
       help: md(visualization),
     },
 
+    // NEW: FastAPI AQI Tracker - Real-time Air Quality Monitoring
+    {
+      ...(await import("./q-fastapi-aqi-tracker.js").then((m) => m.default({ user, weight: 2.0 }))),
+    },
+
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
