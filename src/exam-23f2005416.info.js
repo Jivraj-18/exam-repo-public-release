@@ -6,7 +6,7 @@ export default {
 
   // Access control
   admin: (email) => email == "23f2005416@ds.study.iitm.ac.in", // Who can administer
-  allowed: (email) => email.endsWith(".edu"), // Who can take exam
+  allowed: (email) => email.endsWith(".iitm.ac.in"), // Who can take exam
 
   // Pre-exam display
   instructions: /* html */ `
