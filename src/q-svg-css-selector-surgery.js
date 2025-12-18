@@ -89,6 +89,9 @@ export default async function({ user, weight = 2.5 }) {
 
   const answer = null; // Manual validation required
 
+  // Create blob for download before the template
+  const blob = new Blob([svgContent], { type: 'image/svg+xml' });
+
   const question = html`
     <div class="mb-3">
       <h2>Case Study: Automated SVG Manipulation for Design System Migration</h2>
@@ -115,15 +118,9 @@ export default async function({ user, weight = 2.5 }) {
 
       <h3>Download SVG File</h3>
       <p>
-        <button class="btn btn-primary btn-sm" onclick="
-          const svg = \`${svgContent.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`;
-          const blob = new Blob([svg], { type: 'image/svg+xml' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'complex-graphic.svg';
-          a.click();
-        ">Download complex-graphic.svg</button>
+        <button class="btn btn-primary btn-sm" type="button" @click=${() => download(blob, 'complex-graphic.svg')}>
+          Download complex-graphic.svg
+        </button>
       </p>
 
       <h3>Critical Challenges</h3>

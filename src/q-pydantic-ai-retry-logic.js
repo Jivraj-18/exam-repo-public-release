@@ -41,7 +41,7 @@ from pydantic_ai import Agent, RunContext
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 @retry(
-    stop=stop_after_attempt(${maxRetries}),
+    stop=stop_after_attempt(${maxRetries} + 1),
     wait=wait_exponential(multiplier=1, min=1, max=10),
     reraise=True
 )

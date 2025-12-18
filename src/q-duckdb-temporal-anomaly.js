@@ -94,6 +94,9 @@ export default async function({ user, weight = 2.5 }) {
   
   const answer = anomalyCount.toString();
 
+  // Create blob for download before the template
+  const blob = new Blob([csv], { type: 'text/csv' });
+
   const question = html`
     <div class="mb-3">
       <h2>Case Study: Industrial IoT Sensor Anomaly Detection</h2>
@@ -123,7 +126,7 @@ export default async function({ user, weight = 2.5 }) {
 
       <h3>Download Dataset</h3>
       <p>
-        <button class="btn btn-primary btn-sm" type="button" @click=${() => download(new Blob([csv], { type: 'text/csv' }), 'sensor_readings.csv')}>
+        <button class="btn btn-primary btn-sm" type="button" @click=${() => download(blob, 'sensor_readings.csv')}>
           Download sensor_readings.csv
         </button>
       </p>

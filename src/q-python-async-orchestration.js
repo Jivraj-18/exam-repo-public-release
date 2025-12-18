@@ -91,11 +91,11 @@ class CircuitBreaker:
 class RateLimiter:
     def __init__(self, max_requests_per_second):
         self.max_requests = max_requests_per_second
-        self.semaphore = asyncio.Semaphore(max_requests_per_second)
-        self.reset_task = None
+        self.tokens = max_requests_per_second
+        self.last_update = time.monotonic()
     
     async def acquire(self):
-        # TODO: Implement sliding window rate limiter
+        # TODO: Implement token bucket or sliding window
         pass
 
 class APIOrchestrator:
