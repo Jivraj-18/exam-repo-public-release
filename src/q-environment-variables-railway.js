@@ -26,7 +26,7 @@ export default async function ({ user, weight = 1.0 }) {
         <li>Create a FastAPI app (<code>main.py</code>) with:
           <ul>
             <li>A <code>/health</code> endpoint returning <code>{"status": "healthy"}</code></li>
-            <li>A <code>/config</code> endpoint that returns your email, API key prefix (first 4 chars), and deployment ID</li>
+            <li>A <code>/config</code> endpoint that returns your email, API key prefix (first 4 characters of the <code>RAILWAY_API_KEY</code> environment variable value), and deployment ID</li>
           </ul>
         </li>
         <li>Deploy to Railway and set environment variables:
