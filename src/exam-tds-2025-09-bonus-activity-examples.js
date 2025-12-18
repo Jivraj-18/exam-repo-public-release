@@ -32,6 +32,12 @@ export async function questions(user, elementMap) {
       help: md(excel),
     },
 
+    // NEW: Geospatial Satellite Analysis - NPK Assessment
+    {
+      ...(await import("./q-satellite-farm-npk-analysis.js").then((m) => m.default({ user, weight: 2.0 }))),
+      help: md(geospatial),
+    },
+
     // GA3: AI Coding - LLM Assisted Development
     {
       ...(await import("./q-fastapi-coder.js").then((m) => m.default({ user, weight: 2 }))),
