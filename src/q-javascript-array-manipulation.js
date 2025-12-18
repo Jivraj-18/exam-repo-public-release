@@ -24,7 +24,7 @@ export default async function ({ user, weight = 0.6 }) {
         <li>Filter products where <code>stock > 50</code> AND <code>price < 150</code></li>
         <li>Sort by <code>category</code> (A→Z), then by <code>price</code> (lowest→highest)</li>
         <li>Extract only the <code>name</code> field from the top 10 products</li>
-        <li>Join all names with a comma (no spaces) and compute the SHA256 hash</li>
+        <li>Join all names with a comma (no spaces) and compute the SHA256 hash using Node's built-in <code>crypto</code> module (no external libraries)</li>
       </ol>
       <p>
         <strong>Product Data:</strong>
