@@ -2,7 +2,7 @@ export default {
   title: "TDS 2025 Sep Bonus Activity - 22f3000730",
   start: "2025-09-01T00:00:00+05:30",
   end: () => "2025-12-31T23:59:59+05:30",
-  allowed: (email) => email == "22f3000730@ds.study.iitm.ac.in", // Only allow this roll number
+  allowed: () => true, // Allow all logged-in users to submit
   read: () => true, // Allow all to read (non-logged-in users in reader mode)
   admin: (email) =>
     email == "22f3001919@ds.study.iitm.ac.in" // Carlton D'Silva
@@ -12,8 +12,7 @@ export default {
     || email == "jkm@study.iitm.ac.in" // Jayakrishnan Warriem
     || email == "narayanan@study.iitm.ac.in" // Narayanan R
     || email == "sivaadithya@study.iitm.ac.in" // Sivaadithya M
-    || email == "anand@study.iitm.ac.in" // Anand S
-    || email == "22f3000730@ds.study.iitm.ac.in", // Allow roll number owner as admin
+    || email == "anand@study.iitm.ac.in", // Anand S
   instructions: /* html */ `
     <h1 class="display-3 my-5">
       TDS 2025 Sep Bonus Activity - 22f3000730
