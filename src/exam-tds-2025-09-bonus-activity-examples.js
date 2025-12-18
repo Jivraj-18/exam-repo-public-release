@@ -26,6 +26,12 @@ export async function questions(user, elementMap) {
       help: md(excel),
     },
 
+    // NEW: Excel Data Analysis - Farm Moisture Monitoring
+    {
+      ...(await import("./q-farm-moisture-analysis.js").then((m) => m.default({ user, weight: 1.5 }))),
+      help: md(excel),
+    },
+
     // GA3: AI Coding - LLM Assisted Development
     {
       ...(await import("./q-fastapi-coder.js").then((m) => m.default({ user, weight: 2 }))),
