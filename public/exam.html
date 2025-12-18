@@ -156,7 +156,12 @@
   <script src="https://accounts.google.com/gsi/client"></script>
   <script type="module">
     import { setup } from './exam.js';
-    setup(window.location.pathname.slice(1));
+    const path = window.location.pathname;
+    if (path.startsWith('/exam-')) {
+      setup(path.slice(6));
+    } else {
+      setup(path.slice(1));
+    }
   </script>
 </body>
 
