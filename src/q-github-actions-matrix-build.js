@@ -85,9 +85,9 @@ export default async function ({ user, weight = 1.0 }) {
           
           // Check for required elements
           const hasMatrix = workflowContent.includes('matrix:');
-          const hasPython310 = workflowContent.includes('3.10');
-          const hasPython311 = workflowContent.includes('3.11');
-          const hasPython312 = workflowContent.includes('3.12');
+          const hasPython310 = /\b["']?3\.10["']?\b/.test(workflowContent);
+          const hasPython311 = /\b["']?3\.11["']?\b/.test(workflowContent);
+          const hasPython312 = /\b["']?3\.12["']?\b/.test(workflowContent);
           const hasUbuntu = workflowContent.includes('ubuntu-latest');
           const hasMacOS = workflowContent.includes('macos-latest');
           const hasEmail = workflowContent.includes(email);
