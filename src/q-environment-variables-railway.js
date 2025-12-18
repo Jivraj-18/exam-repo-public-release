@@ -101,6 +101,9 @@ export default async function ({ user, weight = 1.0 }) {
       
       return true;
     } catch (error) {
+      if (error instanceof Error) {
+        throw error;
+      }
       throw new Error("Failed to fetch or parse deployment URL. Please check the URL and ensure it returns valid JSON.");
     }
   };
