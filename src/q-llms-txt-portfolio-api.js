@@ -119,10 +119,10 @@ export default async function ({ user, weight = 1.0 }) {
     }
 
     if (errors.length > 0) {
-      return { valid: false, message: `Validation failed:\n${errors.join('\n')}` };
+      throw new Error(`Validation failed:\n${errors.join('\n')}`);
     }
 
-    return { valid: true, message: "llms.txt content verified successfully" };
+    return true;
   };
 
   const answer = `${studentId},${email}`;
