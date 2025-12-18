@@ -2,88 +2,126 @@ import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
 import seedrandom from "seedrandom";
 
 export default async function ({ user, weight = 0.75 }) {
-    const id = "q-base64-encoding";
-    const title = "Encode and Decode Base64";
+  const id = "q-regex-data-extraction";
+  const title = "Extract Data Using Regular Expressions";
 
-    const random = seedrandom(`${user.email}#${id}`);
-    const pick = (arr) => arr[Math.floor(random() * arr.length)];
+  const random = seedrandom(`${user.email}#${id}`);
+  const pick = (arr) => arr[Math.floor(random() * arr.length)];
 
-    // Generate random secret message
-    const adjectives = ["secret", "hidden", "private", "confidential", "secure", "encrypted", "protected"];
-    const nouns = ["message", "data", "code", "key", "token", "password", "phrase"];
-    const verbs = ["unlock", "decode", "reveal", "discover", "access", "retrieve", "obtain"];
+  // Generate random log entries with embedded data
+  const services = ["auth-service", "api-gateway", "user-service", "payment-service", "order-service"];
+  const levels = ["INFO", "DEBUG", "WARN", "ERROR"];
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-    const randomNum = Math.floor(random() * 9000) + 1000; // 4-digit number
-    const secretMessage = `The ${pick(adjectives)} ${pick(nouns)} to ${pick(verbs)} is: ${randomNum}`;
+  const numLogs = 20 + Math.floor(random() * 15); // 20-34 log entries
+  const logs = [];
 
-    // Encode to Base64
-    const base64Encoded = btoa(secretMessage);
+  // Target: count specific error codes
+  const targetService = pick(services);
+  const targetErrorCode = 400 + Math.floor(random() * 100); // 400-499 error codes
 
-    const answer = (input) => {
-        if (!input) throw new Error("Please enter the decoded message.");
-        const trimmed = input.trim();
+  let targetCount = 0;
 
-        if (trimmed !== secretMessage) {
-            throw new Error("Incorrect decoded message. Make sure to decode the entire Base64 string precisely.");
-        }
-        return true;
-    };
+  for (let i = 0; i < numLogs; i++) {
+    const month = pick(months);
+    const day = Math.floor(random() * 28) + 1;
+    const hour = Math.floor(random() * 24);
+    const minute = Math.floor(random() * 60);
+    const second = Math.floor(random() * 60);
+    const service = pick(services);
+    const level = pick(levels);
 
-    const question = html`
+    // Generate error code - some will match our target
+    let errorCode;
+    if (service === targetService && random() < 0.4) {
+      errorCode = targetErrorCode;
+      targetCount++;
+    } else {
+      errorCode = 400 + Math.floor(random() * 200); // 400-599
+    }
+
+    const requestId = `req-${Math.random().toString(36).substr(2, 8)}`;
+    const responseTime = Math.floor(random() * 2000) + 50;
+
+    logs.push(
+      `[${month} ${String(day).padStart(2, '0')} ${String(hour).padStart(2, '0')}:${String(minute).padStart(2, '0')}:${String(second).padStart(2, '0')}] ${level} ${service} - Request ${requestId} completed with status ${errorCode} in ${responseTime}ms`
+    );
+  }
+
+  const logText = logs.join("\n");
+
+  const answer = (input) => {
+    if (!input) throw new Error("Please enter the count.");
+
+    const value = parseInt(input.trim(), 10);
+    if (isNaN(value)) throw new Error("Please enter a valid integer.");
+
+    if (value !== targetCount) {
+      throw new Error(`Incorrect count. Use regex to find all lines containing '${targetService}' with status ${targetErrorCode}.`);
+    }
+    return true;
+  };
+
+  const question = html`
     <div class="mb-3">
-      <h2>CryptoSafe: Base64 Decoding Challenge</h2>
+      <h2>LogParser: Extract Data with Regular Expressions</h2>
       <p>
-        <strong>CryptoSafe Security</strong> uses Base64 encoding for transmitting sensitive configuration data.
-        Your task is to decode a Base64-encoded message to retrieve the original text.
+        <strong>LogParser Inc.</strong> analyzes server logs to identify issues.
+        Your task is to use regular expressions to extract and count specific patterns.
       </p>
 
-      <h3>What is Base64?</h3>
-      <p>
-        Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format.
-        It's commonly used in data URLs, email attachments, and API authentication tokens.
-      </p>
+      <h3>Log Format</h3>
+      <pre style="background: #f5f5f5; padding: 5px; border-radius: 5px; font-size: 12px;"><code>[Mon DD HH:MM:SS] LEVEL service-name - Request req-id completed with status CODE in TIMEms</code></pre>
 
-      <h3>Base64 Encoded String</h3>
-      <pre style="background: #f5f5f5; padding: 15px; border-radius: 5px; word-break: break-all;"><code>${base64Encoded}</code></pre>
+      <h3>Sample Log Entries</h3>
+      <pre style="background: #f5f5f5; padding: 10px; border-radius: 5px; max-height: 200px; overflow-y: auto; font-size: 11px; white-space: pre-wrap;"><code>${logText}</code></pre>
 
-      <h3>Your Task</h3>
-      <p>Decode the above Base64 string and enter the original message below.</p>
-
-      <h3>Methods to Decode</h3>
+      <h3>Task</h3>
+      <p>Using <strong>regular expressions</strong> in Python, count how many log entries match:</p>
       <ul>
-        <li><strong>Python:</strong> <code>import base64; base64.b64decode("...").decode()</code></li>
-        <li><strong>JavaScript:</strong> <code>atob("...")</code></li>
-        <li><strong>Command Line:</strong> <code>echo "..." | base64 -d</code></li>
-        <li><strong>Online Tools:</strong> base64decode.org or similar</li>
+        <li>Service: <code>${targetService}</code></li>
+        <li>Status code: <code>${targetErrorCode}</code></li>
       </ul>
 
+      <h3>Python Hint</h3>
+      <pre style="background: #f5f5f5; padding: 10px; border-radius: 5px;"><code class="language-python">import re
+
+pattern = r'${targetService}.*status ${targetErrorCode}'
+matches = re.findall(pattern, log_text)
+print(len(matches))</code></pre>
+
       <label for="${id}" class="form-label">
-        What is the decoded message?
+        How many log entries are from <code>${targetService}</code> with status <code>${targetErrorCode}</code>?
       </label>
-      <input class="form-control" id="${id}" name="${id}" required />
+      <input class="form-control" id="${id}" name="${id}" type="number" required />
     </div>
   `;
 
-    return { id, title, weight, question, answer };
+  return { id, title, weight, question, answer };
 }
 
 /* Solution
 
-# Using Python:
 # /// script
 # requires-python = ">=3.12"
 # ///
-import base64
-import sys
+import re
 
-encoded = sys.argv[1] if len(sys.argv) > 1 else "YOUR_BASE64_STRING"
-decoded = base64.b64decode(encoded).decode('utf-8')
-print(decoded)
+log_text = """
+[paste the log entries here]
+"""
 
-# Or in browser console:
-# atob("YOUR_BASE64_STRING")
+# Replace with actual values from your question
+service = "auth-service"  # Use the service shown in the question
+status_code = 404  # Use the status code shown in the question
 
-# Or command line:
-# echo "YOUR_BASE64_STRING" | base64 -d
+# Pattern to match the specific service and status code
+pattern = rf'{service}.*status {status_code}'
+
+matches = re.findall(pattern, log_text)
+print(f"Count: {len(matches)}")
+
+# Alternative approach using grep:
+# grep -c "auth-service.*status 404" logs.txt
 
 */
