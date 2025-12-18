@@ -105,6 +105,10 @@ export default async function ({ user, weight = 1.0 }) {
             continue;
           }
           const workflowResponse = await fetch(file.download_url);
+          if (!workflowResponse.ok) {
+            // Skip files that cannot be fetched and continue checking other workflow files
+            continue;
+          }
           const workflowContent = await workflowResponse.text();
           
           // Check for required elements
