@@ -69,16 +69,19 @@ export default async function ({ user, weight = 0.8 }) {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
-      const response = await fetch(submittedUrl, { signal: controller.signal });
-      clearTimeout(timeoutId);
-      if (!response.ok) {
-        throw new Error("Unable to fetch the deployment URL");
+      try {
+        const response = await fetch(submittedUrl, { signal: controller.signal });
+        if (!response.ok) {
+          throw new Error("Unable to fetch the deployment URL");
+        }
+        const html = await response.text();
+        if (html.includes(email)) {
+          return true;
+        }
+        throw new Error(`Deployment found but does not contain required email: ${email}`);
+      } finally {
+        clearTimeout(timeoutId);
       }
-      const html = await response.text();
-      if (html.includes(email)) {
-        return true;
-      }
-      throw new Error(`Deployment found but does not contain required email: ${email}`);
     } catch (error) {
       throw new Error("Failed to fetch deployment URL. Please check the URL and try again.");
     }
