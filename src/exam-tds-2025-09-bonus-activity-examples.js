@@ -73,6 +73,15 @@ export async function questions(user, elementMap) {
     // },
   ];
 
+  // Bonus Activity Questions
+  results.push(
+    { ...(await import("./q-git-log-limit.js").then((m) => m.default({ user, weight: 1 }))) },
+    { ...(await import("./q-docker-port-mapping.js").then((m) => m.default({ user, weight: 1 }))) },
+    { ...(await import("./q-pandas-read-function.js").then((m) => m.default({ user, weight: 1 }))) },
+    { ...(await import("./q-llm-token-cost.js").then((m) => m.default({ user, weight: 1 }))) },
+    { ...(await import("./q-python-variable.js").then((m) => m.default({ user, weight: 1 }))) }
+  );
+
   displayQuestions(results, elementMap);
   return Object.fromEntries(results.map(({ id, ...rest }) => [id, rest]));
 }
