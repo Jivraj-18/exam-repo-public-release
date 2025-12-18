@@ -1,3 +1,9 @@
+import q1 from "./q-pandas-missing-values.js";
+import q2 from "./q-numpy-array-stats.js";
+import q3 from "./q-fastapi-validation.js";
+import q4 from "./q-http-status-codes.js";
+import q5 from "./q-eda-data-summary.js";
+
 import { displayQuestions } from "./utils/display.js";
 import { md } from "./utils/markdown.js";
 
@@ -14,6 +20,11 @@ import visualization from "./tds/data-visualization-with-seaborn.md";
 
 export async function questions(user, elementMap) {
   const results = [
+    q1({ user, weight: 1 }),
+    q2({ user, weight: 1 }),
+    q3({ user, weight: 1 }),
+    q4({ user, weight: 1 }),
+    q5({ user, weight: 1 }),
     // GA1: Core Tools - JSON Wrangling
     {
       ...(await import("./q-sort-filter-json.js").then((m) => m.default({ user, weight: 1.0 }))),
