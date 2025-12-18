@@ -138,8 +138,6 @@ benchmark();</code></pre>
         <li>Browser memory usage <100MB total</li>
         <li>First render <16ms (60fps)</li>
       </ul>
-
-      <p><strong>Hint:</strong> Use <code>wasm-bindgen</code> with <code>--no-typescript</code>, manual SIMD intrinsics, and custom allocators.</p>
     `,
     answer: null,
   };

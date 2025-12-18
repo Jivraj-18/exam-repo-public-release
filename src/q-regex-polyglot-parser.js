@@ -209,6 +209,9 @@ constexpr int ${targetFunction}_THRESHOLD = 100;
   
   const answer = functionDefinitions.toString();
 
+  // Create blob for download before the template
+  const blob = new Blob([allCode], { type: 'text/plain' });
+
   const question = html`
     <div class="mb-3">
       <h2>Case Study: Multi-Language Codebase Analysis for API Documentation</h2>
@@ -264,7 +267,7 @@ constexpr int ${targetFunction}_THRESHOLD = 100;
 
       <h3>Download Codebase</h3>
       <p>
-        <button class="btn btn-primary btn-sm" type="button" @click=${() => download(new Blob([allCode], { type: 'text/plain' }), 'codebase.txt')}>
+        <button class="btn btn-primary btn-sm" type="button" @click=${() => download(blob, 'codebase.txt')}>
           Download codebase.txt
         </button>
       </p>
@@ -301,8 +304,7 @@ constexpr int ${targetFunction}_THRESHOLD = 100;
       <pre><code class="language-bash"># This is a STARTING POINT (incomplete, will miss cases)
 grep -oP '(?&lt;=def )${targetFunction}(?=\\s*\\()' codebase.txt | wc -l
 
-# You need to extend this to handle all languages and edge cases
-# Hint: Use multiple grep passes or awk with complex patterns</code></pre>
+# You need to extend this to handle all languages and edge cases</code></pre>
 
       <h3>Validation</h3>
       <p>Your regex should correctly identify:</p>
@@ -320,8 +322,7 @@ grep -oP '(?&lt;=def )${targetFunction}(?=\\s*\\()' codebase.txt | wc -l
       
       <div class="mt-2 text-muted">
         <small>
-          Expected format: Single integer<br>
-          Hint: The answer is between 5 and 15
+          Expected format: Single integer
         </small>
       </div>
     </div>
