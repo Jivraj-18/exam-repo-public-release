@@ -12,7 +12,6 @@ import imageCompression from "./tds/image-compression.md";
 import largeLanguageModels from "./tds/large-language-models.md";
 import visualization from "./tds/data-visualization-with-seaborn.md";
 
-
 export async function questions(user, elementMap) {
   const results = [
     // GA1: Core Tools - JSON Wrangling
