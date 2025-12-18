@@ -71,6 +71,22 @@ export async function questions(user, elementMap) {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+
+    //1
+    (await import("./q-fastapi-github-endpoint.js").then(m => [m.default({ user })])),
+
+    //2
+    (await import("./q-fastapi-sum-transform.js").then(m => [m.default({ user })])),
+
+    //3
+    (await import("./q-docker-metadata.js").then(m => [m.default({ user })])),
+
+    //4
+    (await import("./q-llm-streaming.js").then(m => [m.default({ user })])),
+
+    //5
+    (await import("./q-fastapi-weather-streak.js").then(m => [m.default({ user })])),
+
   ];
 
   displayQuestions(results, elementMap);
