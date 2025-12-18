@@ -111,7 +111,12 @@ export default async function ({ user, weight = 1.0 }) {
 
     // Check response formats
     const codeBlockMatches = submittedText.match(/```[\s\S]*?```/g);
-    const responseText = codeBlockMatches ? codeBlockMatches.join('\n') : submittedText;
+    let responseText = '';
+    if (codeBlockMatches && codeBlockMatches.length > 0) {
+      responseText = codeBlockMatches.join('\n');
+    } else {
+      errors.push('Missing code block with example response format');
+    }
     const missingResponseElements = required.responseFormats.filter(elem => !responseText.includes(elem));
     if (missingResponseElements.length > 0) {
       errors.push(`Missing response format elements: ${missingResponseElements.join(', ')}`);
