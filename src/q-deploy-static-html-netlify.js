@@ -66,11 +66,29 @@ export default async function ({ user, weight = 0.8 }) {
   // Validation function to check if the deployment URL contains the student's email
   const validate = async (submittedUrl) => {
     try {
+      // Validate that the submitted URL is a proper Netlify deployment URL
+      let parsedUrl;
+      try {
+        parsedUrl = new URL(submittedUrl);
+      } catch (e) {
+        throw new Error("Invalid URL format. Please provide a valid Netlify deployment URL.");
+      }
+
+      const protocol = parsedUrl.protocol.toLowerCase();
+      if (protocol !== "https:" && protocol !== "http:") {
+        throw new Error("URL must use http or https.");
+      }
+
+      const hostname = parsedUrl.hostname.toLowerCase();
+      if (hostname !== "netlify.app" && !hostname.endsWith(".netlify.app")) {
+        throw new Error("URL must point to a Netlify deployment ending with '.netlify.app'.");
+      }
+
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
 
       try {
-        const response = await fetch(submittedUrl, { signal: controller.signal });
+        const response = await fetch(parsedUrl.toString(), { signal: controller.signal });
         if (!response.ok) {
           throw new Error("Unable to fetch the deployment URL");
         }
