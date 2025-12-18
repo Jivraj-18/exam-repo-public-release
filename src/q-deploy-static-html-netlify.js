@@ -101,6 +101,20 @@ export default async function ({ user, weight = 0.8 }) {
         clearTimeout(timeoutId);
       }
     } catch (error) {
+      // Preserve specific validation errors and only wrap unexpected/network errors
+      if (error instanceof Error) {
+        const knownPrefixes = [
+          "Invalid URL format.",
+          "URL must use http or https.",
+          "URL must point to a Netlify deployment ending with '.netlify.app'.",
+          "Unable to fetch the deployment URL",
+          "Deployment found but does not contain required email:"
+        ];
+
+        if (knownPrefixes.some((prefix) => error.message.startsWith(prefix))) {
+          throw error;
+        }
+      }
       throw new Error("Failed to fetch deployment URL. Please check the URL and try again.");
     }
   };
