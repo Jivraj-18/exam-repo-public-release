@@ -3,7 +3,7 @@ import { displayQuestions } from "./utils/display.js";
 export async function questions(user, elementMap) {
   const results = [
     {
-      ...(await import("./q-json-sensor-rollup.js").then((m) =>
+      ...(await import("./q-22f3003115-groq-cli.js").then((m) =>
         m.default({
           user,
           weight: 1,
@@ -11,14 +11,37 @@ export async function questions(user, elementMap) {
       )),
     },
     {
-      ...(await import("./q-seaborn-data-visualization.js").then((m) =>
+      ...(await import("./q-22f3003115-embeddings-search.js").then((m) =>
         m.default({
           user,
           weight: 1,
         }),
       )),
     },
-    // later you can add more q-*.js here
+    {
+      ...(await import("./q-22f3003115-excel-transform.js").then((m) =>
+        m.default({
+          user,
+          weight: 1,
+        }),
+      )),
+    },
+    {
+      ...(await import("./q-22f3003115-api-orchestration.js").then((m) =>
+        m.default({
+          user,
+          weight: 1,
+        }),
+      )),
+    },
+    {
+      ...(await import("./q-22f3003115-metrics-dashboard.js").then((m) =>
+        m.default({
+          user,
+          weight: 1,
+        }),
+      )),
+    },
   ];
 
   displayQuestions(results, elementMap);
