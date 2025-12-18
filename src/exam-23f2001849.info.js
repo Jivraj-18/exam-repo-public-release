@@ -5,7 +5,7 @@ export default {
   hours: 1.0,
 
   // Access control
-  admin: (email) => email === "admin.example.com",
+  admin: (email) => email === "23f2001849@ds.study.iitm.ac.in",
   allowed: (email) => email.endsWith("@ds.study.iitm.ac.in"),
 
   // Pre-exam display
