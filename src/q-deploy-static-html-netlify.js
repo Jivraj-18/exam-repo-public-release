@@ -72,19 +72,17 @@ export default async function ({ user, weight = 0.8 }) {
       const response = await fetch(submittedUrl, { signal: controller.signal });
       clearTimeout(timeoutId);
       if (!response.ok) {
-        return { valid: false, message: "Unable to fetch the deployment URL" };
+        throw new Error("Unable to fetch the deployment URL");
       }
       const html = await response.text();
       if (html.includes(email)) {
-        return { valid: true, message: "Deployment verified successfully" };
+        return true;
       }
-      return { valid: false, message: `Deployment found but does not contain required email: ${email}` };
+      throw new Error(`Deployment found but does not contain required email: ${email}`);
     } catch (error) {
-      return { valid: false, message: "Failed to fetch deployment URL. Please check the URL and try again." };
+      throw new Error("Failed to fetch deployment URL. Please check the URL and try again.");
     }
   };
 
-  const answer = email;
-
-  return { id, title, weight, question, answer, validate };
+  return { id, title, weight, question, answer: validate };
 }
