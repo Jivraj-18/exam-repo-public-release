@@ -22,6 +22,11 @@ export async function questions(user, elementMap) {
 		(m) => m.default({ user, weight: 1.0 })
 	  )),
 	},
+	{
+	  ...(await import("./q-sql-concentration-distribution.js").then(
+		(m) => m.default({ user, weight: 1.25 })
+	  )),
+	},
   ];
 
   displayQuestions(results, elementMap);
