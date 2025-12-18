@@ -1,5 +1,6 @@
 import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
 import { default as seedrandom } from "seedrandom";
+import { download } from "./download.js";
 
 export default async function({ user, weight = 3.0 }) {
   const id = "q-regex-polyglot-parser";
@@ -263,15 +264,9 @@ constexpr int ${targetFunction}_THRESHOLD = 100;
 
       <h3>Download Codebase</h3>
       <p>
-        <button class="btn btn-primary btn-sm" onclick="
-          const code = \`${allCode.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`;
-          const blob = new Blob([code], { type: 'text/plain' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'codebase.txt';
-          a.click();
-        ">Download codebase.txt</button>
+        <button class="btn btn-primary btn-sm" type="button" @click=${() => download(new Blob([allCode], { type: 'text/plain' }), 'codebase.txt')}>
+          Download codebase.txt
+        </button>
       </p>
 
       <h3>Your Task</h3>

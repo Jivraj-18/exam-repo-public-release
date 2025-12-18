@@ -123,15 +123,9 @@ export default async function({ user, weight = 2.5 }) {
 
       <h3>Download Dataset</h3>
       <p>
-        <button class="btn btn-primary btn-sm" onclick="
-          const csv = \`${csv.replace(/`/g, '\\`')}\`;
-          const blob = new Blob([csv], { type: 'text/csv' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'sensor_readings.csv';
-          a.click();
-        ">Download sensor_readings.csv</button>
+        <button class="btn btn-primary btn-sm" type="button" @click=${() => download(new Blob([csv], { type: 'text/csv' }), 'sensor_readings.csv')}>
+          Download sensor_readings.csv
+        </button>
       </p>
 
       <h3>Sample DuckDB Query Structure</h3>
