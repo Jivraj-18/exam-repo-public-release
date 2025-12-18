@@ -71,6 +71,16 @@ export async function questions(user, elementMap) {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+
+    // GA9: Git - Blame Command
+    {
+      ...(await import("./q-git-blame.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+
+    // GA10: Steganography - JPEG Secret Extraction
+    {
+      ...(await import("./q-jpeg-secret-extraction.js").then((m) => m.default({ user, weight: 1 }))),
+    },
   ];
 
   displayQuestions(results, elementMap);
