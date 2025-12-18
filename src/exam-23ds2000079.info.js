@@ -1,0 +1,135 @@
+export default {
+  title: "TDS Bonus Activity – FastAPI & GitHub Actions (23DS2000079)",
+
+  start: "2025-09-01T00:00:00+05:30",
+  end: () => "2025-12-31T23:59:59+05:30",
+
+  allowed: () => true,
+  read: () => true,
+
+  admin: (email) =>
+    email === "22f3001919@ds.study.iitm.ac.in" || // Carlton D'Silva
+    email === "prasanna@study.iitm.ac.in" ||     // Prasanna S
+    email === "22f3002542@ds.study.iitm.ac.in" || // Jivraj Singh Shekhawat
+    email === "22f3002460@ds.study.iitm.ac.in" || // Hritik Roshan Maurya
+    email === "jkm@study.iitm.ac.in" ||           // Jayakrishnan Warriem
+    email === "narayanan@study.iitm.ac.in" ||     // Narayanan R
+    email === "sivaadithya@study.iitm.ac.in" ||   // Sivaadithya M
+    email === "anand@study.iitm.ac.in",           // Anand S
+
+  instructions: /* html */ `
+    <h1 class="display-4 my-5">TDS Bonus Activity – 23DS2000079</h1>
+
+    <h2 class="display-6 my-4">Overview</h2>
+    <p>
+      This bonus activity evaluates your mastery of <strong>Tools in Data Science</strong>:
+      FastAPI for server development and GitHub Actions for CI/CD automation.
+      You will demonstrate understanding of backend service construction,
+      workflow automation, and scheduled processing.
+    </p>
+
+    <p>
+      This assignment contains <strong>three independent questions</strong>.
+      Each one must be completed separately, and the output must come from
+      running your own code or workflows.
+    </p>
+
+    <hr/>
+
+    <h2 class="display-6 my-4">Question 1 – FastAPI: Computed Summary API</h2>
+    <p>
+      Build a FastAPI server providing a computed JSON output via HTTP.
+      You must run the service locally and submit the computed value returned
+      by the endpoint.
+    </p>
+
+    <ul>
+      <li>REST endpoint design</li>
+      <li>JSON serialization</li>
+      <li>Server-side computation</li>
+      <li>HTTP GET request handling</li>
+    </ul>
+
+    <hr/>
+
+    <h2 class="display-6 my-4">Question 2 – GitHub Actions: Secrets & CI/CD</h2>
+    <p>
+      Create a GitHub Actions workflow demonstrating secure use of repository
+      secrets and environment variables. Print only the length of the secret, not
+      the raw value.
+    </p>
+
+    <ul>
+      <li>Repository secret handling</li>
+      <li>Workflow dispatch triggering</li>
+      <li>Secure CI/CD pipeline implementation</li>
+    </ul>
+
+    <hr/>
+
+    <h2 class="display-6 my-4">Question 3 – GitHub Actions: Scheduled Error Logging</h2>
+    <p>
+      Implement a daily cron workflow that commits logging data to the repository
+      and documents workflow status using success/failure tagging.
+    </p>
+
+    <ul>
+      <li>Scheduled cron automation</li>
+      <li>Conditional step execution</li>
+      <li>Versioned log persistence</li>
+    </ul>
+
+	<hr/>
+
+	<h2 class="display-6 my-4">Question 4 – DuckDB: Multi-Source Product Standardisation</h2>
+
+	<p>
+	  This question requires merging CSV, JSON, and Parquet tables using
+	  <code>UNION ALL</code>, cleaning product text using trimming and regex, and
+	  calculating unified product counts and value proportions across regions.
+	</p>
+
+	<ul>
+	  <li>multi-format ingestion</li>
+	  <li>regex-based product standardisation</li>
+	  <li>regional proportion analysis</li>
+	  <li>missing-value customer handling</li>
+	</ul>
+
+    <hr/>
+
+    <h2 class="display-6 my-4">Questions Included</h2>
+    <ol>
+      <li>FastAPI – Computed summary endpoint</li>
+      <li>GitHub Actions – Secrets environment workflow</li>
+      <li>GitHub Actions – Scheduled logging workflow</li>
+	  <li>DuckDB – Multi-Format Data Quality Metrics</li>
+    </ol>
+
+    <hr/>
+
+    <h2 class="display-6 my-4">General Instructions</h2>
+    <ol>
+      <li>You may submit answers multiple times.</li>
+      <li>Using internet resources is allowed.</li>
+      <li>Copy-pasting external implementation output is not allowed.</li>
+      <li>
+        All three questions must be completed for full credit (if applicable).
+      </li>
+    </ol>
+
+    <h2 class="display-6 my-4">Notes</h2>
+    <ul>
+      <li>FastAPI output is auto-validated.</li>
+      <li>
+        GitHub Action workflows are validated by repository inspection.
+      </li>
+      <li>
+        Secrets must never appear in workflow logs or answers.
+      </li>
+      <li>
+        Cron must use minute and hour precision.
+      </li>
+    </ul>
+  `,
+};
