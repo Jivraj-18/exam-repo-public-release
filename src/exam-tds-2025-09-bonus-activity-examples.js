@@ -16,59 +16,122 @@ export async function questions(user, elementMap) {
   const results = [
     // GA1: Core Tools - JSON Wrangling
     {
-      ...(await import("./q-sort-filter-json.js").then((m) => m.default({ user, weight: 1.0 }))),
+      ...(await import("./q-sort-filter-json.js").then((m) =>
+        m.default({ user, weight: 1.0 }),
+      )),
       help: md(json),
     },
 
     // GA1: Core Tools - Spreadsheets
     {
-      ...(await import("./q-use-excel.js").then((m) => m.default({ user, weight: 0.5 }))),
+      ...(await import("./q-use-excel.js").then((m) =>
+        m.default({ user, weight: 0.5 }),
+      )),
       help: md(excel),
     },
 
     // GA3: AI Coding - LLM Assisted Development
     {
-      ...(await import("./q-fastapi-coder.js").then((m) => m.default({ user, weight: 2 }))),
+      ...(await import("./q-fastapi-coder.js").then((m) =>
+        m.default({ user, weight: 2 }),
+      )),
+    },
+
+    // GA3: AI Coding - LangChain Recursive Chunking ✅
+    {
+      ...(await import("./q-langchain-recursive-chunker.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
+      help: md(largeLanguageModels),
     },
 
     // GA5: Web Scraping - Data Extraction
     {
-      ...(await import("./q-scrape-imdb-movies.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-scrape-imdb-movies.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
       help: md(webScraping),
     },
 
     // GA5: Web Scraping - API Parsing with Proxy
     {
-      ...(await import("./q-hacker-news-search.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-hacker-news-search.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
     },
 
     // GA6: Data Preparation - Advanced Transformation
     {
-      ...(await import("./q-json-sensor-rollup.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-json-sensor-rollup.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
       help: md(dataTransformation),
     },
 
     // GA7: Data Analysis - Statistical Analysis
     {
-      ...(await import("./q-python-cohort-retention.js").then((m) => m.default({ user, weight: 1.25 }))),
+      ...(await import("./q-python-cohort-retention.js").then((m) =>
+        m.default({ user, weight: 1.25 }),
+      )),
       help: md(pythonAnalysis),
     },
 
     // GA2: Deployment - Image Compression
     {
-      ...(await import("./q-image-compression-dynamic.js").then((m) => m.default({ user, weight: 0.75 }))),
+      ...(await import("./q-image-compression-dynamic.js").then((m) =>
+        m.default({ user, weight: 0.75 }),
+      )),
       help: md(imageCompression),
     },
 
+    // GA4: LLM Vision - Text Extraction from Image ✅
+    {
+      ...(await import("./q-vision-text-extraction.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
+      help: md(largeLanguageModels),
+    },
+    // GA4: LLM Vision - Table Text Extraction
+{
+  ...(await import("./q-vision-table-text-extraction.js").then((m) =>
+    m.default({ user, weight: 1 }),
+  )),
+  help: md(largeLanguageModels),
+},
+// GA3: Streamlit - Interactive Data App
+{
+  ...(await import("./q-streamlit-data-dashboard.js").then((m) =>
+    m.default({ user, weight: 1 }),
+  )),
+  help: md(pythonAnalysis),
+},
+// GA3: Agent Tooling – MCP Server
+{
+  ...(await import("./q-mcp-server-tool.js").then((m) =>
+    m.default({ user, weight: 1.5 }),
+  )),
+},
+
+// GA8: Interactive Visualization – Hugging Face Streamlit
+{
+  ...(await import("./q-hf-streamlit-dashboard.js").then((m) =>
+    m.default({ user, weight: 1.5 }),
+  )),
+},
     // GA8: Visualization - Seaborn Data Visualization
     {
-      ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
+      ...(await import("./q-seaborn-data-visualization.js").then((m) =>
+        m.default({ user, weight: 1.5 }),
+      )),
       help: md(visualization),
     },
 
+
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
-    //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
+    //   ...(await import("./q-region-containing-point-server.js").then((m) =>
+    //     m.default({ user, weight: 2 }),
+    //   )),
     //   help: md(geospatial),
     // },
   ];
