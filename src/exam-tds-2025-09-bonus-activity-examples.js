@@ -66,6 +66,35 @@ export async function questions(user, elementMap) {
       help: md(visualization),
     },
 
+    // GA4: Large Language Models - Function Calling
+    {
+      ...(await import("./q-llm-function-calling.js").then((m) => m.default({ user, weight: 1.5 }))),
+      help: md(largeLanguageModels),
+    },
+
+    // GA2: Deployment - Docker Compose Multi-Container
+    {
+      ...(await import("./q-docker-compose-setup.js").then((m) => m.default({ user, weight: 1.25 }))),
+    },
+
+    // GA7: Data Analysis - Geospatial Distance Calculation
+    {
+      ...(await import("./q-geospatial-distance.js").then((m) => m.default({ user, weight: 1.0 }))),
+      help: md(geospatial),
+    },
+
+    // GA6: Data Preparation - CSV Data Cleaning
+    {
+      ...(await import("./q-csv-data-cleaning.js").then((m) => m.default({ user, weight: 1.0 }))),
+      help: md(dataTransformation),
+    },
+
+    // GA8: Visualization - Interactive Plotly Charts
+    {
+      ...(await import("./q-plotly-interactive-viz.js").then((m) => m.default({ user, weight: 1.25 }))),
+      help: md(visualization),
+    },
+
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
