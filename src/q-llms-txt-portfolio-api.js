@@ -55,7 +55,7 @@ export default async function ({ user, weight = 1.0 }) {
         id="${id}" 
         name="${id}" 
         rows="15"
-        placeholder=${`# Student Portfolio API - ${studentId}\n\n## Overview\n...`}
+        placeholder=${`# Student Portfolio API - ${studentId} (start your llms.txt here)`}
         required
       ></textarea>
     </div>
