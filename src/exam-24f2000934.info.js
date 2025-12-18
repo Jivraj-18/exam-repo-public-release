@@ -20,15 +20,13 @@ export default {
     </h1>
 
     <h2 class="display-6 my-5">Overview</h2>
-    <p>This exam contains 7 advanced questions covering key tools and techniques from the Tools in Data Science course. These questions test deep understanding across multiple domains:</p>
+    <p>This exam contains 5 advanced questions covering key tools and techniques from the Tools in Data Science course. These questions test deep understanding across multiple domains:</p>
     <ul>
-      <li><strong>Database Processing</strong>: DuckDB for multi-format data analysis</li>
-      <li><strong>Vector Search</strong>: Semantic search with embeddings and vector databases</li>
-      <li><strong>Shell Scripting</strong>: Unix pipeline for log analysis</li>
-      <li><strong>AI Agents</strong>: Type-safe tool-calling agents with Pydantic AI</li>
+      <li><strong>Data Preparation</strong>: DuckDB for SQL-based data analysis</li>
+      <li><strong>Machine Learning</strong>: Vector databases and semantic search with embeddings</li>
+      <li><strong>Shell Scripting</strong>: Unix pipelines for log analysis</li>
       <li><strong>DevOps</strong>: Automated data collection with GitHub Actions</li>
-      <li><strong>Network Analysis</strong>: Community detection in social graphs</li>
-      <li><strong>Hybrid RAG</strong>: Combining semantic and keyword search with TypeSense</li>
+      <li><strong>Data Analysis</strong>: Network community detection with Python</li>
     </ul>
 
     <h2 class="display-6 my-5">How to Use This Assignment</h2>
@@ -41,25 +39,11 @@ export default {
 
     <h2 class="display-6 my-5">Questions Included</h2>
     <ol>
-      <li>DuckDB Multi-Format Data Pipeline (Database Processing)</li>
-      <li>Vector Database Semantic Search (ML/AI)</li>
+      <li>DuckDB Multi-Format Data Pipeline (Data Preparation)</li>
+      <li>Vector Database Semantic Search (Machine Learning)</li>
       <li>Shell-Based Log Analysis (Unix Tools)</li>
-      <li>Pydantic AI Agent with Custom Tools (AI Agents)</li>
       <li>GitHub Actions Automated Scraper (DevOps)</li>
-      <li>Network Community Detection (Graph Analysis)</li>
-      <li>Hybrid RAG with TypeSense (Search Systems)</li>
+      <li>Network Community Detection (Data Analysis)</li>
     </ol>
-
-    <h2 class="display-6 my-5">Technical Requirements</h2>
-    <ul>
-      <li><strong>Python 3.11+</strong> recommended for all Python-based questions</li>
-      <li><strong>Docker</strong> required for Q7 (TypeSense deployment)</li>
-      <li><strong>Git & GitHub</strong> required for Q5</li>
-      <li><strong>Unix Shell</strong> for Q3</li>
-      <li><strong>API Deployment Service</strong> for Q2, Q4, Q7 (free tier acceptable: Render, Railway, Fly.io, etc.)</li>
-    </ul>
-
-    <h2 class="display-6 my-5">Scoring</h2>
-    <p>Total weight: 16 points across 7 questions (weights: 2.0, 2.5, 2.0, 2.5, 2.0, 2.0, 3.0)</p>
   `,
 };

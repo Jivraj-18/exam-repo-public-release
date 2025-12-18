@@ -2,7 +2,7 @@ import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
 import { default as seedrandom } from "seedrandom";
 import { pick } from "./utils/random.js";
 
-export default async function({ user, weight = 2.5 }) {
+export default async function({ user, weight = 2 }) {
   const id = "q-vector-semantic-search";
   const title = "Vector Database: Semantic Document Search";
 
