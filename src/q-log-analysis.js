@@ -28,7 +28,7 @@ export default function ({ user, weight }) {
       <p>You have been given a server log file. Count how many requests returned a <strong>${targetCode}</strong> status code.</p>
       <pre class="overflow-auto" style="max-height: 200px; background: #f8f9fa; padding: 10px;">${logs.join("\n")}</pre>
       <label>Count:</label>
-      <input type="number" name="answer" placeholder="0" />
+      <input type="number" name="${id}" placeholder="0" />
     </div>
   `;
 

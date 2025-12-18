@@ -25,7 +25,7 @@ export default function ({ user, weight }) {
       </ul>
       <p>Round your answer to <strong>2 decimal places</strong> (e.g. 1.25).</p>
       <label>Total Cost ($):</label>
-      <input type="number" step="0.01" name="answer" />
+      <input type="number" step="0.01" name="${id}" />
     </div>
   `;
 

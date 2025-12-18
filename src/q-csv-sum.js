@@ -32,7 +32,7 @@ export default function ({ user, weight }) {
       <p>Calculate the <strong>sum of the 'Quantity' column</strong> in the CSV data below.</p>
       <pre class="overflow-auto" style="max-height: 200px; background: #f8f9fa; padding: 10px;">${csv}</pre>
       <label>Total Quantity:</label>
-      <input type="number" name="answer" />
+      <input type="number" name="${id}" />
     </div>
   `;
 

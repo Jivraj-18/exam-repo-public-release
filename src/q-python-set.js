@@ -21,7 +21,7 @@ export default function ({ user, weight }) {
       <p>Given the following list of numbers in Python, what would be the result of <code>len(set(nums))</code>?</p>
       <pre class="overflow-auto" style="max-height: 100px; background: #f8f9fa; padding: 10px;">nums = [${nums.join(", ")}]</pre>
       <label>Result:</label>
-      <input type="number" name="answer" />
+      <input type="number" name="${id}" />
     </div>
   `;
 
