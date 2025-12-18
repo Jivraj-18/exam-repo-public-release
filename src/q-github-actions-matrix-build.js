@@ -1,5 +1,5 @@
 /**
- * Question 5: GitHub Actions Matrix Build Strategy
+ * Question: GitHub Actions Matrix Build Strategy
  * Topic: CI/CD - GitHub Actions
  * Marks: 1.0
  * GA: GA2 (Deployment Tools)
