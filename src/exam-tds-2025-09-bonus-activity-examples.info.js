@@ -54,7 +54,12 @@ export default {
       <li>JSON Sensor Data Rollup (Data Preparation)</li>
       <li>Python Cohort Retention Analysis (Statistical Analysis)</li>
       <li>Image Compression with Dynamic Quality (Image Processing)</li>
-      <li>Region Containing Point Geospatial Query (Geospatial Analysis - Server-Side Validation)</li>
+      <li>Seaborn Data Visualization (Data Visualization)</li>
+      <li>LLM Function Calling: Structured Data Extraction (Large Language Models)</li>
+      <li>Docker Compose: Multi-Container Application Deployment (Deployment)</li>
+      <li>Geospatial Analysis: Store Locator Distance Calculator (Geospatial Analysis)</li>
+      <li>CSV Data Cleaning: Customer Transaction Data Quality (Data Preparation)</li>
+      <li>Interactive Data Visualization: Plotly Dashboard Creation (Data Visualization)</li>
     </ol>
   `,
 };
