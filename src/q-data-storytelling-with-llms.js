@@ -1,10 +1,11 @@
-export default function ({ user, weight = 1.5 }) {
+export default async function ({ user, weight = 1.5 }) {
   return {
     id: "data-storytelling-with-llms",
     title: "Data Storytelling with Large Language Models",
     weight,
 
-    description: `
+    help: [
+      `
 Large Language Models (LLMs) can assist across the entire data-to-story value chain,
 including data engineering, analysis, visualization, and narrative creation.
 
@@ -29,15 +30,19 @@ You may use any LLM (e.g., ChatGPT, Claude) and any analysis or visualization to
 
 Return ONLY the final narrative text.
 Do not include code, bullet points, or explanations.
-`,
+      `,
+    ],
 
-    input: {
-      type: "none"
-    },
+    question: `
+Generate a concise, compelling 5–7 sentence narrative describing a key insight
+from the customer feedback data.
+    `,
+
+    type: "text",
 
     expectedOutput: {
       type: "string",
-      description: "A concise data-driven narrative generated with LLM assistance"
+      description: "A concise data-driven narrative generated with LLM assistance",
     },
 
     grading: {
@@ -46,8 +51,8 @@ Do not include code, bullet points, or explanations.
         "Narrative is data-driven and coherent",
         "Insight is clearly explained and meaningful",
         "Includes a human-interest or surprising element",
-        "Demonstrates appropriate use of LLMs in the workflow"
-      ]
-    }
+        "Demonstrates appropriate use of LLMs in the workflow",
+      ],
+    },
   };
 }

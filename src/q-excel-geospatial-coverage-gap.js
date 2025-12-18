@@ -1,10 +1,11 @@
-export default function ({ user, weight = 0.75 }) {
+export default async function ({ user, weight = 0.75 }) {
   return {
     id: "excel-geospatial-coverage-gap",
     title: "Excel Geospatial Coverage Gap Analysis",
     weight,
 
-    description: `
+    help: [
+      `
 MetroBeans is planning the next phase of café expansion and wants to identify
 neighborhoods with the largest service gaps using **Excel-based geospatial analysis**.
 
@@ -17,6 +18,7 @@ You are provided with a CSV containing the following columns:
 • Our_Stores — current MetroBeans outlets
 
 Steps to perform in Excel:
+
 1. Import the CSV into Excel.
 2. Add a calculated column:
    Population_per_OurStore = Population / Our_Stores
@@ -25,25 +27,26 @@ Steps to perform in Excel:
 4. Sort neighborhoods in descending order of Population_per_OurStore.
 5. Use Excel Map Charts or 3D Maps to visually confirm the coverage gap hotspot.
 
-Download the neighborhood coverage dataset and complete the above steps.
-
 Return ONLY the name of the neighborhood with the highest
 Population_per_OurStore value.
-`,
+      `,
+    ],
 
-    input: {
-      type: "none"
-    },
+    question: `
+Which neighborhood has the highest Population_per_OurStore value?
+    `,
+
+    type: "text",
 
     expectedOutput: {
       type: "string",
-      description: "Neighborhood with the highest population-per-store gap"
+      description: "Neighborhood with the highest population-per-store gap",
     },
 
     grading: {
       type: "exact",
       caseSensitive: false,
-      trim: true
-    }
+      trim: true,
+    },
   };
 }
