@@ -16,59 +16,120 @@ export async function questions(user, elementMap) {
   const results = [
     // GA1: Core Tools - JSON Wrangling
     {
-      ...(await import("./q-sort-filter-json.js").then((m) => m.default({ user, weight: 1.0 }))),
+      ...(await import("./q-sort-filter-json.js").then((m) =>
+        m.default({ user, weight: 1.0 }),
+      )),
       help: md(json),
     },
 
     // GA1: Core Tools - Spreadsheets
     {
-      ...(await import("./q-use-excel.js").then((m) => m.default({ user, weight: 0.5 }))),
+      ...(await import("./q-use-excel.js").then((m) =>
+        m.default({ user, weight: 0.5 }),
+      )),
       help: md(excel),
     },
 
     // GA3: AI Coding - LLM Assisted Development
     {
-      ...(await import("./q-fastapi-coder.js").then((m) => m.default({ user, weight: 2 }))),
+      ...(await import("./q-fastapi-coder.js").then((m) =>
+        m.default({ user, weight: 2 }),
+      )),
     },
 
     // GA5: Web Scraping - Data Extraction
     {
-      ...(await import("./q-scrape-imdb-movies.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-scrape-imdb-movies.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
       help: md(webScraping),
     },
 
     // GA5: Web Scraping - API Parsing with Proxy
     {
-      ...(await import("./q-hacker-news-search.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-hacker-news-search.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
     },
 
     // GA6: Data Preparation - Advanced Transformation
     {
-      ...(await import("./q-json-sensor-rollup.js").then((m) => m.default({ user, weight: 1 }))),
+      ...(await import("./q-json-sensor-rollup.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
       help: md(dataTransformation),
     },
 
     // GA7: Data Analysis - Statistical Analysis
     {
-      ...(await import("./q-python-cohort-retention.js").then((m) => m.default({ user, weight: 1.25 }))),
+      ...(await import("./q-python-cohort-retention.js").then((m) =>
+        m.default({ user, weight: 1.25 }),
+      )),
       help: md(pythonAnalysis),
     },
 
     // GA2: Deployment - Image Compression
     {
-      ...(await import("./q-image-compression-dynamic.js").then((m) => m.default({ user, weight: 0.75 }))),
+      ...(await import("./q-image-compression-dynamic.js").then((m) =>
+        m.default({ user, weight: 0.75 }),
+      )),
       help: md(imageCompression),
     },
 
     // GA8: Visualization - Seaborn Data Visualization
     {
-      ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
+      ...(await import("./q-seaborn-data-visualization.js").then((m) =>
+        m.default({ user, weight: 1.5 }),
+      )),
       help: md(visualization),
+    },
+
+    // -----------------------------
+    // YOUR 5 NEW BONUS QUESTIONS
+    // -----------------------------
+
+    // Development Tools
+    {
+      ...(await import("./q-devtools-git-fix-commit.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
+    },
+
+    // Deployment Tools
+    {
+      ...(await import("./q-deploy-dockerfile-healthcheck.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
+    },
+
+    // AI Coding
+    {
+      ...(await import("./q-ai-coding-refactor-pure.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
+    },
+
+    // Large Language Models
+    {
+      ...(await import("./q-llm-system-prompt-guardrails.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
+      // Optional: if you want help docs for LLM module, uncomment:
+      // help: md(largeLanguageModels),
+    },
+
+    // Data Preparation
+    {
+      ...(await import("./q-data-prep-csv-dedup.js").then((m) =>
+        m.default({ user, weight: 1 }),
+      )),
     },
 
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
-    //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
+    //   ...(await import("./q-region-containing-point-server.js").then((m) =>
+    //     m.default({ user, weight: 2 }),
+    //   )),
     //   help: md(geospatial),
     // },
   ];
