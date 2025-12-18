@@ -69,7 +69,7 @@ export default async function ({ user, weight = 1.0 }) {
       endpoints: ['## Endpoints', '/api/profile', '/api/projects', '/api/contact'],
       authentication: ['## Authentication', 'authentication'],
       responseFormats: ['## Response', 'format', email, studentId],
-      rateLimits: ['## Rate', 'limit', 'usage', 'polic'],
+      rateLimits: ['## Rate', 'limit', 'usage', 'policy', 'policies'],
       contact: ['## Contact', email],
       lastUpdated: ['last updated', 'date', '202']
     };
