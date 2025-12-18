@@ -125,7 +125,5 @@ export default async function ({ user, weight = 1.0 }) {
     return true;
   };
 
-  const answer = `${studentId},${email}`;
-
-  return { id, title, weight, question, answer, validate };
+  return { id, title, weight, question, answer: validate };
 }
