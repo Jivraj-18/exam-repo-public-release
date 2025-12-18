@@ -22,8 +22,11 @@ export default async function ({ user, weight }) {
       <h3>Requirements</h3>
       
       <h4>Part A: Rust Implementation (3.5 marks)</h4>
-      <p>Create Rust library with manual memory management:</p>
-      <pre><code>// Cargo.toml
+      <p>Create Rust library with manual memory management (use <a href="https://rustwasm.github.io/wasm-pack/" target="_blank">wasm-pack</a>):</p>
+      <pre><code>// Setup: cargo install wasm-pack
+// Create project: cargo new --lib wasm-compute
+
+// Cargo.toml
 [package]
 name = "wasm-compute"
 version = "0.1.0"
@@ -45,14 +48,24 @@ use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
 pub fn ${operations}(data: &[f64], size: usize) -> Vec<f64> {
-    // Implement with SIMD operations
-    // Use unsafe blocks for zero-copy
+    // Generate test data if data is empty
+    let input: Vec<f64> = if data.is_empty() {
+        (0..size).map(|i| (i as f64).sin()).collect()
+    } else {
+        data.to_vec()
+    };
+    
+    // Implement ${operations} with SIMD-like operations
+    // Use unsafe blocks for zero-copy transfers
     // Manual memory layout optimization
+    input.iter().map(|x| x * 2.0 + 1.0).collect()
 }
 
 #[wasm_bindgen]
 pub fn allocate_buffer(size: usize) -> *mut f64 {
     // Custom allocator for ${dataSize} elements
+    let layout = std::alloc::Layout::array::<f64>(size).unwrap();
+    unsafe { std::alloc::alloc(layout) as *mut f64 }
 }</code></pre>
 
       <h4>Part B: WASM Compilation & Optimization (2.5 marks)</h4>
@@ -64,37 +77,50 @@ wasm-opt -O4 -o pkg/optimized.wasm pkg/wasm_compute_bg.wasm
 gzip -c pkg/optimized.wasm | wc -c</code></pre>
 
       <h4>Part C: JS Integration & Benchmarking (2.5 marks)</h4>
-      <p>Compare performance with JS baseline:</p>
-      <pre><code>import init, { ${operations}, allocate_buffer } from './pkg/wasm_compute.js';
+      <p>Compare performance with JS baseline (deploy to CodePen/JSFiddle/Stackblitz):</p>
+      <pre><code>// Create index.html and include compiled WASM
+import init, { ${operations}, allocate_buffer } from './pkg/wasm_compute.js';
+
+// Pure JS baseline implementation
+function ${operations}JS(data) {
+    return data.map(x => x * 2.0 + 1.0);
+}
 
 async function benchmark() {
     await init();
     
+    // Generate test data (use crypto for randomness)
     const data = new Float64Array(${dataSize});
-    crypto.getRandomValues(data);
+    for (let i = 0; i < ${dataSize}; i++) {
+        data[i] = Math.sin(i);
+    }
     
-    // JS baseline
+    // JS baseline benchmark
     const jsStart = performance.now();
-    const jsResult = ${operations}JS(data);
+    const jsResult = ${operations}JS(Array.from(data));
     const jsTime = performance.now() - jsStart;
     
-    // WASM with zero-copy
+    // WASM benchmark with zero-copy
     const wasmStart = performance.now();
-    const ptr = allocate_buffer(${dataSize});
-    const wasmData = new Float64Array(
-        memory.buffer, ptr, ${dataSize}
-    );
-    wasmData.set(data);
-    const wasmResult = ${operations}(wasmData, ${dataSize});
+    const wasmResult = ${operations}(data, ${dataSize});
     const wasmTime = performance.now() - wasmStart;
     
-    console.log(\`Speedup: \${(jsTime/wasmTime).toFixed(1)}x\`);
+    const speedup = (jsTime/wasmTime).toFixed(1);
+    console.log(\`JS Time: \${jsTime.toFixed(2)}ms\`);
+    console.log(\`WASM Time: \${wasmTime.toFixed(2)}ms\`);
+    console.log(\`Speedup: \${speedup}x\`);
     
-    // Must achieve ${targetSpeedup}x or better
+    // Validation
     if (jsTime/wasmTime < ${targetSpeedup}) {
-        throw new Error('Insufficient optimization');
+        console.error('Target speedup not achieved!');
+    } else {
+        console.log('✓ Performance target achieved!');
     }
-}</code></pre>
+    
+    return { jsTime, wasmTime, speedup };
+}
+
+benchmark();</code></pre>
 
       <h3>Deliverables</h3>
       <ol>

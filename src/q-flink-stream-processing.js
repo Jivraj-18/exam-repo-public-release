@@ -23,19 +23,29 @@ export default async function ({ user, weight }) {
       <h3>Architecture Requirements</h3>
       
       <h4>Part A: Flink Job Implementation (3.5 marks)</h4>
-      <p>Create stateful stream processor with checkpointing:</p>
-      <pre><code>from pyflink.datastream import StreamExecutionEnvironment
+      <p>Create stateful stream processor with checkpointing (use Docker for Kafka/Flink):</p>
+      <pre><code># docker-compose.yml to setup environment
+version: '3'
+services:
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+  flink-jobmanager:
+    image: flink:latest
+    command: jobmanager
+  
+# Install: pip install apache-flink kafka-python
+
+from pyflink.datastream import StreamExecutionEnvironment
 from pyflink.datastream.state import ValueStateDescriptor
-from pyflink.datastream.window import TumblingEventTimeWindows
-from pyflink.common import Time, WatermarkStrategy
-from pyflink.common.serialization import SimpleStringSchema
+from pyflink.datastream.functions import KeyedProcessFunction
+from pyflink.common import Types, Time
+import json
 
 env = StreamExecutionEnvironment.get_execution_environment()
 env.set_parallelism(${parallelism})
-env.enable_checkpointing(30000)  # 30 second intervals
-env.get_checkpoint_config().set_checkpointing_mode(
-    CheckpointingMode.EXACTLY_ONCE
-)
+env.enable_checkpointing(30000)
 
 class FraudDetectionFunction(KeyedProcessFunction):
     def __init__(self):
@@ -43,7 +53,6 @@ class FraudDetectionFunction(KeyedProcessFunction):
         self.alert_state = None
     
     def open(self, context):
-        # State: Recent transaction patterns
         tx_descriptor = ValueStateDescriptor(
             "transactions",
             Types.LIST(Types.TUPLE([
@@ -54,78 +63,60 @@ class FraudDetectionFunction(KeyedProcessFunction):
         )
         self.transaction_state = context.get_state(tx_descriptor)
         
-        # State: Alert cooldown (prevent spam)
         alert_descriptor = ValueStateDescriptor(
-            "last_alert",
-            Types.LONG()
+            "last_alert", Types.LONG()
         )
         self.alert_state = context.get_state(alert_descriptor)
     
     def process_element(self, value, ctx):
-        # Detect patterns:
-        # 1. Velocity: >3 transactions in ${windowSize} minutes
-        # 2. Geography: transactions from 2+ countries in 1 hour
-        # 3. Amount: sudden 10x increase from average
+        # Parse transaction (simulate with random data)
+        tx = json.loads(value) if isinstance(value, str) else value
         
         transactions = self.transaction_state.value() or []
         current_time = ctx.timestamp()
         
         # Window: last ${windowSize} minutes
         window_start = current_time - ${windowSize * 60000}
-        recent_txs = [tx for tx in transactions 
-                      if tx[1] > window_start]
+        recent_txs = [t for t in transactions if t[1] > window_start]
         
-        # Fraud detection logic
-        if self._is_fraudulent(value, recent_txs):
+        # Fraud detection rules:
+        # 1. >3 transactions in ${windowSize} minutes
+        # 2. Different countries in 1 hour
+        # 3. 10x amount increase
+        
+        is_fraud = False
+        if len(recent_txs) > 3:
+            is_fraud = True
+        
+        if is_fraud:
             last_alert = self.alert_state.value() or 0
-            if current_time - last_alert > 300000:  # 5 min cooldown
-                yield (value['user_id'], 'FRAUD_ALERT', current_time)
+            if current_time - last_alert > 300000:
+                yield (tx['user_id'], 'FRAUD_ALERT', current_time)
                 self.alert_state.update(current_time)
         
-        # Update state
-        recent_txs.append((
-            value['amount'],
-            current_time,
-            value['location']
-        ))
-        self.transaction_state.update(recent_txs[-100:])  # Keep last 100
-    
-    def _is_fraudulent(self, tx, history):
-        # Implement sophisticated fraud rules
-        pass
+        recent_txs.append((tx['amount'], current_time, tx['location']))
+        self.transaction_state.update(recent_txs[-100:])
 
-# Data source with watermarks
-transactions = env.from_source(
-    KafkaSource.builder()
-        .set_bootstrap_servers("kafka:9092")
-        .set_topics("transactions")
-        .set_value_only_deserializer(SimpleStringSchema())
-        .build(),
-    WatermarkStrategy
-        .for_bounded_out_of_orderness(
-            Duration.of_seconds(${lateDataTolerance})
-        )
-        .with_timestamp_assigner(
-            lambda event: event['timestamp']
-        ),
-    "kafka-source"
-)
+# Simulate transaction stream (for testing without Kafka)
+def generate_transactions():
+    import random
+    for i in range(${Math.floor(throughput/10)}):
+        yield json.dumps({
+            'user_id': f'user_{random.randint(1, 1000)}',
+            'amount': random.uniform(10, 1000),
+            'location': random.choice(['US', 'UK', 'IN']),
+            'timestamp': int(time.time() * 1000)
+        })
 
-# Processing pipeline
+transactions = env.from_collection(list(generate_transactions()))
+
 alerts = (transactions
-    .key_by(lambda x: x['user_id'])
+    .key_by(lambda x: json.loads(x)['user_id'])
     .process(FraudDetectionFunction())
     .name("fraud-detection"))
 
-# Sink to output
-alerts.add_sink(
-    KafkaSink.builder()
-        .set_bootstrap_servers("kafka:9092")
-        .set_record_serializer(...)
-        .build()
-)
-
-env.execute("Fraud Detection Pipeline")</code></pre>
+alerts.print()
+env.execute("Fraud Detection")</code></pre>
 
       <h4>Part B: Performance Tuning (2.5 marks)</h4>
       <p>Optimize for ${throughput.toLocaleString()} events/sec:</p>
@@ -181,18 +172,18 @@ class MetricsCollector(RichMapFunction):
       <h3>Deliverables</h3>
       <ol>
         <li>Complete Flink job with exactly-once semantics</li>
-        <li>Load test achieving ${throughput.toLocaleString()} events/sec</li>
-        <li>Checkpoint recovery demonstration (<1 second RTO)</li>
-        <li>Grafana dashboard with 15+ metrics</li>
-        <li>Backpressure analysis report</li>
+        <li>Python script demonstrating fraud detection on simulated data</li>
+        <li>Performance benchmark showing throughput metrics</li>
+        <li>Screenshot of Flink Web UI showing running job</li>
+        <li>README with setup instructions (Docker Compose)</li>
       </ol>
 
-      <h3>Test Scenarios</h3>
+      <h3>Test Scenarios (can simulate locally)</h3>
       <ul>
-        <li><strong>Throughput:</strong> Sustain ${throughput.toLocaleString()} events/sec for 10 minutes</li>
-        <li><strong>Late data:</strong> Handle events ${lateDataTolerance}s out-of-order</li>
-        <li><strong>Fault tolerance:</strong> Kill 2 TaskManagers mid-job, recover without data loss</li>
-        <li><strong>Scaling:</strong> Scale from ${Math.floor(parallelism/2)} to ${parallelism} workers during runtime</li>
+        <li><strong>Throughput:</strong> Process generated transactions at high rate</li>
+        <li><strong>Late data:</strong> Inject out-of-order events in simulation</li>
+        <li><strong>Stateful processing:</strong> Demonstrate state recovery after restart</li>
+        <li><strong>Fraud detection:</strong> Show alerts triggered on suspicious patterns</li>
       </ul>
 
       <p><strong>Bonus (+1.5):</strong> Implement session windows for user behavior tracking with custom triggers.</p>
