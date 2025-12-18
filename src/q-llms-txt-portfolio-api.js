@@ -110,10 +110,38 @@ export default async function ({ user, weight = 1.0 }) {
     }
 
     // Check response formats
-    const codeBlockMatches = submittedText.match(/```[\s\S]*?```/g);
+    const lines = submittedText.split('\n');
+    const codeBlocks = [];
+    let inCodeBlock = false;
+    let currentBlock = [];
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (trimmed.startsWith('```')) {
+        if (!inCodeBlock) {
+          // Start of a new code block
+          inCodeBlock = true;
+          currentBlock = [];
+        } else {
+          // End of the current code block
+          inCodeBlock = false;
+          codeBlocks.push(currentBlock.join('\n'));
+          currentBlock = [];
+        }
+        continue;
+      }
+
+      if (inCodeBlock) {
+        currentBlock.push(line);
+      }
+    }
+
     let responseText = '';
-    if (codeBlockMatches && codeBlockMatches.length > 0) {
-      responseText = codeBlockMatches.join('\n');
+    if (inCodeBlock) {
+      // Malformed code block: missing closing fence
+      errors.push('Malformed code block: missing closing ```');
+    } else if (codeBlocks.length > 0) {
+      responseText = codeBlocks.join('\n');
     } else {
       errors.push('Missing code block with example response format');
     }
