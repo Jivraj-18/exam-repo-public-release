@@ -1,5 +1,5 @@
 /**
- * Question 9: Implement llms.txt for a Student Portfolio API
+ * Question 5: Implement llms.txt for a Student Portfolio API
  * Topic: AI Coding Context Engineering - llms.txt
  * Marks: 1.0
  * GA: GA3 (AI Coding)
