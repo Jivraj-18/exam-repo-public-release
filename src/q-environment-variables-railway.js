@@ -95,5 +95,5 @@ export default async function ({ user, weight = 1.0 }) {
 
   const answer = validate;
 
-  return { id, title, weight, question, answer, validate };
+  return { id, title, weight, question, answer };
 }
