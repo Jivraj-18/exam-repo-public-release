@@ -56,19 +56,33 @@ export default async function ({ user, weight = 1.0 }) {
   // Validation function to check if the GitHub repository contains the required workflow
   const validate = async (submittedUrl) => {
     try {
-      // Parse GitHub URL to extract owner and repo
-      const urlPattern = /github\.com\/([^\/]+)\/([^\/]+)/;
-      const match = submittedUrl.match(urlPattern);
-      
-      if (!match) {
+      // Parse GitHub URL to extract owner and repo using the URL API
+      let parsedUrl;
+      try {
+        parsedUrl = new URL(submittedUrl);
+      } catch {
         return { valid: false, message: "Invalid GitHub repository URL format" };
       }
-      
-      const [, owner, repo] = match;
-      const repoName = repo.replace(/\.git$/, ''); // Remove .git if present
+
+      const hostname = parsedUrl.hostname.toLowerCase();
+      if (hostname !== "github.com" && hostname !== "www.github.com") {
+        return { valid: false, message: "URL must be a GitHub repository URL" };
+      }
+
+      const pathSegments = parsedUrl.pathname.split("/").filter(Boolean);
+      if (pathSegments.length < 2) {
+        return { valid: false, message: "Invalid GitHub repository URL format" };
+      }
+
+      const [ownerRaw, repoRaw] = pathSegments;
+      const owner = ownerRaw;
+      const repoName = repoRaw.replace(/\.git$/, ""); // Remove .git if present
       
       // Try to fetch workflow files from .github/workflows directory
-      const apiUrl = `https://api.github.com/repos/${owner}/${repoName}/contents/.github/workflows`;
+      const apiUrl = new URL(
+        `/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repoName)}/contents/.github/workflows`,
+        "https://api.github.com"
+      ).toString();
       const response = await fetch(apiUrl);
       
       if (!response.ok) {
