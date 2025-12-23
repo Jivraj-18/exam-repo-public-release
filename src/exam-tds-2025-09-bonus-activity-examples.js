@@ -71,6 +71,26 @@ export async function questions(user, elementMap) {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+
+    // New Sample Questions
+    {
+      ...(await import("./q-json-aggregations.js").then((m) => m.default({ user, weight: 1 }))),
+      help: md(json),
+    },
+    {
+      ...(await import("./q-date-diff.js").then((m) => m.default({ user, weight: 1 }))),
+      help: md(dataTransformation),
+    },
+    {
+      ...(await import("./q-fastapi-calculator.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    {
+      ...(await import("./q-fastapi-header.js").then((m) => m.default({ user, weight: 1 }))),
+    },
+    {
+      ...(await import("./q-regex-find-dates.js").then((m) => m.default({ user, weight: 1 }))),
+      help: md(dataTransformation),
+    },
   ];
 
   displayQuestions(results, elementMap);
