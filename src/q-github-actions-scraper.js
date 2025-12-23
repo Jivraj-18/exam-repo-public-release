@@ -1,0 +1,243 @@
+import { html } from "https://cdn.jsdelivr.net/npm/lit-html@3/lit-html.js";
+import { default as seedrandom } from "seedrandom";
+
+export default async function({ user, weight = 2 }) {
+  const id = "q-github-actions-scraper";
+  const title = "GitHub Actions: Automated Data Collection Pipeline";
+
+  const random = seedrandom(`${user.email}#${id}`);
+
+  const repositories = [
+    "anthropics/anthropic-sdk-python",
+    "openai/openai-python",
+    "google/generative-ai-python",
+    "langchain-ai/langchain",
+    "run-llama/llama_index",
+  ];
+
+  const targetRepo = repositories[Math.floor(random() * repositories.length)];
+  const [owner, repo] = targetRepo.split("/");
+
+  const question = html`
+    <div class="mb-3">
+      <h2>DataPulse: Automated GitHub Repository Monitoring</h2>
+      <p>
+        <strong>DataPulse</strong> is a developer analytics company that tracks open-source project health metrics for
+        CTOs and engineering leaders. They monitor thousands of GitHub repositories to identify trending projects,
+        developer activity patterns, and ecosystem health indicators.
+      </p>
+
+      <h3>Business Challenge</h3>
+      <p>
+        Manually checking GitHub repositories for updates is inefficient. DataPulse needs an automated system that:
+        <ul>
+          <li>Runs on a schedule (daily/hourly) without manual intervention</li>
+          <li>Scrapes repository metadata (stars, forks, issues, recent commits)</li>
+          <li>Stores historical data for trend analysis</li>
+          <li>Deploys without managing servers</li>
+          <li>Handles errors gracefully with notifications</li>
+        </ul>
+      </p>
+
+      <h3>Solution: GitHub Actions for Scheduled Scraping</h3>
+      <p>
+        <strong>GitHub Actions</strong> is a CI/CD platform that can run workflows on schedules, making it perfect for
+        automated data collection. It's free for public repos and requires no server management.
+      </p>
+
+      <h3>Your Mission</h3>
+      <p>
+        Create a GitHub repository with a scheduled GitHub Actions workflow that:
+      </p>
+      <ol>
+        <li>Runs automatically on a schedule (use cron: <code>0 */6 * * *</code> for every 6 hours)</li>
+        <li>
+          Fetches GitHub repository data for <strong>${targetRepo}</strong> using the GitHub API:
+          <ul>
+            <li>Star count</li>
+            <li>Fork count</li>
+            <li>Open issues count</li>
+            <li>Latest commit SHA and message</li>
+          </ul>
+        </li>
+        <li>Saves results to a JSON file (<code>data/latest.json</code>) with timestamp</li>
+        <li>Commits and pushes the updated data file back to the repository</li>
+        <li>Includes a README.md with your email: <strong>${user.email}</strong></li>
+      </ol>
+
+      <h3>GitHub Actions Workflow Example</h3>
+      <pre><code># .github/workflows/scrape.yml
+name: Scrape Repository Data
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+  workflow_dispatch:  # Allow manual triggering
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run scraper
+        run: python scraper.py
+        env:
+          GITHUB_TOKEN: \${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit results
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add data/latest.json
+          git diff-index --quiet HEAD || git commit -m "Update data \$(date)"
+          git push</code></pre>
+
+      <h3>Python Scraper Example (scraper.py)</h3>
+      <pre><code>import requests
+import json
+from datetime import datetime
+import os
+
+REPO = "${targetRepo}"
+API_URL = f"https://api.github.com/repos/{REPO}"
+
+headers = {"Authorization": f"token {os.getenv('GITHUB_TOKEN')}"}
+resp = requests.get(API_URL, headers=headers)
+data = resp.json()
+
+# Get latest commit
+commits = requests.get(f"{API_URL}/commits", headers=headers).json()
+latest_commit = commits[0] if commits else {}
+
+result = {
+    "timestamp": datetime.utcnow().isoformat(),
+    "repository": REPO,
+    "stars": data.get("stargazers_count"),
+    "forks": data.get("forks_count"),
+    "open_issues": data.get("open_issues_count"),
+    "latest_commit": {
+        "sha": latest_commit.get("sha", "")[:7],
+        "message": latest_commit.get("commit", {}).get("message", "").split("\\n")[0]
+    }
+}
+
+os.makedirs("data", exist_ok=True)
+with open("data/latest.json", "w") as f:
+    json.dump(result, f, indent=2)</code></pre>
+
+      <h3>Required Repository Structure</h3>
+      <pre><code>your-repo/
+├── .github/
+│   └── workflows/
+│       └── scrape.yml        # GitHub Actions workflow
+├── data/
+│   └── latest.json           # Generated by scraper (committed by workflow)
+├── scraper.py                # Python script to fetch data
+└── README.md                 # Contains your email</code></pre>
+
+      <h3>Validation Criteria</h3>
+      <p>Your repository will be checked for:</p>
+      <ul>
+        <li>README.md contains <code>${user.email}</code></li>
+        <li>GitHub Actions workflow exists and is properly configured</li>
+        <li><code>data/latest.json</code> exists with valid data for ${targetRepo}</li>
+        <li>JSON contains: timestamp, stars, forks, open_issues, latest_commit</li>
+        <li>Workflow has run successfully (check Actions tab)</li>
+      </ul>
+
+      <label for="${id}" class="form-label">
+        Enter your GitHub repository URL (e.g., https://github.com/username/repo-name)
+      </label>
+      <input
+        class="form-control"
+        id="${id}"
+        name="${id}"
+        type="url"
+        placeholder="https://github.com/username/repository"
+        required
+      />
+      <p class="text-muted">
+        Ensure your repository is public, the workflow has run at least once, and data/latest.json contains current data
+        for ${targetRepo}.
+      </p>
+    </div>
+  `;
+
+  const answer = async (repoUrl) => {
+    if (!repoUrl) throw new Error("GitHub repository URL is required");
+
+    // Extract owner and repo from URL
+    const match = repoUrl.match(/github\.com\/([^\/]+)\/([^\/]+)/);
+    if (!match) throw new Error("Invalid GitHub repository URL");
+
+    const [, userOwner, userRepo] = match;
+    const cleanRepo = userRepo.replace(/\.git$/, "");
+
+    // Fetch README.md
+    const readmeUrl = `https://raw.githubusercontent.com/${userOwner}/${cleanRepo}/main/README.md`;
+    let readmeResp = await fetch(readmeUrl);
+    if (!readmeResp.ok) {
+      // Try master branch
+      const readmeUrlMaster = `https://raw.githubusercontent.com/${userOwner}/${cleanRepo}/master/README.md`;
+      readmeResp = await fetch(readmeUrlMaster);
+      if (!readmeResp.ok) throw new Error("Could not fetch README.md (tried main and master branches)");
+    }
+
+    const readmeText = await readmeResp.text();
+    if (!readmeText.includes(user.email)) {
+      throw new Error(`README.md must contain your email: ${user.email}`);
+    }
+
+    // Fetch data/latest.json
+    const dataUrl = `https://raw.githubusercontent.com/${userOwner}/${cleanRepo}/main/data/latest.json`;
+    let dataResp = await fetch(dataUrl);
+    if (!dataResp.ok) {
+      const dataUrlMaster = `https://raw.githubusercontent.com/${userOwner}/${cleanRepo}/master/data/latest.json`;
+      dataResp = await fetch(dataUrlMaster);
+      if (!dataResp.ok) throw new Error("Could not fetch data/latest.json (ensure workflow has run)");
+    }
+
+    let jsonData;
+    try {
+      jsonData = await dataResp.json();
+    } catch {
+      throw new Error("data/latest.json is not valid JSON");
+    }
+
+    // Validate JSON structure
+    if (!jsonData.timestamp) throw new Error("data/latest.json must contain 'timestamp' field");
+    if (!jsonData.repository || jsonData.repository !== targetRepo) {
+      throw new Error(`data/latest.json must track repository '${targetRepo}'`);
+    }
+    if (typeof jsonData.stars !== "number") throw new Error("data/latest.json must contain 'stars' as a number");
+    if (typeof jsonData.forks !== "number") throw new Error("data/latest.json must contain 'forks' as a number");
+    if (typeof jsonData.open_issues !== "number") {
+      throw new Error("data/latest.json must contain 'open_issues' as a number");
+    }
+    if (!jsonData.latest_commit || !jsonData.latest_commit.sha) {
+      throw new Error("data/latest.json must contain 'latest_commit' with 'sha' field");
+    }
+
+    // Verify workflow exists
+    const workflowUrl = `https://api.github.com/repos/${userOwner}/${cleanRepo}/actions/workflows`;
+    const workflowResp = await fetch(workflowUrl);
+    if (workflowResp.ok) {
+      const workflows = await workflowResp.json();
+      if (!workflows.workflows || workflows.workflows.length === 0) {
+        throw new Error("No GitHub Actions workflows found in repository");
+      }
+    }
+
+    return true;
+  };
+
+  return { id, title, weight, question, answer };
+}
