@@ -14,6 +14,7 @@ import visualization from "./tds/data-visualization-with-seaborn.md";
 
 export async function questions(user, elementMap) {
   const results = [
+    
     // GA1: Core Tools - JSON Wrangling
     {
       ...(await import("./q-sort-filter-json.js").then((m) => m.default({ user, weight: 1.0 }))),
@@ -65,6 +66,17 @@ export async function questions(user, elementMap) {
       ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
       help: md(visualization),
     },
+    {
+       ...(await import("./q-seaborn-data-visualization.js").then((m) => m.default({ user, weight: 1.5 }))),
+       help: md(visualization),
+    },
+    // YOUR NEW QUESTIONS START HERE
+    { ...(await import("./q-fastapi-query.js").then((m) => m.default({ user, weight: 1 }))) },
+    { ...(await import("./q-pandas-efficiency.js").then((m) => m.default({ user, weight: 1 }))) },
+    { ...(await import("./q-docker-layers.js").then((m) => m.default({ user, weight: 1 }))) },
+    { ...(await import("./q-bash-pipes.js").then((m) => m.default({ user, weight: 1 }))) },
+    { ...(await import("./q-sql-nulls.js").then((m) => m.default({ user, weight: 1 }))) }
+  
 
     // GA4: Geospatial Analysis - Server-Side Validation
     // {
@@ -76,3 +88,4 @@ export async function questions(user, elementMap) {
   displayQuestions(results, elementMap);
   return Object.fromEntries(results.map(({ id, ...rest }) => [id, rest]));
 }
+
