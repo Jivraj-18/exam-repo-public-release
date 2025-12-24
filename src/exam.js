@@ -130,6 +130,14 @@ ${e.stack}</pre>
       if ($checkButton) validateQuestion(e.target.dataset.question);
     });
 
+    // Handle form submission (Enter key)
+    $examForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (document.activeElement && document.activeElement.name) {
+        validateQuestion(document.activeElement.name);
+      }
+    });
+
     // Clicking on check button validates the answers
     const handleCheck = (e) => {
       e.preventDefault();
