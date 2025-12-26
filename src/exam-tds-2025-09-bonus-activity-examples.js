@@ -71,6 +71,18 @@ export async function questions(user, elementMap) {
     //   ...(await import("./q-region-containing-point-server.js").then((m) => m.default({ user, weight: 2 }))),
     //   help: md(geospatial),
     // },
+
+    // New: Diverse Technology Questions (10 items)
+    { ...(await import("./q-rust-log-analytics.js").then((m) => m.default({ user, weight: 1.0 }))) },
+    { ...(await import("./q-cloudflare-fx-cache.js").then((m) => m.default({ user, weight: 0.75 }))) },
+    { ...(await import("./q-poi-cluster-duckdb.js").then((m) => m.default({ user, weight: 1.0 }))) , help: md(geospatial)},
+    { ...(await import("./q-playwright-timetable-capture.js").then((m) => m.default({ user, weight: 0.75 }))) },
+    { ...(await import("./q-ffmpeg-whisper-transcripts.js").then((m) => m.default({ user, weight: 1.0 }))) },
+    { ...(await import("./q-lance-vector-search.js").then((m) => m.default({ user, weight: 1.0 }))) },
+    { ...(await import("./q-excel-powerquery-etl.js").then((m) => m.default({ user, weight: 1.0 }))) , help: md(excel)},
+    { ...(await import("./q-seaborn-isolation-forest.js").then((m) => m.default({ user, weight: 0.75 }))) , help: md(visualization)},
+    { ...(await import("./q-go-notion-metrics.js").then((m) => m.default({ user, weight: 1.0 }))) },
+    { ...(await import("./q-fastapi-image-captioning.js").then((m) => m.default({ user, weight: 0.75 }))) },
   ];
 
   displayQuestions(results, elementMap);
