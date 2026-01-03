@@ -55,6 +55,8 @@ export default {
       <li>Python Cohort Retention Analysis (Statistical Analysis)</li>
       <li>Image Compression with Dynamic Quality (Image Processing)</li>
       <li>Region Containing Point Geospatial Query (Geospatial Analysis - Server-Side Validation)</li>
+      <li>Git Blame Command (Version Control)</li>
+      <li>Jpeg Base64 Secret Extraction (Data Security)</li>
     </ol>
   `,
 };
